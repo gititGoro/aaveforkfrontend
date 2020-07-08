@@ -13,6 +13,7 @@
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
     "bignumber.js": "^9.0.0",
+    "ethers": "^5.0.5",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
@@ -23,7 +24,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "generate-types": "typechain --target=truffle-v5 --outDir=typechain-types/ 'ABIs/*.json'"
+    "generate-types:truffle": "typechain --target=truffle-v5 --outDir=typechain-types/truffle 'ABIs/*.json'",
+    "generate-types:ethers": "typechain --target=ethers-v5 --outDir=typechain-types/ethers 'ABIs/*.json'"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -41,6 +43,7 @@
     ]
   },
   "devDependencies": {
+    "@typechain/ethers-v5": "0.0.2",
     "@typechain/truffle-v5": "^2.0.2",
     "@types/bn.js": "^4.11.6",
     "@types/chai": "^4.2.11",
