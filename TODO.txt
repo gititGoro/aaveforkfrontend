@@ -1,2 +1,5 @@
 stateless ethereum API
 stateful context that uses API to initialize
+
+------> User ethereum API to populate context. See ethers documentation https://docs.ethers.io/v5/getting-started/#installing
+   Remember to account for different states of connection so that you can provide a connect button

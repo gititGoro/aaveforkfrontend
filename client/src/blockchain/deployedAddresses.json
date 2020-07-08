@@ -1,0 +1,20 @@
+{
+    "kovan": {
+        "LendingPoolAddressesProvider": "0x1a84C655a3F178BeA02DcBc9F46Bc84c17c36FC0",
+        "MockFlashLoadnReceiver": "0x792c2aadB101Ee3C3F3D9487F2E899DdE8A34e27",
+        "MockAggregatorBat": "0x2D49d05B28533365F24E0FA0FF481A18C8178c32",
+        "MockAggregatorDai": "0xA9B6E1f006163FB07698071b4B5a9cf13542d1eA",
+        "MockAggregatorKnc": "0x3fcB24dC871e7318905947272A26E9b1f9F1B944",
+        "MockAggregatorLend": "0x17b8DABd83a0140e70D96D0733C64645A2B5CdbF",
+        "MockAggregatorLink": "0xAA6ceA3E84A2717035b9644f9Ff54C74D51259C6",
+        "MockAggregatorMana": "0xa5104818BB8D9a2023f0BbEE039f9dFaA26284F2",
+        "MockAggregatorMkr": "0xEbA960fe41A32E52D32C77c34fE5971712FD3a3e",
+        "MockAggregatorRep": "0x7031F74E8cCe0Ec2c8BfB5Fec688bD6ccb810B26",
+        "MockAggregatorSusd": "0x07136Ccc2e89264ECbed87397eA863389fC01DFD",
+        "MockAggregatorTusd": "0xEd1ec66F1246243861aEE307060C5baEbBbd4fB7",
+        "MockAggregatorUsdc": "0xFd1f4747cBfbBb1E5bE7f290dfeD4b5BD3C4477b",
+        "MockAggregatorUsdt": "0x1571f7693152086588A63b04a92AaF4A3c70ab4d",
+        "MockAggregatorWbtc": "0x5968451B5Bff8fbD5446C71172450302880Dd95c",
+        "MockAggregatorZrx": "0xFf00975111a045099B3A13610DA9Da1842b8D491"
+    }
+}
