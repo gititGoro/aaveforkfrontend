@@ -46,6 +46,7 @@
     "@types/chai": "^4.2.11",
     "@types/mocha": "^7.0.2",
     "@types/web3": "^1.2.2",
+    "truffle-typings": "^1.0.8",
     "typechain": "^2.0.0"
   }
 }
