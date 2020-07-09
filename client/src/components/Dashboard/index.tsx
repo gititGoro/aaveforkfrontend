@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, makeStyles } from '@material-ui/core'
 import WalletHeader from "./WalletHeader"
-import Admin from './Admin/index'
+import ContractSection from './ContractSection/index'
 
 const useStyles = makeStyles({
     root: {
@@ -36,10 +36,7 @@ export default function Dashboard() {
                     <WalletHeader />
                 </Grid>
                 <Grid item>
-                    User section
-                </Grid>
-                <Grid item>
-                  <Admin />
+                  <ContractSection />
                 </Grid>
             </Grid>
 

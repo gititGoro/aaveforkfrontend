@@ -27,13 +27,17 @@ for contract x
 Object.keys(ethereumContextProps.blockchain.contracts[x]['interface]['functions'])
 will give list of functions
 
+Reflect.apply(func, undefined, ['reserve', 'user', 'amount', 'atoken'])
+
 select function y
 ethereumContextProps.blockchain.contracts[x]['interface]['functions'][y].inputs will give us the ability to 
 spawn textbox.
 
 if(view) have textbox to display result
 
-Have one overarching component to do all this in. Make a contractsList filter for admin or not admin
+Have one overarching component to do all this in.
+
+Have to manually collect all functions that have onlyLendingPoolManager modifier so that I can filter out for each contract
 
 
 
