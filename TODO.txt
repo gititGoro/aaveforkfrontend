@@ -40,4 +40,45 @@ Have one overarching component to do all this in.
 Have to manually collect all functions that have onlyLendingPoolManager modifier so that I can filter out for each contract
 
 
+onlyLendingPoolManager: 
+LendingPoolConfigurator
 
+
+Forbidden external:
+LendingPoolCore
+    updateStateOnDeposit
+    updateStateOnRedeem
+    updateStateOnFlashLoan
+    updateStateOnBorrow
+    updateStateOnRepay
+    updateStateOnSwapRate
+    updateStateOnLiquidation
+    updateStateOnRebalance
+    setUserUseReserveAsCollateral
+    transferToUser
+    transferToFeeCollectionAddress
+    liquidateFee
+    transferToReserve
+    refreshConfiguration
+    initReserve
+    removeLastAddedReserve
+    setReserveInterestRateStrategyAddress
+    enableBorrowingOnReserve
+    disableBorrowingOnReserve
+    enableReserveAsCollateral
+    disableReserveAsCollateral
+    enableReserveStableBorrowRate
+    disableReserveStableBorrowRate
+    activateReserve
+    deactivateReserve
+    freezeReserve
+    unfreezeReserve
+    setReserveBaseLTVasCollateral
+    setReserveLiquidationThreshold
+    setReserveLiquidationBonus
+    setReserveDecimals
+
+
+
+Need a section for inserting an Atoken and spawning controls for end user.
+Will get Atoken address from lendingpool or something when we create it

@@ -1,32 +1,52 @@
 import React from 'react';
-import { useContext, useState, useEffect } from 'react'
-// import { Grid, Button, Paper, makeStyles } from '@material-ui/core'
+import { useContext } from 'react'
 import { EthereumContext } from '../../contexts/EthereumContext'
+import ControlsForContract from "./ControlsForContract"
+import { Typography, makeStyles, Grid } from '@material-ui/core';
 
-export default function ContractSection(props: {}) {
-    const ethereumContextProps = useContext(EthereumContext)
-    const [isAdmin, setIsAdmin] = useState<boolean>(false)
-
-    useEffect(() => {
-        if (ethereumContextProps.blockchain) {
-            ethereumContextProps
-                .blockchain
-                .contracts
-                .LendingPoolAddressesProvider
-                .getLendingPoolManager()
-                .then(m => {
-                    let condition = false
-                    if (ethereumContextProps.blockchain?.account) {
-                        condition = (m.toLowerCase() === ethereumContextProps.blockchain.account.toLowerCase())
-                    }
-                    setIsAdmin(condition)
-                })
-        } else {
-            setIsAdmin(false)
-        }
-    })
-    if (ethereumContextProps.blockchain?.contracts) {
-       
+const useStyles = makeStyles({
+    statusHeader: {
+        color: "white",
+        marginBottom: "50px"
+    },
+    root: {
+        display: "flex"
+    },
+    grid: {
+        margin: "50px"
     }
-    return isAdmin ? <div>"Admin logged in"</div> : <div>"not admin"</div>
+})
+interface props {
+    selectedContract: string
+    isAdmin: boolean
+}
+
+export default function ContractSection(props: props) {
+    const classes = useStyles()
+    const ethereumContextProps = useContext(EthereumContext)
+
+
+
+    if (!ethereumContextProps.blockchain)
+        return <div></div>
+
+    return <div className={classes.root}>
+        <Grid
+            container
+            direction="column"
+            justify="center"
+            alignItems="center"
+            className={classes.grid}
+        >
+            <Grid item>
+                <Typography className={classes.statusHeader} variant="h5">
+
+                    Current Account is {(props.isAdmin ? "Lending Pool Manager" : "user")}
+                </Typography>
+            </Grid>
+            <Grid item>
+                <ControlsForContract contractName={props.selectedContract} />
+            </Grid>
+        </Grid>
+    </div >
 }

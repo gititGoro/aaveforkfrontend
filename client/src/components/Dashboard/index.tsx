@@ -1,8 +1,8 @@
 import React from 'react';
 import { Grid, makeStyles } from '@material-ui/core'
 import WalletHeader from "./WalletHeader"
-import ContractSection from './ContractSection/index'
 
+import ContractSelector from "./ContractSelector"
 const useStyles = makeStyles({
     root: {
         display: "flex"
@@ -36,7 +36,7 @@ export default function Dashboard() {
                     <WalletHeader />
                 </Grid>
                 <Grid item>
-                  <ContractSection />
+                  <ContractSelector />
                 </Grid>
             </Grid>
 
