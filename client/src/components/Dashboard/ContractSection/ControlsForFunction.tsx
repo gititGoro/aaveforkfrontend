@@ -3,7 +3,7 @@ import { useContext, useState, useEffect, useCallback } from 'react'
 import { EthereumContext } from "../../contexts/EthereumContext"
 import { Grid, Typography, TextField, Button, Paper, makeStyles } from "@material-ui/core"
 import BigNumber from "bignumber.js"
-import { hexToNumString } from "../../../blockchain/EthereumAPI"
+import { hexToNumString, weiToEth } from "../../../blockchain/EthereumAPI"
 interface props {
     contractName: string
     function: string
@@ -116,6 +116,7 @@ export default function ControlsForFunction(props: props) {
     const outputs = ethereumContextProps.blockchain.contracts[props.contractName].interface.functions[props.function].outputs as ParamType[] | undefined
 
     const [inputsText, setInputsText] = useState<string[] | undefined>(inputs ? new Array<string>(inputs.length) : undefined)
+    const [payableEth, setPayableEth] = useState<string>("")
     const [outputText, setOutputText] = useState<string>("")
     const [awaitingWalletConfirmation, setAwaitingWalletConfirmation] = useState<boolean>(false)
     const [error, setError] = useState<string>("")
@@ -131,9 +132,9 @@ export default function ControlsForFunction(props: props) {
         }
     }
     const functionName: string = props.function.substring(0, props.function.indexOf('(')).trim()
-
-
-    const action = ethereumContextProps.blockchain.contracts[props.contractName][functionName]//presumable returns a promise when reflet.apply
+    const action = ethereumContextProps.blockchain.contracts[props.contractName][functionName]
+    // const action = mutability==='payable'? ethereumContextProps.blockchain.contracts[props.contractName][functionName]({value:payableEth})
+    // :ethereumContextProps.blockchain.contracts[props.contractName][functionName]//presumable returns a promise when reflet.apply
 
 
     return <Paper className={classes.paper}><Grid
@@ -147,7 +148,7 @@ export default function ControlsForFunction(props: props) {
         </Grid>
         {inputs && inputsText ?
             < Grid item>
-                <AppropriateInput args={inputs} setInput={setInput} inputs={inputsText} />
+                <AppropriateInput args={inputs} setInput={setInput} inputs={inputsText} payableEth={payableEth} setPayableEth={setPayableEth} isPayable={mutability === 'payable'} />
             </Grid>
             : ""}
         <Grid item>
@@ -159,6 +160,7 @@ export default function ControlsForFunction(props: props) {
                 setAwaitingBlockchainConfirmation={setAwaitingBlockchainConfirmation}
                 setAwaitingWalletConfirmation={setAwaitingWalletConfirmation}
                 setError={setError}
+                payableEth={payableEth}
             />
         </Grid>
         {
@@ -176,12 +178,15 @@ interface appropriateInputProps {
     args: ParamType[]
     setInput: (v: string, index: number) => void
     inputs: string[]
+    setPayableEth: (eth: string) => void
+    payableEth: string
+    isPayable: boolean
 }
 
 const inputStyles = makeStyles({
     text: {
         margin: "10px",
-        width:"400px"
+        width: "400px"
     }
 })
 
@@ -204,6 +209,8 @@ function AppropriateInput(props: appropriateInputProps) {
         alignItems="center"
     >
         {columns}
+        {props.isPayable ? <TextField className={classes.text} label="Eth value" type="text" variant="outlined" value={props.payableEth}
+            onChange={event => props.setPayableEth(event.target.value)} /> : ""}
     </Grid>
 }
 
@@ -211,6 +218,7 @@ interface appropriateActionProps {
     mutability: mutabilityOptions
     action: any
     inputs: string[] | undefined
+    payableEth: string
     setOutput: (o: string) => void
     setAwaitingWalletConfirmation: (w: boolean) => void
     setAwaitingBlockchainConfirmation: (b: boolean) => void
@@ -231,7 +239,11 @@ function AppropriateAction(props: appropriateActionProps) {
             if (props.mutability === 'view') {
                 setViewPromise(Reflect.apply(props.action, undefined, props.inputs || []))
             } else {
-                setTransactionPromise(Reflect.apply(props.action, undefined, props.inputs || []))
+                let args = props.inputs as any[]
+                args = args || []
+                if (props.mutability === 'payable')
+                    args.push({ value: weiToEth(props.payableEth) })
+                setTransactionPromise(Reflect.apply(props.action, undefined, args || []))
             }
             setClick(false)
         }
@@ -241,7 +253,6 @@ function AppropriateAction(props: appropriateActionProps) {
         if (viewPromise) {
             try {
                 const output = await viewPromise
-                console.log('trying to execute')
                 if (output) {
                     if (output._isBigNumber) {
                         props.setOutput(hexToNumString(output._hex))

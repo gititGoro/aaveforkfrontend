@@ -2,6 +2,7 @@ import React from 'react';
 import { useContext } from 'react'
 import { Grid, Button, Paper, makeStyles } from '@material-ui/core'
 import { EthereumContext } from '../contexts/EthereumContext'
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const useStyles = makeStyles({
     paper: {
@@ -36,13 +37,12 @@ export default function WalletHeader(props: walletHeaderProps) {
             <Grid item>
                 {ethereumContextProps.connectionStatus}
             </Grid>
-            {ethereumContextProps.blockchain && ethereumContextProps.blockchain.account !== '' ? <Grid item>
-                Account: {ethereumContextProps.blockchain.account}
-            </Grid> : ""}
+            {ethereumContextProps.connectionStatus === 'Successfully connected to Metmask' && !ethereumContextProps.blockchain ? <Grid item>fetching account...<CircularProgress /></Grid> : ""}
+            {ethereumContextProps.connectionStatus === 'Successfully connected to Metmask' && ethereumContextProps.blockchain ? <Grid item>Account: {ethereumContextProps.blockchain.account}</Grid> : ""}
             <Grid item>
                 network: {ethereumContextProps.network}
             </Grid>{ethereumContextProps.network === 'kovan' ? <Grid item>
-                <Button color="primary" onClick={() => { ethereumContextProps.requestConnection(); }}>connect</Button>
+                <Button color="secondary" variant="outlined" onClick={() => { ethereumContextProps.requestConnection(); }}>connect</Button>
             </Grid> : <Grid item>Switch network to Kovan</Grid>}
         </Grid >
     </Paper>

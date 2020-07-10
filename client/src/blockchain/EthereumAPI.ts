@@ -8,6 +8,7 @@ import BigNumber from "bignumber.js"
 export const hexToNumString = (hex: string) => new BigNumber(hex).toString()
 export const numToHex = (num: string) => ethers.utils.hexValue(num)
 export const isHex = (value: string) => ethers.utils.isHexString(value)
+export const weiToEth = (value: string) => ethers.utils.parseEther(value)
 
 export interface ethersMetamask {
     provider: ethers.providers.Web3Provider,
