@@ -82,7 +82,7 @@ interface ContractTransaction extends TransactionResponse {
     wait(confirmations?: number): Promise<ContractReceipt>;
 }
 
-type mutabilityOptions = 'payable' | 'nonpayable' | 'view'
+type mutabilityOptions = 'payable' | 'nonpayable' | 'view' | 'pure'
 
 const useStyles = makeStyles({
     paper: {
@@ -164,7 +164,7 @@ export default function ControlsForFunction(props: props) {
             />
         </Grid>
         {
-            mutability === 'view' && outputs ? <Grid item>
+            (mutability === 'view' || mutability === 'pure') && outputs ? <Grid item>
                 {outputText}
             </Grid> : <Grid item>
                     {awaitingWalletConfirmation ? "waiting for user to confirm transaction" : (awaitingBlockchainConfirmation ? "waiting for transaction to confirm" : (error !== '' ? "error in execution:" + error : ''))}
@@ -236,7 +236,7 @@ function AppropriateAction(props: appropriateActionProps) {
         if (!click)
             return
         if (click) {
-            if (props.mutability === 'view') {
+            if (props.mutability === 'view' || props.mutability === 'pure') {
                 setViewPromise(Reflect.apply(props.action, undefined, props.inputs || []))
             } else {
                 let args = props.inputs as any[]
