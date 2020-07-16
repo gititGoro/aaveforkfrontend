@@ -2,6 +2,7 @@ import * as React from "react"
 import * as API from "../../blockchain/EthereumAPI"
 import ContractInstances from '../../blockchain/ContractInstances'
 import { createContext, useState, useEffect, useCallback } from "react"
+
 interface blockchainProps {
     metamaskConnections: API.ethersMetamask
     contracts: ContractInstances
@@ -23,18 +24,6 @@ let EthereumContext = createContext<ethereumContextProps>({
     requestConnection: () => console.log('unitialized')
 })
 
-const networkNameMapper = (id: number): string => {
-    switch (id) {
-        case 1: return "main"
-        case 2: return "morden"
-        case 3: return "ropsten"
-        case 4: return "rinkeby"
-        case 5: return "goerli"
-        case 42: return "kovan"
-        case 66: return "private"
-        default: return "private"
-    }
-}
 
 interface providerProps {
     children: any
@@ -54,21 +43,24 @@ function EthereumContextProvider(props: providerProps) {
     const chainChangeCallBack = useCallback(async () => {
         const result = API.GetEthereum(props.window)
         if (result.ethereum) {
-            setInjectedEthereum(result.ethereum)
             const ethers = API.GetEthers(result.ethereum)
+
+            setInjectedEthereum(result.ethereum)
             result.ethereum.on('accountsChanged', (response) => setAccount(response[0]))
             if (connectionStatus == 'Successfully connected to Metmask') {
-                await result.ethereum.enable()
+                if (result.ethereum.request)
+                    await result.ethereum.request({ method: 'eth_requestAccounts' })
+                else
+                    await result.ethereum.send('eth_requestAccounts')
                 setContractInstances(await API.GetContracts(ethers.signer, network))
-
-
-            } else
+            } else {
                 setConnectionStatus('window.ethereum injected by Metmask')
+            }
 
             setMetamask(ethers)
-            const newChainId = await ethers.signer.getChainId()
-            setChainId(newChainId)
-            setNetwork(networkNameMapper(newChainId))
+            const networkObject = await ethers.provider.getNetwork()
+            setChainId(networkObject.chainId)
+            setNetwork(networkObject.chainId === 1 ? 'main' : networkObject.name)
 
 
         } else {
@@ -96,16 +88,17 @@ function EthereumContextProvider(props: providerProps) {
 
     const requestConnectionCallback = useCallback(async () => {
         if (requestConnection && injectedEthereum) {
-            await injectedEthereum.enable()
+            if (injectedEthereum.request)
+                await injectedEthereum.request({ 'method': 'eth_requestAccounts' })
+            else
+                await injectedEthereum.enable()
             setConnectionStatus('Successfully connected to Metmask')
-            injectedEthereum.on('chainChanged', response => {
-                let chainString = response.result
-                if (API.isHex(chainString)) {
-                    chainString = API.hexToNumString(chainString)
-                }
-                const chainIDnum = parseInt(chainString)
-                setChainId(chainIDnum)
-                setNetwork(networkNameMapper(chainIDnum))
+            injectedEthereum.on('chainChanged', async () => {
+                let ethers = !metamask ? API.GetEthers(injectedEthereum) : metamask
+                let networkObject = await ethers.provider.getNetwork()
+
+                setChainId(networkObject.chainId)
+                setNetwork(networkObject.chainId === 1 ? 'main' : networkObject.name)
             })
             if (!metamask) {
                 setMetamask(API.GetEthers(injectedEthereum))
@@ -138,6 +131,5 @@ function EthereumContextProvider(props: providerProps) {
 
     return <EthereumContext.Provider value={contextProps}>{props.children}</EthereumContext.Provider>
 }
-
 
 export { EthereumContext, EthereumContextProvider }

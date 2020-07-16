@@ -1,6 +1,6 @@
 import React from 'react';
 import { useContext } from 'react'
-import { EthereumContext } from '../../contexts/EthereumContext'
+import { EthereumContext } from '../../../../contexts/EthereumContext'
 import ControlsForContract from "./ControlsForContract"
 import { Typography, makeStyles, Grid } from '@material-ui/core';
 

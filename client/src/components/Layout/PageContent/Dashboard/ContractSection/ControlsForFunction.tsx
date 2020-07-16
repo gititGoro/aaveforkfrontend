@@ -1,9 +1,9 @@
 import * as React from "react"
 import { useContext, useState, useEffect, useCallback } from 'react'
-import { EthereumContext } from "../../contexts/EthereumContext"
+import { EthereumContext } from "../../../../contexts/EthereumContext"
 import { Grid, Typography, TextField, Button, Paper, makeStyles } from "@material-ui/core"
 import BigNumber from "bignumber.js"
-import { hexToNumString, weiToEth } from "../../../blockchain/EthereumAPI"
+import { hexToNumString, weiToEth } from "../../../../../blockchain/EthereumAPI"
 interface props {
     contractName: string
     function: string

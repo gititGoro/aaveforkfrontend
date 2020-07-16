@@ -18,10 +18,15 @@ export interface ethersMetamask {
 type ethereumSendArguments = 'eth_accounts' | 'eth_chainId' | 'eth_requestAccounts'
 type ethereumOnArguments = 'accountsChanged' | 'chainChanged'
 
+interface requestParams {
+    method: ethereumSendArguments
+}
+
 export interface injectedEthereum {
     send: (args: ethereumSendArguments) => Promise<any>
     on: (args: ethereumOnArguments, callback: (response: any) => any) => void
     isMetaMask: boolean
+    request: (arg: requestParams) => Promise<any>
     enable: () => Promise<void>
 }
 

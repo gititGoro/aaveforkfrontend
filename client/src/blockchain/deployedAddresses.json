@@ -1,6 +1,6 @@
 {
     "kovan": {
-        "LendingPoolAddressesProvider": "0x1a84C655a3F178BeA02DcBc9F46Bc84c17c36FC0",
+        "LendingPoolAddressesProvider": "0xde8dfEaD049E18B01a0940E5f2F43175309E3abC",
         "MockFlashLoadnReceiver": "0x792c2aadB101Ee3C3F3D9487F2E899DdE8A34e27",
         "MockAggregatorBat": "0x2D49d05B28533365F24E0FA0FF481A18C8178c32",
         "MockAggregatorDai": "0xA9B6E1f006163FB07698071b4B5a9cf13542d1eA",

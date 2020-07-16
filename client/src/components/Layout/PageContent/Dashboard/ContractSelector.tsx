@@ -1,6 +1,6 @@
 import React from 'react';
 import { useContext, useState, useEffect } from 'react'
-import { EthereumContext } from '../contexts/EthereumContext'
+import { EthereumContext } from '../../../contexts/EthereumContext'
 import ContractSection from './ContractSection/index'
 import { Grid, Select, FormControl, InputLabel, MenuItem, makeStyles } from '@material-ui/core';
 

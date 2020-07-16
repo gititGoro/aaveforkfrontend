@@ -1,7 +1,7 @@
 import * as React from "react"
 import { useContext } from 'react'
-import { EthereumContext } from "../../contexts/EthereumContext"
-import verboten from "../../../blockchain/forbiddenFunctions.json"
+import { EthereumContext } from "../../../../contexts/EthereumContext"
+import verboten from "../../../../../blockchain/forbiddenFunctions.json"
 import ControlsForFunction from "./ControlsForFunction"
 import { Grid, Typography, Paper, makeStyles } from '@material-ui/core'
 

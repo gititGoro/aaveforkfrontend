@@ -1,7 +1,7 @@
 import React from 'react';
 import { useContext } from 'react'
 import { Grid, Button, Paper, makeStyles } from '@material-ui/core'
-import { EthereumContext } from '../contexts/EthereumContext'
+import { EthereumContext } from '../../../contexts/EthereumContext'
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 const useStyles = makeStyles({

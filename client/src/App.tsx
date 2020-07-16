@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import { EthereumContextProvider } from './components/contexts/EthereumContext'
-import Dashboard from "./components/Dashboard/index"
+import Layout from './components/Layout/index'
 import { makeStyles } from '@material-ui/core';
 //style="background:"
 
@@ -22,7 +22,7 @@ function App() {
   return (
     <div className={classes.app}>
       <EthereumContextProvider window={window}>
-        <Dashboard />
+        <Layout />
       </EthereumContextProvider>
     </div>
   );
