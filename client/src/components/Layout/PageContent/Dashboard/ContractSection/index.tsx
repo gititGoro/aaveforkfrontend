@@ -25,8 +25,6 @@ export default function ContractSection(props: props) {
     const classes = useStyles()
     const ethereumContextProps = useContext(EthereumContext)
 
-
-
     if (!ethereumContextProps.blockchain)
         return <div></div>
 

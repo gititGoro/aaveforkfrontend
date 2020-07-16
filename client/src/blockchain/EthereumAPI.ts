@@ -127,3 +127,20 @@ export async function GetContracts(signer: ethers.Signer, network: string): Prom
     }
 }
 
+export enum Role {
+    addressesProviderOwner,
+    lendingPoolManager,
+    superAdmin,
+    user
+}
+
+export const GetRole = async (address: string, contracts: ContractInstances): Promise<Role> => {
+    const isOwner = await contracts.LendingPoolAddressesProvider.isOwner({ from: address })
+    const isLendingPoolManager = (await contracts.LendingPoolAddressesProvider.getLendingPoolManager()).toLowerCase() === address.toLowerCase()
+
+    return isOwner && isLendingPoolManager ?
+        Role.superAdmin :
+        (!isOwner && !isLendingPoolManager ?
+            Role.user :
+            (!isOwner ? Role.lendingPoolManager : Role.addressesProviderOwner))
+}
