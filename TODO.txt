@@ -1,84 +1,10 @@
-stateless ethereum API
-stateful context that uses API to initialize
+
 
 ------> User ethereum API to populate context. See ethers documentation https://docs.ethers.io/v5/getting-started/#installing
 
    Shawn's address: 0xD80533f7e935Afb300D3801923FdfA4B1A4557Fd
 
-For next time:
-ethereumContextProps.blockchain.contracts.LendingPool.interface.functions
-Object.keys(ethereumContextProps.blockchain.contracts.LendingPool.interface.functions)
-gives a list of all the functions
 
-foreach key in listOfFuncs
-const inputs = ethereumContextProps.blockchain.contracts.LendingPool.interface.functions[key].inputs
-const mutability =  ethereumContextProps.blockchain.contracts.LendingPool.interface.functions[key].mutability
+TODO: 
+show/hide button in leftpanel using withWidth. see commented source code
 
-take inputs and generate text boxes with a component
-take mutability and show button for call/ transact
-if(mutability==='payable') add textbox for eth value
-
-figure out how to treat each type from ethers and make this component generic
-
-Object.keys(ethereumContextProps.blockchain.contracts) will give a list of contracts.
-populate drop down
-
-for contract x
-Object.keys(ethereumContextProps.blockchain.contracts[x]['interface]['functions'])
-will give list of functions
-
-Reflect.apply(func, undefined, ['reserve', 'user', 'amount', 'atoken'])
-
-select function y
-ethereumContextProps.blockchain.contracts[x]['interface]['functions'][y].inputs will give us the ability to 
-spawn textbox.
-
-if(view) have textbox to display result
-
-Have one overarching component to do all this in.
-
-Have to manually collect all functions that have onlyLendingPoolManager modifier so that I can filter out for each contract
-
-
-onlyLendingPoolManager: 
-LendingPoolConfigurator
-
-
-Forbidden external:
-LendingPoolCore
-    updateStateOnDeposit
-    updateStateOnRedeem
-    updateStateOnFlashLoan
-    updateStateOnBorrow
-    updateStateOnRepay
-    updateStateOnSwapRate
-    updateStateOnLiquidation
-    updateStateOnRebalance
-    setUserUseReserveAsCollateral
-    transferToUser
-    transferToFeeCollectionAddress
-    liquidateFee
-    transferToReserve
-    refreshConfiguration
-    initReserve
-    removeLastAddedReserve
-    setReserveInterestRateStrategyAddress
-    enableBorrowingOnReserve
-    disableBorrowingOnReserve
-    enableReserveAsCollateral
-    disableReserveAsCollateral
-    enableReserveStableBorrowRate
-    disableReserveStableBorrowRate
-    activateReserve
-    deactivateReserve
-    freezeReserve
-    unfreezeReserve
-    setReserveBaseLTVasCollateral
-    setReserveLiquidationThreshold
-    setReserveLiquidationBonus
-    setReserveDecimals
-
-
-
-Need a section for inserting an Atoken and spawning controls for end user.
-Will get Atoken address from lendingpool or something when we create it

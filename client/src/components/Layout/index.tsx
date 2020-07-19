@@ -13,7 +13,7 @@ export default function Layout(props: props) {
     // const ethereumContextProps = useContext(EthereumContext)
 
 
-    return <div>
+    return <div>   
         <LeftPanel />
         <BottomPanel />
         <PageContent />
