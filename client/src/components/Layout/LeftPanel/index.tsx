@@ -17,6 +17,7 @@ const useStyles = makeStyles((theme: Theme) =>
             width: bigWidth
         },
         actionDrawerPaperShrunk: {
+            overflowX:"hidden",
             width: smallWidth,
         },
         actionDrawerPaperBig: {
@@ -28,6 +29,12 @@ const useStyles = makeStyles((theme: Theme) =>
             position: "absolute",
             bottom: 0,
             right: 0,
+        },
+        shrinkButton:{
+             //   backgroundColor:theme.palette.augmentColor
+        },
+        expandButton:{
+
         }
     }),
 );

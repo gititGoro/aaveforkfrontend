@@ -2,12 +2,12 @@ import React from 'react';
 import './App.css';
 import { EthereumContextProvider } from './components/contexts/EthereumContext'
 import Layout from './components/Layout/index'
-import { makeStyles } from '@material-ui/core';
+import { makeStyles, Theme } from '@material-ui/core';
 //style="background:"
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme:Theme)=>({
   app: {
-    background: " linear-gradient(to bottom right, #FE6B8B, #00AAAA)",
+    background: theme.appbackground[theme.palette.type],
     position: "fixed",
     top: 0,
     left: 0,
@@ -15,7 +15,7 @@ const useStyles = makeStyles({
     right: 0,
     overflow: "auto",
   }
-})
+}))
 
 function App() {
   const classes = useStyles()
