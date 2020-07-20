@@ -3,7 +3,6 @@ import './App.css';
 import { EthereumContextProvider } from './components/contexts/EthereumContext'
 import Layout from './components/Layout/index'
 import { makeStyles, Theme } from '@material-ui/core';
-//style="background:"
 
 const useStyles = makeStyles((theme:Theme)=>({
   app: {
