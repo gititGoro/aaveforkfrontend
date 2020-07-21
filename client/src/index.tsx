@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import theme from './SiteTheme'
-import { Container, Switch, Typography, FormControl } from '@material-ui/core';
+import { Switch, Typography, FormControl, Grid } from '@material-ui/core';
 
 
 ReactDOM.render(
@@ -26,11 +26,18 @@ function ThemedApp() {
 
   return <ThemeProvider theme={themetoUse}>
     <App />
-    <Container>
-      <FormControl>
-        <Typography>{mode.toString()}</Typography>
-        <Switch onClick={() => setMode(mode === 'light' ? 'dark' : 'light')} value={mode}></Switch>
-      </FormControl>
-    </Container>
+    <Grid
+      container
+      direction="row"
+      justify="flex-end"
+      alignItems="center"
+    >
+      <Grid item>
+        <FormControl>
+          <Typography>{mode.toString()}</Typography>
+          <Switch onClick={() => setMode(mode === 'light' ? 'dark' : 'light')} value={mode}></Switch>
+        </FormControl>
+      </Grid>
+    </Grid>
   </ThemeProvider>
 }

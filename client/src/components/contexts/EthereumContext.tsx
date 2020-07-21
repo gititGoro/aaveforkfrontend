@@ -9,19 +9,21 @@ interface blockchainProps {
     account: string
 }
 
-type Status = 'Metamask Missing' | 'window.ethereum not found' | 'Application not connected to Metamask' | 'window.ethereum injected by Metmask' | 'Successfully connected to Metmask'
+type Status = 'Metamask Missing' | 'window.ethereum not found' | 'Application not connected to Metamask' | 'window.ethereum injected by Metmask' | 'Successfully connected to Metmask' | 'Unsupported Network'
 
 interface ethereumContextProps {
     blockchain?: blockchainProps
     connectionStatus: Status
     network: string
     requestConnection: () => void
+    requestDisconnection: () => void
 }
 
 let EthereumContext = createContext<ethereumContextProps>({
     connectionStatus: 'Metamask Missing',
     network: '',
-    requestConnection: () => console.log('unitialized')
+    requestConnection: () => console.log('unitialized'),
+    requestDisconnection: () => console.log('unitialized')
 })
 
 
@@ -40,6 +42,15 @@ function EthereumContextProvider(props: providerProps) {
     const [contractInstances, setContractInstances] = useState<ContractInstances | undefined>(undefined)
     const [account, setAccount] = useState<string>("")
 
+
+    const chainChangedHandler = (injectedEthereum: API.injectedEthereum) => async () => {
+        let ethers = !metamask ? API.GetEthers(injectedEthereum) : metamask
+        let networkObject = await ethers.provider.getNetwork()
+        setChainId(networkObject.chainId)
+        if (networkObject.chainId != chainId && chainId > 0)
+            location.reload()
+    }
+
     const chainChangeCallBack = useCallback(async () => {
         const result = API.GetEthereum(props.window)
         if (result.ethereum) {
@@ -52,16 +63,31 @@ function EthereumContextProvider(props: providerProps) {
                     await result.ethereum.request({ method: 'eth_requestAccounts' })
                 else
                     await result.ethereum.send('eth_requestAccounts')
-                setContractInstances(await API.GetContracts(ethers.signer, network))
+                const contracts = await API.GetContracts(ethers.signer, network)
+
+                setContractInstances(contracts)
+                if (!contracts)
+                    setConnectionStatus('Unsupported Network')
             } else {
                 setConnectionStatus('window.ethereum injected by Metmask')
             }
-
+            const chainChangeContext = chainChangedHandler(result.ethereum)
+            result.ethereum.on('chainChanged', chainChangeContext)
             setMetamask(ethers)
             const networkObject = await ethers.provider.getNetwork()
+
             setChainId(networkObject.chainId)
             setNetwork(networkObject.chainId === 1 ? 'main' : networkObject.name)
-
+            const account = await ethers.signer.getAddress()
+            if (account && account != '' && account !== '0x0') {
+                setAccount(account)
+                const contracts = await API.GetContracts(ethers.signer, networkObject.name)
+                setContractInstances(contracts)
+                if (!contracts)
+                    setConnectionStatus('Unsupported Network')
+                else
+                    setConnectionStatus('Successfully connected to Metmask')
+            }
 
         } else {
             let status: Status | undefined
@@ -93,18 +119,16 @@ function EthereumContextProvider(props: providerProps) {
             else
                 await injectedEthereum.enable()
             setConnectionStatus('Successfully connected to Metmask')
-            injectedEthereum.on('chainChanged', async () => {
-                let ethers = !metamask ? API.GetEthers(injectedEthereum) : metamask
-                let networkObject = await ethers.provider.getNetwork()
-
-                setChainId(networkObject.chainId)
-                setNetwork(networkObject.chainId === 1 ? 'main' : networkObject.name)
-            })
+            const chainChangeContext = chainChangedHandler(injectedEthereum)
+            injectedEthereum.on('chainChanged', chainChangeContext)
             if (!metamask) {
                 setMetamask(API.GetEthers(injectedEthereum))
             }
             if (metamask && metamask.signer) {
-                setContractInstances(await API.GetContracts(metamask.signer, network))
+                const contracts = await API.GetContracts(metamask.signer, network)
+                setContractInstances(contracts)
+                if (!contracts)
+                    setConnectionStatus('Unsupported Network')
                 setAccount(await metamask.signer.getAddress())
             }
 
@@ -115,7 +139,7 @@ function EthereumContextProvider(props: providerProps) {
 
     useEffect(() => {
         requestConnectionCallback()
-    }, [requestConnection])
+    })
 
     let blockchain: (blockchainProps | undefined)
     if (contractInstances && metamask) {
@@ -125,7 +149,8 @@ function EthereumContextProvider(props: providerProps) {
         blockchain,
         connectionStatus,
         network,
-        requestConnection: () => setRequestConnection(true)
+        requestConnection: () => setRequestConnection(true),
+        requestDisconnection: () => { setMetamask(undefined); setConnectionStatus('Application not connected to Metamask'); blockchain = undefined }
     }
     EthereumContext = createContext<ethereumContextProps>(contextProps)
 

@@ -15,7 +15,7 @@ export interface ethersMetamask {
     signer: ethers.Signer
 }
 
-type ethereumSendArguments = 'eth_accounts' | 'eth_chainId' | 'eth_requestAccounts'
+type ethereumSendArguments = 'eth_accounts' | 'eth_chainId' | 'eth_requestAccounts'|'disconnect'
 type ethereumOnArguments = 'accountsChanged' | 'chainChanged'
 
 interface requestParams {
@@ -63,7 +63,10 @@ export function GetEthers(ethereum: injectedEthereum): ethersMetamask {
     }
 }
 
-export async function GetContracts(signer: ethers.Signer, network: string): Promise<ContractInstances> {
+export async function GetContracts(signer: ethers.Signer, network: string): Promise<ContractInstances|undefined> {
+    if (Object.keys(addresses).filter(key => key === network).length === 0)
+        return
+
     const lendingPoolAddressProvider = new contracts.LendingPoolAddressesProviderFactory(signer).attach(addresses[network]["LendingPoolAddressesProvider"])
     //an ethers oddity that is necessary
     const libraryAddress: LendingPoolCoreLibraryAddresses = {
@@ -117,7 +120,6 @@ export async function GetContracts(signer: ethers.Signer, network: string): Prom
         PriceOracle,
         LendingRateOracle,
         LendingPool,
-
         LendingPoolCore,
         LendingPoolDataProvider,
         LendingPoolLiquidationManager,

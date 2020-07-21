@@ -1,7 +1,7 @@
 import * as React from "react"
 import { useContext, useState, useEffect, useCallback } from 'react'
 import { EthereumContext } from "../../../../contexts/EthereumContext"
-import { Grid, Typography, TextField, Button, Paper, makeStyles } from "@material-ui/core"
+import { Grid, Typography, TextField, Button, Paper, makeStyles, createStyles } from "@material-ui/core"
 import BigNumber from "bignumber.js"
 import { hexToNumString, weiToEth } from "../../../../../blockchain/EthereumAPI"
 interface props {
@@ -125,17 +125,12 @@ export default function ControlsForFunction(props: props) {
     const setInput = (v: string, index: number) => {
         if (inputsText) {
             inputsText[index] = v
-            // let current = [...inputsText]
-            // current[index] = v
-            // setInputsText(current)
+
             setInputsText(inputsText)
         }
     }
     const functionName: string = props.function.substring(0, props.function.indexOf('(')).trim()
     const action = ethereumContextProps.blockchain.contracts[props.contractName][functionName]
-    // const action = mutability==='payable'? ethereumContextProps.blockchain.contracts[props.contractName][functionName]({value:payableEth})
-    // :ethereumContextProps.blockchain.contracts[props.contractName][functionName]//presumable returns a promise when reflet.apply
-
 
     return <Paper className={classes.paper}><Grid
         container
@@ -183,12 +178,20 @@ interface appropriateInputProps {
     isPayable: boolean
 }
 
-const inputStyles = makeStyles({
+const inputStyles = makeStyles(theme => createStyles({
     text: {
         margin: "10px",
-        width: "400px"
+        width: "400px",
+        color: "white",
+        fontFamily: theme.standardFont.fontFamily,
+        fontSize: theme.standardFont.fontSize
+    },
+    MuiTextField:{
+        color: "white",
+        fontFamily: theme.standardFont.fontFamily,
+        fontSize: theme.standardFont.fontSize+3
     }
-})
+}))
 
 function AppropriateInput(props: appropriateInputProps) {
     const classes = inputStyles()
@@ -196,8 +199,12 @@ function AppropriateInput(props: appropriateInputProps) {
         .filter(arg => arg._isParamType)
         .map((arg, i) => (
             <Grid item key={'app' + arg.name + i}>
-                <TextField className={classes.text} label={arg.name} type="text" variant="outlined" value={props.inputs[i]}
-                    onChange={(event) => { props.setInput(event.target.value, i) }} autoComplete={arg.name} />
+                <TextField label={arg.name} type="text" variant="outlined" value={props.inputs[i]}
+                    onChange={(event) => { props.setInput(event.target.value, i) }} autoComplete={arg.name}
+                    InputProps={{
+                        className: classes.text
+                      }}
+                    />
             </Grid>
         ))
 

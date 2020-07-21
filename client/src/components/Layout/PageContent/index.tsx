@@ -1,35 +1,53 @@
 import * as React from "react"
 import Dashboard from './Dashboard/index'
-import { Route, Switch, BrowserRouter, Redirect/*, useLocation */ } from 'react-router-dom'
-import { useContext, useCallback, useEffect } from 'react'
-import { EthereumContext } from '../../contexts/EthereumContext'
-import * as API from '../../../blockchain/EthereumAPI'
+import { Route, Switch, Redirect/*, useLocation */ } from 'react-router-dom'
+import Borrow from "./Borrow/index"
+import Deposit from "./Deposit/index"
+import Liquidation from "./Liquidation/index"
+import { makeStyles, createStyles } from '@material-ui/core'
+const delayDuration = '300ms'
+const delayFunction = 'ease'
 
-export default function PageContent() {
-    const ethereumContextProps = useContext(EthereumContext)
-    const [role, setRole] = React.useState<API.Role>(API.Role.user)
-    const roleCallBack = useCallback(async () => {
-        if (ethereumContextProps.blockchain) {
-            setRole(await API.GetRole(ethereumContextProps.blockchain.account, ethereumContextProps.blockchain.contracts))
-        }
-    }, [ethereumContextProps.blockchain?.account])
+const useStyles = makeStyles(them => createStyles({
+    expanded: {
+        marginLeft:"200px",
+        transitionProperty: "margin",
+        transitionDuration: delayDuration,
+        transitionTimingFunction: delayFunction,
+    },
+    shrunk:{
+        marginLeft:"50px",
+        transitionProperty: "margin",
+        transitionDuration: delayDuration,
+        transitionTimingFunction: delayFunction
+    }
+}))
 
-    useEffect(() => {
-        roleCallBack()
-    }, [ethereumContextProps.blockchain?.account])
-    const isAdmin = (role: API.Role): boolean => role !== API.Role.user
+interface props{
+    expanded:boolean
+    isAdmin:boolean
+}
 
-    return <div>
-        <BrowserRouter>
-            <Switch>
-                <Route path='/' exact>
-                    <div>user page</div>
-                </Route>
+export default function PageContent(props:props) {
+    const classes = useStyles()
 
-                <Route path='/admin'>
-                    {isAdmin(role) ? <Dashboard /> : <Redirect to="/" />}
-                </Route>
-            </Switch>
-        </BrowserRouter>
+    return <div className={props.expanded?classes.expanded:classes.shrunk}>
+        <Switch>
+            <Route path='/' exact>
+                <div>user page</div>
+            </Route>
+            <Route path='/admin' exact>
+                {props.isAdmin ? <Dashboard /> : <Redirect to="/" />}
+            </Route>
+            <Route path='/borrow' exact>
+                <Borrow />
+            </Route>
+            <Route path='/deposit' exact>
+                <Deposit />
+            </Route>
+            <Route path='/liquidation' exact>
+                <Liquidation />
+            </Route>
+        </Switch>
     </div >
 }

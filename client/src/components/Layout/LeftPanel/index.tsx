@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { Drawer, Grid, Button } from '@material-ui/core'
+import { Drawer, Grid, Button, List, ListItem } from '@material-ui/core'
 import { Theme, makeStyles, createStyles } from '@material-ui/core/styles';
 import withWidth from '@material-ui/core/withWidth';
 import { Breakpoint } from '@material-ui/core/styles/createBreakpoints';
 import growArrow from '../../../images/growArrow.png'
 import shrinkArrow from '../../../images/shrinkArrow.png'
+import ShortcutButtons from './ShortcutButtons'
+import WalletView from './WalletView'
 
-const bigWidth = 180
+const bigWidth = 200
 const smallWidth = 50
 const delayDuration = '300ms'
 const delayFunction = 'ease'
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         actionDrawerShrunk: {
-            overflowX: "hidden",
+            overflowX: "visible",
+            overflowY:"visible",
             width: smallWidth,
             flexShrink: 0,
             background: theme.componentBackground[theme.palette.type],
@@ -23,7 +26,8 @@ const useStyles = makeStyles((theme: Theme) =>
             transitionTimingFunction: delayFunction
         },
         actionDrawerBig: {
-            overflowX: "hidden",
+            overflowX: "visible",
+            overflowY:"visible",
             width: bigWidth,
             background: theme.componentBackground[theme.palette.type],
             transitionProperty: "width",
@@ -31,7 +35,8 @@ const useStyles = makeStyles((theme: Theme) =>
             transitionTimingFunction: delayFunction
         },
         actionDrawerPaperShrunk: {
-            overflowX: "hidden",
+            overflowX: "visible",
+            overflowY:"visible",
             width: smallWidth,
             background: theme.componentBackground[theme.palette.type],
             transitionProperty: "width",
@@ -39,7 +44,8 @@ const useStyles = makeStyles((theme: Theme) =>
             transitionTimingFunction: delayFunction
         },
         actionDrawerPaperBig: {
-            overflowX: "hidden",
+            overflowX: "visible",
+            overflowY:"visible",
             width: bigWidth,
             background: theme.componentBackground[theme.palette.type],
             transitionProperty: "width",
@@ -47,7 +53,8 @@ const useStyles = makeStyles((theme: Theme) =>
             transitionTimingFunction: delayFunction
         },
         contentRoot: {
-            overflowX: "hidden",
+            overflowX: "visible",
+            overflowY:"visible",
             background: theme.componentBackground[theme.palette.type]
         },
         footer: {
@@ -58,7 +65,7 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         shrinkButton: {
             background: theme.controlHighlight[theme.palette.type],
-            width: 140,
+            width: 170,
             borderRadius: "25px 0 0 25px",
 
         },
@@ -71,49 +78,64 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         arrow: {
             alignItems: "flex-start",
-        }
+        },
+        navigationList: {
+            width: '100%',
+            maxWidth: 360,
+        },
     }),
 );
 
 interface leftPanelProps {
     width: Breakpoint
+    setExpanded: (e: boolean) => void
+    expanded: boolean
+    isAdmin: boolean
 }
 
 function LeftPanel(props: leftPanelProps) {
     const classes = useStyles()
-    const [expanded, setExpanded] = useState<boolean>(true)
     const [clickExpand, setClickExpand] = useState<boolean>(false)
     const [clickShrink, setClickShrink] = useState<boolean>(false)
-
     const wide = widthBig(props.width)
 
     useEffect(() => {
         if (clickExpand) {
-            setExpanded(true)
+            props.setExpanded(true)
             setClickShrink(false)
         }
         else if (clickShrink) {
-            setExpanded(false)
+            props.setExpanded(false)
             setClickExpand(false)
         }
 
-        if (!wide && expanded && !clickExpand) {
-            setExpanded(false)
-        } else if (wide && !expanded && !clickShrink) {
-            setExpanded(true)
-        } else if (wide && expanded) {
+        if (!wide && props.expanded && !clickExpand) {
+            props.setExpanded(false)
+        } else if (wide && !props.expanded && !clickShrink) {
+            props.setExpanded(true)
+        } else if (wide && props.expanded) {
             setClickExpand(false)
         }
     });
 
-    let drawerClass = expanded ? classes.actionDrawerBig : classes.actionDrawerShrunk
-    let drawerPaperClasses = expanded ? classes.actionDrawerPaperBig : classes.actionDrawerPaperShrunk
+    let drawerClass = props.expanded ? classes.actionDrawerBig : classes.actionDrawerShrunk
+    let drawerPaperClasses = props.expanded ? classes.actionDrawerPaperBig : classes.actionDrawerPaperShrunk
 
-    return <Drawer variant="persistent"
+    return <Drawer variant="permanent"
         open={true}
         className={drawerClass}
         classes={{ paper: drawerPaperClasses }}
+
     >
+        <List className={classes.navigationList}
+            component="nav"
+        >
+            <ListItem key="wallet">
+                <WalletView expanded={props.expanded} />
+            </ListItem>
+
+            <ShortcutButtons expanded={props.expanded} isAdmin={props.isAdmin} />
+        </List>
         <div className={classes.contentRoot}>
             <Grid
                 container
@@ -123,7 +145,7 @@ function LeftPanel(props: leftPanelProps) {
                 className={classes.footer}
             >
                 <Grid item>
-                    {expanded
+                    {props.expanded
                         ?
                         <Button key={1} className={classes.shrinkButton} onClick={() => setClickShrink(true)}><div className={classes.arrowContainer}><img className={classes.arrow} src={shrinkArrow} /></div></Button>
                         :

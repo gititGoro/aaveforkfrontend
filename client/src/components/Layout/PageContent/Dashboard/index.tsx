@@ -1,16 +1,18 @@
 import React from 'react';
-import { Grid, makeStyles } from '@material-ui/core'
-import WalletHeader from "./WalletHeader"
+import { Grid, makeStyles, createStyles } from '@material-ui/core'
 
 import ContractSelector from "./ContractSelector"
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => createStyles({
     root: {
-        display: "flex"
+        display: "flex",
+        color: "white",
+        fontFamily: theme.standardFont.fontFamily,
+        fontSize: theme.standardFont.fontSize
     },
     gridItem: {
         flexGrow: 1,
     }
-});
+}));
 
 export default function Dashboard() {
 
@@ -33,10 +35,7 @@ export default function Dashboard() {
                 spacing={10}
             >
                 <Grid item>
-                    <WalletHeader />
-                </Grid>
-                <Grid item>
-                  <ContractSelector />
+                    <ContractSelector />
                 </Grid>
             </Grid>
 
