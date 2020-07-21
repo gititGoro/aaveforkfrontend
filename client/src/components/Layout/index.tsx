@@ -1,19 +1,19 @@
 import React, { useState, useContext, useCallback, useEffect } from 'react';
 import PageContent from './PageContent/index'
 import LeftPanel from './LeftPanel/index'
-import BottomPanel from './BottomPanel'
+import BottomPanel, {brightMode} from './BottomPanel'
 import { BrowserRouter } from 'react-router-dom'
 import { GetRole, Role } from '../../blockchain/EthereumAPI'
 import { EthereumContext } from '../contexts/EthereumContext'
 import { makeStyles, createStyles, Theme } from '@material-ui/core';
 interface props {
-
+    setBrightMode: (mode: brightMode) => void
+    brightMode: brightMode
 }
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
     root: {
-        overflowX: "hidden",
-        overflowY:"visible"
+        overflowX: "hidden"
     }
 }))
 
@@ -37,7 +37,7 @@ export default function Layout(props: props) {
     return <div className={classes.root}>
         <BrowserRouter>
             <LeftPanel expanded={expandLeftPanel} setExpanded={setExpandLeftPanel} isAdmin={isAdmin} />
-            <BottomPanel />
+            <BottomPanel brightMode={props.brightMode} setBrightMode={props.setBrightMode} />
             <PageContent expanded={expandLeftPanel} isAdmin={isAdmin} />
         </BrowserRouter>
     </div>

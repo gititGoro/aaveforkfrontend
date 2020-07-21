@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import theme from './SiteTheme'
-import { Switch, Typography, FormControl, Grid } from '@material-ui/core';
+import { brightMode } from './components/Layout/BottomPanel';
 
 
 ReactDOM.render(
@@ -16,7 +16,16 @@ ReactDOM.render(
 
 
 function ThemedApp() {
-  const [mode, setMode] = useState<'light' | 'dark'>('light')
+  const rememberedMode = localStorage.getItem("brightnessMode")
+  const light: brightMode = 'light'
+  const dark: brightMode = 'dark'
+  const defaultMode: brightMode = rememberedMode === light || rememberedMode === dark ? rememberedMode : 'light'
+  const [mode, setMode] = useState<brightMode>(defaultMode)
+
+  const setModeRemember = (m: brightMode) => {
+    localStorage.setItem("brightnessMode", m);
+    setMode(m)
+  }
 
   const themetoUse = createMuiTheme(theme, {
     palette: {
@@ -25,19 +34,6 @@ function ThemedApp() {
   })
 
   return <ThemeProvider theme={themetoUse}>
-    <App />
-    <Grid
-      container
-      direction="row"
-      justify="flex-end"
-      alignItems="center"
-    >
-      <Grid item>
-        <FormControl>
-          <Typography>{mode.toString()}</Typography>
-          <Switch onClick={() => setMode(mode === 'light' ? 'dark' : 'light')} value={mode}></Switch>
-        </FormControl>
-      </Grid>
-    </Grid>
+    <App brightMode={mode} setBrightMode={setModeRemember} />
   </ThemeProvider>
 }

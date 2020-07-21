@@ -4,6 +4,7 @@ import { EthereumContextProvider } from './components/contexts/EthereumContext'
 import Layout from './components/Layout/index'
 import { makeStyles, Theme } from '@material-ui/core';
 import 'fontsource-roboto';
+import { brightMode } from './components/Layout/BottomPanel';
 
 const useStyles = makeStyles((theme:Theme)=>({
   app: {
@@ -17,12 +18,17 @@ const useStyles = makeStyles((theme:Theme)=>({
   }
 }))
 
-function App() {
+interface props{
+  setBrightMode: (mode: brightMode) => void
+  brightMode: brightMode
+}
+
+function App(props:props) {
   const classes = useStyles()
   return (
     <div className={classes.app}>
       <EthereumContextProvider window={window}>
-        <Layout />
+        <Layout brightMode={props.brightMode} setBrightMode={props.setBrightMode} />
       </EthereumContextProvider>
     </div>
   );
