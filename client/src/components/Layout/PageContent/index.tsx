@@ -34,7 +34,7 @@ export default function PageContent(props:props) {
     return <div className={props.expanded?classes.expanded:classes.shrunk}>
         <Switch>
             <Route path='/' exact>
-                <div>user page</div>
+                <div></div>
             </Route>
             <Route path='/admin' exact>
                 {props.isAdmin ? <Dashboard /> : <Redirect to="/" />}
