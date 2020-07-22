@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         actionDrawerShrunk: {
             overflowX: "visible",
-            overflowY:"visible",
+            overflowY: "visible",
             width: smallWidth,
             flexShrink: 0,
             background: theme.componentBackground[theme.palette.type],
@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         actionDrawerBig: {
             overflowX: "visible",
-            overflowY:"visible",
+            overflowY: "visible",
             width: bigWidth,
             background: theme.componentBackground[theme.palette.type],
             transitionProperty: "width",
@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         actionDrawerPaperShrunk: {
             overflowX: "visible",
-            overflowY:"visible",
+            overflowY: "visible",
             width: smallWidth,
             background: theme.componentBackground[theme.palette.type],
             transitionProperty: "width",
@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         actionDrawerPaperBig: {
             overflowX: "visible",
-            overflowY:"visible",
+            overflowY: "visible",
             width: bigWidth,
             background: theme.componentBackground[theme.palette.type],
             transitionProperty: "width",
@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         contentRoot: {
             overflowX: "visible",
-            overflowY:"visible",
+            overflowY: "visible",
             background: theme.componentBackground[theme.palette.type]
         },
         footer: {
@@ -70,7 +70,8 @@ const useStyles = makeStyles((theme: Theme) =>
 
         },
         expandButton: {
-            background: theme.controlHighlight[theme.palette.type]
+            background: theme.controlHighlight[theme.palette.type],
+            minWidth: smallWidth
         },
         arrowContainer: {
             width: "100%",

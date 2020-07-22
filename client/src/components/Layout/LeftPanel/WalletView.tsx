@@ -4,6 +4,7 @@ import { EthereumContext } from '../../contexts/EthereumContext'
 import { Button, makeStyles, createStyles, Theme, Grid, List, ListItem, Divider } from '@material-ui/core'
 import greenLight from '../../../images/greenLight.png'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
     walletContainer: {
@@ -181,9 +182,12 @@ function ConnectedSection() {
                 <Grid item>
                     {truncateAddress(ethereumContextProps.blockchain?.account)}
                 </Grid>
-                <Grid item>
-                    <ExpandMoreIcon className={classes.greenLight} />
-                </Grid>
+                {popupVisible ? <Grid item>
+                    <ExpandLessIcon className={classes.greenLight} />
+                </Grid> : <Grid item>
+                        <ExpandMoreIcon className={classes.greenLight} />
+                    </Grid>}
+
             </Grid>
         </Button>
     </div>
