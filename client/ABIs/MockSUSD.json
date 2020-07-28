@@ -326,14 +326,14 @@
     "absolutePath": "/home/justin/freelancing/aave-protocol/contracts/mocks/tokens/MockSUSD.sol",
     "exportedSymbols": {
       "MockSUSD": [
-        12202
+        12200
       ]
     },
-    "id": 12203,
+    "id": 12201,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 12189,
+        "id": 12187,
         "literals": [
           "solidity",
           "^",
@@ -346,10 +346,10 @@
       {
         "absolutePath": "/home/justin/freelancing/aave-protocol/contracts/mocks/tokens/MintableERC20.sol",
         "file": "./MintableERC20.sol",
-        "id": 12190,
+        "id": 12188,
         "nodeType": "ImportDirective",
-        "scope": 12203,
-        "sourceUnit": 12068,
+        "scope": 12201,
+        "sourceUnit": 12066,
         "src": "26:29:65",
         "symbolAliases": [],
         "unitAlias": ""
@@ -360,47 +360,47 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 12191,
+              "id": 12189,
               "name": "MintableERC20",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 12067,
+              "referencedDeclaration": 12065,
               "src": "79:13:65",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_MintableERC20_$12067",
+                "typeIdentifier": "t_contract$_MintableERC20_$12065",
                 "typeString": "contract MintableERC20"
               }
             },
-            "id": 12192,
+            "id": 12190,
             "nodeType": "InheritanceSpecifier",
             "src": "79:13:65"
           }
         ],
         "contractDependencies": [
-          12067,
-          13437,
-          14147,
-          14308
+          12065,
+          13435,
+          14145,
+          14306
         ],
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 12202,
+        "id": 12200,
         "linearizedBaseContracts": [
-          12202,
-          12067,
-          14147,
-          14308,
-          13437
+          12200,
+          12065,
+          14145,
+          14306,
+          13435
         ],
         "name": "MockSUSD",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 12195,
+            "id": 12193,
             "name": "decimals",
             "nodeType": "VariableDeclaration",
-            "scope": 12202,
+            "scope": 12200,
             "src": "100:27:65",
             "stateVariable": true,
             "storageLocation": "default",
@@ -409,7 +409,7 @@
               "typeString": "uint256"
             },
             "typeName": {
-              "id": 12193,
+              "id": 12191,
               "name": "uint256",
               "nodeType": "ElementaryTypeName",
               "src": "100:7:65",
@@ -421,7 +421,7 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "36",
-              "id": 12194,
+              "id": 12192,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
@@ -440,10 +440,10 @@
           },
           {
             "constant": false,
-            "id": 12198,
+            "id": 12196,
             "name": "symbol",
             "nodeType": "VariableDeclaration",
-            "scope": 12202,
+            "scope": 12200,
             "src": "133:29:65",
             "stateVariable": true,
             "storageLocation": "default",
@@ -452,7 +452,7 @@
               "typeString": "string"
             },
             "typeName": {
-              "id": 12196,
+              "id": 12194,
               "name": "string",
               "nodeType": "ElementaryTypeName",
               "src": "133:6:65",
@@ -464,7 +464,7 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "53555344",
-              "id": 12197,
+              "id": 12195,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
@@ -483,10 +483,10 @@
           },
           {
             "constant": false,
-            "id": 12201,
+            "id": 12199,
             "name": "name",
             "nodeType": "VariableDeclaration",
-            "scope": 12202,
+            "scope": 12200,
             "src": "168:36:65",
             "stateVariable": true,
             "storageLocation": "default",
@@ -495,7 +495,7 @@
               "typeString": "string"
             },
             "typeName": {
-              "id": 12199,
+              "id": 12197,
               "name": "string",
               "nodeType": "ElementaryTypeName",
               "src": "168:6:65",
@@ -507,7 +507,7 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "53796e74686574697820555344",
-              "id": 12200,
+              "id": 12198,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
@@ -525,7 +525,7 @@
             "visibility": "public"
           }
         ],
-        "scope": 12203,
+        "scope": 12201,
         "src": "58:149:65"
       }
     ],
@@ -535,14 +535,14 @@
     "absolutePath": "/home/justin/freelancing/aave-protocol/contracts/mocks/tokens/MockSUSD.sol",
     "exportedSymbols": {
       "MockSUSD": [
-        12202
+        12200
       ]
     },
-    "id": 12203,
+    "id": 12201,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 12189,
+        "id": 12187,
         "literals": [
           "solidity",
           "^",
@@ -555,10 +555,10 @@
       {
         "absolutePath": "/home/justin/freelancing/aave-protocol/contracts/mocks/tokens/MintableERC20.sol",
         "file": "./MintableERC20.sol",
-        "id": 12190,
+        "id": 12188,
         "nodeType": "ImportDirective",
-        "scope": 12203,
-        "sourceUnit": 12068,
+        "scope": 12201,
+        "sourceUnit": 12066,
         "src": "26:29:65",
         "symbolAliases": [],
         "unitAlias": ""
@@ -569,47 +569,47 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 12191,
+              "id": 12189,
               "name": "MintableERC20",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 12067,
+              "referencedDeclaration": 12065,
               "src": "79:13:65",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_MintableERC20_$12067",
+                "typeIdentifier": "t_contract$_MintableERC20_$12065",
                 "typeString": "contract MintableERC20"
               }
             },
-            "id": 12192,
+            "id": 12190,
             "nodeType": "InheritanceSpecifier",
             "src": "79:13:65"
           }
         ],
         "contractDependencies": [
-          12067,
-          13437,
-          14147,
-          14308
+          12065,
+          13435,
+          14145,
+          14306
         ],
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 12202,
+        "id": 12200,
         "linearizedBaseContracts": [
-          12202,
-          12067,
-          14147,
-          14308,
-          13437
+          12200,
+          12065,
+          14145,
+          14306,
+          13435
         ],
         "name": "MockSUSD",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 12195,
+            "id": 12193,
             "name": "decimals",
             "nodeType": "VariableDeclaration",
-            "scope": 12202,
+            "scope": 12200,
             "src": "100:27:65",
             "stateVariable": true,
             "storageLocation": "default",
@@ -618,7 +618,7 @@
               "typeString": "uint256"
             },
             "typeName": {
-              "id": 12193,
+              "id": 12191,
               "name": "uint256",
               "nodeType": "ElementaryTypeName",
               "src": "100:7:65",
@@ -630,7 +630,7 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "36",
-              "id": 12194,
+              "id": 12192,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
@@ -649,10 +649,10 @@
           },
           {
             "constant": false,
-            "id": 12198,
+            "id": 12196,
             "name": "symbol",
             "nodeType": "VariableDeclaration",
-            "scope": 12202,
+            "scope": 12200,
             "src": "133:29:65",
             "stateVariable": true,
             "storageLocation": "default",
@@ -661,7 +661,7 @@
               "typeString": "string"
             },
             "typeName": {
-              "id": 12196,
+              "id": 12194,
               "name": "string",
               "nodeType": "ElementaryTypeName",
               "src": "133:6:65",
@@ -673,7 +673,7 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "53555344",
-              "id": 12197,
+              "id": 12195,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
@@ -692,10 +692,10 @@
           },
           {
             "constant": false,
-            "id": 12201,
+            "id": 12199,
             "name": "name",
             "nodeType": "VariableDeclaration",
-            "scope": 12202,
+            "scope": 12200,
             "src": "168:36:65",
             "stateVariable": true,
             "storageLocation": "default",
@@ -704,7 +704,7 @@
               "typeString": "string"
             },
             "typeName": {
-              "id": 12199,
+              "id": 12197,
               "name": "string",
               "nodeType": "ElementaryTypeName",
               "src": "168:6:65",
@@ -716,7 +716,7 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "53796e74686574697820555344",
-              "id": 12200,
+              "id": 12198,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
@@ -734,7 +734,7 @@
             "visibility": "public"
           }
         ],
-        "scope": 12203,
+        "scope": 12201,
         "src": "58:149:65"
       }
     ],
@@ -746,7 +746,7 @@
   },
   "networks": {},
   "schemaVersion": "3.1.0",
-  "updatedAt": "2020-07-07T09:41:51.095Z",
+  "updatedAt": "2020-07-28T08:53:26.999Z",
   "devdoc": {
     "methods": {
       "allowance(address,address)": {

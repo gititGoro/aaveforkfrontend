@@ -58,14 +58,14 @@
     "absolutePath": "/home/justin/freelancing/aave-protocol/contracts/misc/IERC20DetailedBytes.sol",
     "exportedSymbols": {
       "IERC20DetailedBytes": [
-        11338
+        11336
       ]
     },
-    "id": 11339,
+    "id": 11337,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 11331,
+        "id": 11329,
         "literals": [
           "solidity",
           "^",
@@ -81,19 +81,19 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 11338,
+        "id": 11336,
         "linearizedBaseContracts": [
-          11338
+          11336
         ],
         "name": "IERC20DetailedBytes",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 11333,
+            "id": 11331,
             "name": "name",
             "nodeType": "VariableDeclaration",
-            "scope": 11338,
+            "scope": 11336,
             "src": "60:21:35",
             "stateVariable": true,
             "storageLocation": "default",
@@ -102,7 +102,7 @@
               "typeString": "bytes32"
             },
             "typeName": {
-              "id": 11332,
+              "id": 11330,
               "name": "bytes32",
               "nodeType": "ElementaryTypeName",
               "src": "60:7:35",
@@ -116,10 +116,10 @@
           },
           {
             "constant": false,
-            "id": 11335,
+            "id": 11333,
             "name": "symbol",
             "nodeType": "VariableDeclaration",
-            "scope": 11338,
+            "scope": 11336,
             "src": "87:23:35",
             "stateVariable": true,
             "storageLocation": "default",
@@ -128,7 +128,7 @@
               "typeString": "bytes32"
             },
             "typeName": {
-              "id": 11334,
+              "id": 11332,
               "name": "bytes32",
               "nodeType": "ElementaryTypeName",
               "src": "87:7:35",
@@ -142,10 +142,10 @@
           },
           {
             "constant": false,
-            "id": 11337,
+            "id": 11335,
             "name": "decimals",
             "nodeType": "VariableDeclaration",
-            "scope": 11338,
+            "scope": 11336,
             "src": "116:25:35",
             "stateVariable": true,
             "storageLocation": "default",
@@ -154,7 +154,7 @@
               "typeString": "uint256"
             },
             "typeName": {
-              "id": 11336,
+              "id": 11334,
               "name": "uint256",
               "nodeType": "ElementaryTypeName",
               "src": "116:7:35",
@@ -167,7 +167,7 @@
             "visibility": "public"
           }
         ],
-        "scope": 11339,
+        "scope": 11337,
         "src": "25:119:35"
       }
     ],
@@ -177,14 +177,14 @@
     "absolutePath": "/home/justin/freelancing/aave-protocol/contracts/misc/IERC20DetailedBytes.sol",
     "exportedSymbols": {
       "IERC20DetailedBytes": [
-        11338
+        11336
       ]
     },
-    "id": 11339,
+    "id": 11337,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 11331,
+        "id": 11329,
         "literals": [
           "solidity",
           "^",
@@ -200,19 +200,19 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 11338,
+        "id": 11336,
         "linearizedBaseContracts": [
-          11338
+          11336
         ],
         "name": "IERC20DetailedBytes",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 11333,
+            "id": 11331,
             "name": "name",
             "nodeType": "VariableDeclaration",
-            "scope": 11338,
+            "scope": 11336,
             "src": "60:21:35",
             "stateVariable": true,
             "storageLocation": "default",
@@ -221,7 +221,7 @@
               "typeString": "bytes32"
             },
             "typeName": {
-              "id": 11332,
+              "id": 11330,
               "name": "bytes32",
               "nodeType": "ElementaryTypeName",
               "src": "60:7:35",
@@ -235,10 +235,10 @@
           },
           {
             "constant": false,
-            "id": 11335,
+            "id": 11333,
             "name": "symbol",
             "nodeType": "VariableDeclaration",
-            "scope": 11338,
+            "scope": 11336,
             "src": "87:23:35",
             "stateVariable": true,
             "storageLocation": "default",
@@ -247,7 +247,7 @@
               "typeString": "bytes32"
             },
             "typeName": {
-              "id": 11334,
+              "id": 11332,
               "name": "bytes32",
               "nodeType": "ElementaryTypeName",
               "src": "87:7:35",
@@ -261,10 +261,10 @@
           },
           {
             "constant": false,
-            "id": 11337,
+            "id": 11335,
             "name": "decimals",
             "nodeType": "VariableDeclaration",
-            "scope": 11338,
+            "scope": 11336,
             "src": "116:25:35",
             "stateVariable": true,
             "storageLocation": "default",
@@ -273,7 +273,7 @@
               "typeString": "uint256"
             },
             "typeName": {
-              "id": 11336,
+              "id": 11334,
               "name": "uint256",
               "nodeType": "ElementaryTypeName",
               "src": "116:7:35",
@@ -286,7 +286,7 @@
             "visibility": "public"
           }
         ],
-        "scope": 11339,
+        "scope": 11337,
         "src": "25:119:35"
       }
     ],
@@ -298,7 +298,7 @@
   },
   "networks": {},
   "schemaVersion": "3.1.0",
-  "updatedAt": "2020-07-07T09:41:51.085Z",
+  "updatedAt": "2020-07-28T08:53:26.987Z",
   "devdoc": {
     "methods": {}
   },

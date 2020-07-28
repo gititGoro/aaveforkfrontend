@@ -464,7 +464,7 @@
   },
   "networks": {},
   "schemaVersion": "3.1.0",
-  "updatedAt": "2020-07-07T09:41:50.995Z",
+  "updatedAt": "2020-07-28T08:53:26.897Z",
   "devdoc": {
     "methods": {
       "getAssetPrice(address)": {

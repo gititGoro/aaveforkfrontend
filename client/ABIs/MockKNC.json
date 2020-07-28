@@ -326,14 +326,14 @@
     "absolutePath": "/home/justin/freelancing/aave-protocol/contracts/mocks/tokens/MockKNC.sol",
     "exportedSymbols": {
       "MockKNC": [
-        12112
+        12110
       ]
     },
-    "id": 12113,
+    "id": 12111,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 12099,
+        "id": 12097,
         "literals": [
           "solidity",
           "^",
@@ -346,10 +346,10 @@
       {
         "absolutePath": "/home/justin/freelancing/aave-protocol/contracts/mocks/tokens/MintableERC20.sol",
         "file": "./MintableERC20.sol",
-        "id": 12100,
+        "id": 12098,
         "nodeType": "ImportDirective",
-        "scope": 12113,
-        "sourceUnit": 12068,
+        "scope": 12111,
+        "sourceUnit": 12066,
         "src": "26:29:59",
         "symbolAliases": [],
         "unitAlias": ""
@@ -360,47 +360,47 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 12101,
+              "id": 12099,
               "name": "MintableERC20",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 12067,
+              "referencedDeclaration": 12065,
               "src": "78:13:59",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_MintableERC20_$12067",
+                "typeIdentifier": "t_contract$_MintableERC20_$12065",
                 "typeString": "contract MintableERC20"
               }
             },
-            "id": 12102,
+            "id": 12100,
             "nodeType": "InheritanceSpecifier",
             "src": "78:13:59"
           }
         ],
         "contractDependencies": [
-          12067,
-          13437,
-          14147,
-          14308
+          12065,
+          13435,
+          14145,
+          14306
         ],
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 12112,
+        "id": 12110,
         "linearizedBaseContracts": [
-          12112,
-          12067,
-          14147,
-          14308,
-          13437
+          12110,
+          12065,
+          14145,
+          14306,
+          13435
         ],
         "name": "MockKNC",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 12105,
+            "id": 12103,
             "name": "decimals",
             "nodeType": "VariableDeclaration",
-            "scope": 12112,
+            "scope": 12110,
             "src": "99:28:59",
             "stateVariable": true,
             "storageLocation": "default",
@@ -409,7 +409,7 @@
               "typeString": "uint256"
             },
             "typeName": {
-              "id": 12103,
+              "id": 12101,
               "name": "uint256",
               "nodeType": "ElementaryTypeName",
               "src": "99:7:59",
@@ -421,7 +421,7 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "3138",
-              "id": 12104,
+              "id": 12102,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
@@ -440,10 +440,10 @@
           },
           {
             "constant": false,
-            "id": 12108,
+            "id": 12106,
             "name": "symbol",
             "nodeType": "VariableDeclaration",
-            "scope": 12112,
+            "scope": 12110,
             "src": "133:28:59",
             "stateVariable": true,
             "storageLocation": "default",
@@ -452,7 +452,7 @@
               "typeString": "string"
             },
             "typeName": {
-              "id": 12106,
+              "id": 12104,
               "name": "string",
               "nodeType": "ElementaryTypeName",
               "src": "133:6:59",
@@ -464,7 +464,7 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "4b4e43",
-              "id": 12107,
+              "id": 12105,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
@@ -483,10 +483,10 @@
           },
           {
             "constant": false,
-            "id": 12111,
+            "id": 12109,
             "name": "name",
             "nodeType": "VariableDeclaration",
-            "scope": 12112,
+            "scope": 12110,
             "src": "167:36:59",
             "stateVariable": true,
             "storageLocation": "default",
@@ -495,7 +495,7 @@
               "typeString": "string"
             },
             "typeName": {
-              "id": 12109,
+              "id": 12107,
               "name": "string",
               "nodeType": "ElementaryTypeName",
               "src": "167:6:59",
@@ -507,7 +507,7 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "4b79626572204e6574776f726b",
-              "id": 12110,
+              "id": 12108,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
@@ -525,7 +525,7 @@
             "visibility": "public"
           }
         ],
-        "scope": 12113,
+        "scope": 12111,
         "src": "58:148:59"
       }
     ],
@@ -535,14 +535,14 @@
     "absolutePath": "/home/justin/freelancing/aave-protocol/contracts/mocks/tokens/MockKNC.sol",
     "exportedSymbols": {
       "MockKNC": [
-        12112
+        12110
       ]
     },
-    "id": 12113,
+    "id": 12111,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 12099,
+        "id": 12097,
         "literals": [
           "solidity",
           "^",
@@ -555,10 +555,10 @@
       {
         "absolutePath": "/home/justin/freelancing/aave-protocol/contracts/mocks/tokens/MintableERC20.sol",
         "file": "./MintableERC20.sol",
-        "id": 12100,
+        "id": 12098,
         "nodeType": "ImportDirective",
-        "scope": 12113,
-        "sourceUnit": 12068,
+        "scope": 12111,
+        "sourceUnit": 12066,
         "src": "26:29:59",
         "symbolAliases": [],
         "unitAlias": ""
@@ -569,47 +569,47 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 12101,
+              "id": 12099,
               "name": "MintableERC20",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 12067,
+              "referencedDeclaration": 12065,
               "src": "78:13:59",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_MintableERC20_$12067",
+                "typeIdentifier": "t_contract$_MintableERC20_$12065",
                 "typeString": "contract MintableERC20"
               }
             },
-            "id": 12102,
+            "id": 12100,
             "nodeType": "InheritanceSpecifier",
             "src": "78:13:59"
           }
         ],
         "contractDependencies": [
-          12067,
-          13437,
-          14147,
-          14308
+          12065,
+          13435,
+          14145,
+          14306
         ],
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 12112,
+        "id": 12110,
         "linearizedBaseContracts": [
-          12112,
-          12067,
-          14147,
-          14308,
-          13437
+          12110,
+          12065,
+          14145,
+          14306,
+          13435
         ],
         "name": "MockKNC",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 12105,
+            "id": 12103,
             "name": "decimals",
             "nodeType": "VariableDeclaration",
-            "scope": 12112,
+            "scope": 12110,
             "src": "99:28:59",
             "stateVariable": true,
             "storageLocation": "default",
@@ -618,7 +618,7 @@
               "typeString": "uint256"
             },
             "typeName": {
-              "id": 12103,
+              "id": 12101,
               "name": "uint256",
               "nodeType": "ElementaryTypeName",
               "src": "99:7:59",
@@ -630,7 +630,7 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "3138",
-              "id": 12104,
+              "id": 12102,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
@@ -649,10 +649,10 @@
           },
           {
             "constant": false,
-            "id": 12108,
+            "id": 12106,
             "name": "symbol",
             "nodeType": "VariableDeclaration",
-            "scope": 12112,
+            "scope": 12110,
             "src": "133:28:59",
             "stateVariable": true,
             "storageLocation": "default",
@@ -661,7 +661,7 @@
               "typeString": "string"
             },
             "typeName": {
-              "id": 12106,
+              "id": 12104,
               "name": "string",
               "nodeType": "ElementaryTypeName",
               "src": "133:6:59",
@@ -673,7 +673,7 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "4b4e43",
-              "id": 12107,
+              "id": 12105,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
@@ -692,10 +692,10 @@
           },
           {
             "constant": false,
-            "id": 12111,
+            "id": 12109,
             "name": "name",
             "nodeType": "VariableDeclaration",
-            "scope": 12112,
+            "scope": 12110,
             "src": "167:36:59",
             "stateVariable": true,
             "storageLocation": "default",
@@ -704,7 +704,7 @@
               "typeString": "string"
             },
             "typeName": {
-              "id": 12109,
+              "id": 12107,
               "name": "string",
               "nodeType": "ElementaryTypeName",
               "src": "167:6:59",
@@ -716,7 +716,7 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "4b79626572204e6574776f726b",
-              "id": 12110,
+              "id": 12108,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
@@ -734,7 +734,7 @@
             "visibility": "public"
           }
         ],
-        "scope": 12113,
+        "scope": 12111,
         "src": "58:148:59"
       }
     ],
@@ -746,7 +746,7 @@
   },
   "networks": {},
   "schemaVersion": "3.1.0",
-  "updatedAt": "2020-07-07T09:41:51.093Z",
+  "updatedAt": "2020-07-28T08:53:26.996Z",
   "devdoc": {
     "methods": {
       "allowance(address,address)": {

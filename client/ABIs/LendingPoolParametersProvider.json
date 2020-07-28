@@ -101,7 +101,7 @@
         "id": 528,
         "nodeType": "ImportDirective",
         "scope": 595,
-        "sourceUnit": 11048,
+        "sourceUnit": 11046,
         "src": "26:77:2",
         "symbolAliases": [],
         "unitAlias": ""
@@ -126,10 +126,10 @@
               "id": 530,
               "name": "VersionedInitializable",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 11047,
+              "referencedDeclaration": 11045,
               "src": "313:22:2",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_VersionedInitializable_$11047",
+                "typeIdentifier": "t_contract$_VersionedInitializable_$11045",
                 "typeString": "contract VersionedInitializable"
               }
             },
@@ -139,7 +139,7 @@
           }
         ],
         "contractDependencies": [
-          11047
+          11045
         ],
         "contractKind": "contract",
         "documentation": "@title LendingPoolParametersProvider\n@author Aave\n@notice stores the configuration parameters of the Lending Pool contract*",
@@ -147,7 +147,7 @@
         "id": 594,
         "linearizedBaseContracts": [
           594,
-          11047
+          11045
         ],
         "name": "LendingPoolParametersProvider",
         "nodeType": "ContractDefinition",
@@ -497,7 +497,7 @@
             "scope": 594,
             "src": "657:100:2",
             "stateMutability": "pure",
-            "superFunction": 11028,
+            "superFunction": 11026,
             "visibility": "internal"
           },
           {
@@ -521,7 +521,7 @@
                   "name": "initializer",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 11023,
+                  "referencedDeclaration": 11021,
                   "src": "1000:11:2",
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$__$",
@@ -907,7 +907,7 @@
         "id": 528,
         "nodeType": "ImportDirective",
         "scope": 595,
-        "sourceUnit": 11048,
+        "sourceUnit": 11046,
         "src": "26:77:2",
         "symbolAliases": [],
         "unitAlias": ""
@@ -932,10 +932,10 @@
               "id": 530,
               "name": "VersionedInitializable",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 11047,
+              "referencedDeclaration": 11045,
               "src": "313:22:2",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_VersionedInitializable_$11047",
+                "typeIdentifier": "t_contract$_VersionedInitializable_$11045",
                 "typeString": "contract VersionedInitializable"
               }
             },
@@ -945,7 +945,7 @@
           }
         ],
         "contractDependencies": [
-          11047
+          11045
         ],
         "contractKind": "contract",
         "documentation": "@title LendingPoolParametersProvider\n@author Aave\n@notice stores the configuration parameters of the Lending Pool contract*",
@@ -953,7 +953,7 @@
         "id": 594,
         "linearizedBaseContracts": [
           594,
-          11047
+          11045
         ],
         "name": "LendingPoolParametersProvider",
         "nodeType": "ContractDefinition",
@@ -1303,7 +1303,7 @@
             "scope": 594,
             "src": "657:100:2",
             "stateMutability": "pure",
-            "superFunction": 11028,
+            "superFunction": 11026,
             "visibility": "internal"
           },
           {
@@ -1327,7 +1327,7 @@
                   "name": "initializer",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 11023,
+                  "referencedDeclaration": 11021,
                   "src": "1000:11:2",
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$__$",
@@ -1692,7 +1692,7 @@
   },
   "networks": {},
   "schemaVersion": "3.1.0",
-  "updatedAt": "2020-07-07T09:41:50.983Z",
+  "updatedAt": "2020-07-28T08:53:26.878Z",
   "devdoc": {
     "author": "Aave",
     "methods": {

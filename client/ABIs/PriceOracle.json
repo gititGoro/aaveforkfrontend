@@ -128,14 +128,14 @@
     "absolutePath": "/home/justin/freelancing/aave-protocol/contracts/mocks/oracle/PriceOracle.sol",
     "exportedSymbols": {
       "PriceOracle": [
-        12045
+        12043
       ]
     },
-    "id": 12046,
+    "id": 12044,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 11964,
+        "id": 11962,
         "literals": [
           "solidity",
           "^",
@@ -148,9 +148,9 @@
       {
         "absolutePath": "/home/justin/freelancing/aave-protocol/contracts/interfaces/IPriceOracle.sol",
         "file": "../../interfaces/IPriceOracle.sol",
-        "id": 11965,
+        "id": 11963,
         "nodeType": "ImportDirective",
-        "scope": 12046,
+        "scope": 12044,
         "sourceUnit": 1609,
         "src": "25:43:55",
         "symbolAliases": [],
@@ -162,7 +162,7 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 11966,
+              "id": 11964,
               "name": "IPriceOracle",
               "nodeType": "UserDefinedTypeName",
               "referencedDeclaration": 1608,
@@ -172,7 +172,7 @@
                 "typeString": "contract IPriceOracle"
               }
             },
-            "id": 11967,
+            "id": 11965,
             "nodeType": "InheritanceSpecifier",
             "src": "95:12:55"
           }
@@ -183,9 +183,9 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 12045,
+        "id": 12043,
         "linearizedBaseContracts": [
-          12045,
+          12043,
           1608
         ],
         "name": "PriceOracle",
@@ -193,10 +193,10 @@
         "nodes": [
           {
             "constant": false,
-            "id": 11971,
+            "id": 11969,
             "name": "prices",
             "nodeType": "VariableDeclaration",
-            "scope": 12045,
+            "scope": 12043,
             "src": "115:34:55",
             "stateVariable": true,
             "storageLocation": "default",
@@ -205,9 +205,9 @@
               "typeString": "mapping(address => uint256)"
             },
             "typeName": {
-              "id": 11970,
+              "id": 11968,
               "keyType": {
-                "id": 11968,
+                "id": 11966,
                 "name": "address",
                 "nodeType": "ElementaryTypeName",
                 "src": "123:7:55",
@@ -223,7 +223,7 @@
                 "typeString": "mapping(address => uint256)"
               },
               "valueType": {
-                "id": 11969,
+                "id": 11967,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "134:7:55",
@@ -238,10 +238,10 @@
           },
           {
             "constant": false,
-            "id": 11973,
+            "id": 11971,
             "name": "ethPriceUsd",
             "nodeType": "VariableDeclaration",
-            "scope": 12045,
+            "scope": 12043,
             "src": "155:19:55",
             "stateVariable": true,
             "storageLocation": "default",
@@ -250,7 +250,7 @@
               "typeString": "uint256"
             },
             "typeName": {
-              "id": 11972,
+              "id": 11970,
               "name": "uint256",
               "nodeType": "ElementaryTypeName",
               "src": "155:7:55",
@@ -265,20 +265,20 @@
           {
             "anonymous": false,
             "documentation": null,
-            "id": 11981,
+            "id": 11979,
             "name": "AssetPriceUpdated",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 11980,
+              "id": 11978,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11975,
+                  "id": 11973,
                   "indexed": false,
                   "name": "_asset",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11981,
+                  "scope": 11979,
                   "src": "205:14:55",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -287,7 +287,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11974,
+                    "id": 11972,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "205:7:55",
@@ -302,11 +302,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 11977,
+                  "id": 11975,
                   "indexed": false,
                   "name": "_price",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11981,
+                  "scope": 11979,
                   "src": "221:14:55",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -315,7 +315,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11976,
+                    "id": 11974,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "221:7:55",
@@ -329,11 +329,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 11979,
+                  "id": 11977,
                   "indexed": false,
                   "name": "timestamp",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11981,
+                  "scope": 11979,
                   "src": "237:17:55",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -342,7 +342,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11978,
+                    "id": 11976,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "237:7:55",
@@ -362,20 +362,20 @@
           {
             "anonymous": false,
             "documentation": null,
-            "id": 11987,
+            "id": 11985,
             "name": "EthPriceUpdated",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 11986,
+              "id": 11984,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11983,
+                  "id": 11981,
                   "indexed": false,
                   "name": "_price",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11987,
+                  "scope": 11985,
                   "src": "283:14:55",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -384,7 +384,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11982,
+                    "id": 11980,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "283:7:55",
@@ -398,11 +398,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 11985,
+                  "id": 11983,
                   "indexed": false,
                   "name": "timestamp",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11987,
+                  "scope": 11985,
                   "src": "299:17:55",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -411,7 +411,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11984,
+                    "id": 11982,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "299:7:55",
@@ -430,7 +430,7 @@
           },
           {
             "body": {
-              "id": 11998,
+              "id": 11996,
               "nodeType": "Block",
               "src": "394:38:55",
               "statements": [
@@ -439,25 +439,25 @@
                     "argumentTypes": null,
                     "baseExpression": {
                       "argumentTypes": null,
-                      "id": 11994,
+                      "id": 11992,
                       "name": "prices",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 11971,
+                      "referencedDeclaration": 11969,
                       "src": "411:6:55",
                       "typeDescriptions": {
                         "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
                         "typeString": "mapping(address => uint256)"
                       }
                     },
-                    "id": 11996,
+                    "id": 11994,
                     "indexExpression": {
                       "argumentTypes": null,
-                      "id": 11995,
+                      "id": 11993,
                       "name": "_asset",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 11989,
+                      "referencedDeclaration": 11987,
                       "src": "418:6:55",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
@@ -475,30 +475,30 @@
                       "typeString": "uint256"
                     }
                   },
-                  "functionReturnParameters": 11993,
-                  "id": 11997,
+                  "functionReturnParameters": 11991,
+                  "id": 11995,
                   "nodeType": "Return",
                   "src": "404:21:55"
                 }
               ]
             },
             "documentation": null,
-            "id": 11999,
+            "id": 11997,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "getAssetPrice",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 11990,
+              "id": 11988,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11989,
+                  "id": 11987,
                   "name": "_asset",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11999,
+                  "scope": 11997,
                   "src": "347:14:55",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -507,7 +507,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11988,
+                    "id": 11986,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "347:7:55",
@@ -524,15 +524,15 @@
               "src": "346:16:55"
             },
             "returnParameters": {
-              "id": 11993,
+              "id": 11991,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11992,
+                  "id": 11990,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11999,
+                  "scope": 11997,
                   "src": "385:7:55",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -541,7 +541,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11991,
+                    "id": 11989,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "385:7:55",
@@ -556,7 +556,7 @@
               ],
               "src": "384:9:55"
             },
-            "scope": 12045,
+            "scope": 12043,
             "src": "324:108:55",
             "stateMutability": "view",
             "superFunction": 1600,
@@ -564,14 +564,14 @@
           },
           {
             "body": {
-              "id": 12019,
+              "id": 12017,
               "nodeType": "Block",
               "src": "502:105:55",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 12010,
+                    "id": 12008,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -580,25 +580,25 @@
                       "argumentTypes": null,
                       "baseExpression": {
                         "argumentTypes": null,
-                        "id": 12006,
+                        "id": 12004,
                         "name": "prices",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 11971,
+                        "referencedDeclaration": 11969,
                         "src": "512:6:55",
                         "typeDescriptions": {
                           "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
                           "typeString": "mapping(address => uint256)"
                         }
                       },
-                      "id": 12008,
+                      "id": 12006,
                       "indexExpression": {
                         "argumentTypes": null,
-                        "id": 12007,
+                        "id": 12005,
                         "name": "_asset",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 12001,
+                        "referencedDeclaration": 11999,
                         "src": "519:6:55",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -620,11 +620,11 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 12009,
+                      "id": 12007,
                       "name": "_price",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 12003,
+                      "referencedDeclaration": 12001,
                       "src": "529:6:55",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -637,7 +637,7 @@
                       "typeString": "uint256"
                     }
                   },
-                  "id": 12011,
+                  "id": 12009,
                   "nodeType": "ExpressionStatement",
                   "src": "512:23:55"
                 },
@@ -647,11 +647,11 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 12013,
+                        "id": 12011,
                         "name": "_asset",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 12001,
+                        "referencedDeclaration": 11999,
                         "src": "568:6:55",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -660,11 +660,11 @@
                       },
                       {
                         "argumentTypes": null,
-                        "id": 12014,
+                        "id": 12012,
                         "name": "_price",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 12003,
+                        "referencedDeclaration": 12001,
                         "src": "576:6:55",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -675,18 +675,18 @@
                         "argumentTypes": null,
                         "expression": {
                           "argumentTypes": null,
-                          "id": 12015,
+                          "id": 12013,
                           "name": "block",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 14638,
+                          "referencedDeclaration": 14636,
                           "src": "584:5:55",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_block",
                             "typeString": "block"
                           }
                         },
-                        "id": 12016,
+                        "id": 12014,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -716,18 +716,18 @@
                           "typeString": "uint256"
                         }
                       ],
-                      "id": 12012,
+                      "id": 12010,
                       "name": "AssetPriceUpdated",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 11981,
+                      "referencedDeclaration": 11979,
                       "src": "550:17:55",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$_t_address_$_t_uint256_$_t_uint256_$returns$__$",
                         "typeString": "function (address,uint256,uint256)"
                       }
                     },
-                    "id": 12017,
+                    "id": 12015,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -741,29 +741,29 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 12018,
+                  "id": 12016,
                   "nodeType": "EmitStatement",
                   "src": "545:55:55"
                 }
               ]
             },
             "documentation": null,
-            "id": 12020,
+            "id": 12018,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "setAssetPrice",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 12004,
+              "id": 12002,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 12001,
+                  "id": 11999,
                   "name": "_asset",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12020,
+                  "scope": 12018,
                   "src": "461:14:55",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -772,7 +772,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 12000,
+                    "id": 11998,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "461:7:55",
@@ -787,10 +787,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 12003,
+                  "id": 12001,
                   "name": "_price",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12020,
+                  "scope": 12018,
                   "src": "477:14:55",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -799,7 +799,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12002,
+                    "id": 12000,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "477:7:55",
@@ -815,12 +815,12 @@
               "src": "460:32:55"
             },
             "returnParameters": {
-              "id": 12005,
+              "id": 12003,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "502:0:55"
             },
-            "scope": 12045,
+            "scope": 12043,
             "src": "438:169:55",
             "stateMutability": "nonpayable",
             "superFunction": 1607,
@@ -828,54 +828,54 @@
           },
           {
             "body": {
-              "id": 12027,
+              "id": 12025,
               "nodeType": "Block",
               "src": "670:35:55",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 12025,
+                    "id": 12023,
                     "name": "ethPriceUsd",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 11973,
+                    "referencedDeclaration": 11971,
                     "src": "687:11:55",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
                     }
                   },
-                  "functionReturnParameters": 12024,
-                  "id": 12026,
+                  "functionReturnParameters": 12022,
+                  "id": 12024,
                   "nodeType": "Return",
                   "src": "680:18:55"
                 }
               ]
             },
             "documentation": null,
-            "id": 12028,
+            "id": 12026,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "getEthUsdPrice",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 12021,
+              "id": 12019,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "636:2:55"
             },
             "returnParameters": {
-              "id": 12024,
+              "id": 12022,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 12023,
+                  "id": 12021,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12028,
+                  "scope": 12026,
                   "src": "661:7:55",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -884,7 +884,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12022,
+                    "id": 12020,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "661:7:55",
@@ -899,7 +899,7 @@
               ],
               "src": "660:9:55"
             },
-            "scope": 12045,
+            "scope": 12043,
             "src": "613:92:55",
             "stateMutability": "view",
             "superFunction": null,
@@ -907,25 +907,25 @@
           },
           {
             "body": {
-              "id": 12043,
+              "id": 12041,
               "nodeType": "Block",
               "src": "760:92:55",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 12035,
+                    "id": 12033,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 12033,
+                      "id": 12031,
                       "name": "ethPriceUsd",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 11973,
+                      "referencedDeclaration": 11971,
                       "src": "770:11:55",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -936,11 +936,11 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 12034,
+                      "id": 12032,
                       "name": "_price",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 12030,
+                      "referencedDeclaration": 12028,
                       "src": "784:6:55",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -953,7 +953,7 @@
                       "typeString": "uint256"
                     }
                   },
-                  "id": 12036,
+                  "id": 12034,
                   "nodeType": "ExpressionStatement",
                   "src": "770:20:55"
                 },
@@ -963,11 +963,11 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 12038,
+                        "id": 12036,
                         "name": "_price",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 12030,
+                        "referencedDeclaration": 12028,
                         "src": "821:6:55",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -978,18 +978,18 @@
                         "argumentTypes": null,
                         "expression": {
                           "argumentTypes": null,
-                          "id": 12039,
+                          "id": 12037,
                           "name": "block",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 14638,
+                          "referencedDeclaration": 14636,
                           "src": "829:5:55",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_block",
                             "typeString": "block"
                           }
                         },
-                        "id": 12040,
+                        "id": 12038,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -1015,18 +1015,18 @@
                           "typeString": "uint256"
                         }
                       ],
-                      "id": 12037,
+                      "id": 12035,
                       "name": "EthPriceUpdated",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 11987,
+                      "referencedDeclaration": 11985,
                       "src": "805:15:55",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$_t_uint256_$_t_uint256_$returns$__$",
                         "typeString": "function (uint256,uint256)"
                       }
                     },
-                    "id": 12041,
+                    "id": 12039,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1040,29 +1040,29 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 12042,
+                  "id": 12040,
                   "nodeType": "EmitStatement",
                   "src": "800:45:55"
                 }
               ]
             },
             "documentation": null,
-            "id": 12044,
+            "id": 12042,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "setEthUsdPrice",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 12031,
+              "id": 12029,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 12030,
+                  "id": 12028,
                   "name": "_price",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12044,
+                  "scope": 12042,
                   "src": "735:14:55",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1071,7 +1071,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12029,
+                    "id": 12027,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "735:7:55",
@@ -1087,19 +1087,19 @@
               "src": "734:16:55"
             },
             "returnParameters": {
-              "id": 12032,
+              "id": 12030,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "760:0:55"
             },
-            "scope": 12045,
+            "scope": 12043,
             "src": "711:141:55",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "external"
           }
         ],
-        "scope": 12046,
+        "scope": 12044,
         "src": "71:783:55"
       }
     ],
@@ -1109,14 +1109,14 @@
     "absolutePath": "/home/justin/freelancing/aave-protocol/contracts/mocks/oracle/PriceOracle.sol",
     "exportedSymbols": {
       "PriceOracle": [
-        12045
+        12043
       ]
     },
-    "id": 12046,
+    "id": 12044,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 11964,
+        "id": 11962,
         "literals": [
           "solidity",
           "^",
@@ -1129,9 +1129,9 @@
       {
         "absolutePath": "/home/justin/freelancing/aave-protocol/contracts/interfaces/IPriceOracle.sol",
         "file": "../../interfaces/IPriceOracle.sol",
-        "id": 11965,
+        "id": 11963,
         "nodeType": "ImportDirective",
-        "scope": 12046,
+        "scope": 12044,
         "sourceUnit": 1609,
         "src": "25:43:55",
         "symbolAliases": [],
@@ -1143,7 +1143,7 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 11966,
+              "id": 11964,
               "name": "IPriceOracle",
               "nodeType": "UserDefinedTypeName",
               "referencedDeclaration": 1608,
@@ -1153,7 +1153,7 @@
                 "typeString": "contract IPriceOracle"
               }
             },
-            "id": 11967,
+            "id": 11965,
             "nodeType": "InheritanceSpecifier",
             "src": "95:12:55"
           }
@@ -1164,9 +1164,9 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 12045,
+        "id": 12043,
         "linearizedBaseContracts": [
-          12045,
+          12043,
           1608
         ],
         "name": "PriceOracle",
@@ -1174,10 +1174,10 @@
         "nodes": [
           {
             "constant": false,
-            "id": 11971,
+            "id": 11969,
             "name": "prices",
             "nodeType": "VariableDeclaration",
-            "scope": 12045,
+            "scope": 12043,
             "src": "115:34:55",
             "stateVariable": true,
             "storageLocation": "default",
@@ -1186,9 +1186,9 @@
               "typeString": "mapping(address => uint256)"
             },
             "typeName": {
-              "id": 11970,
+              "id": 11968,
               "keyType": {
-                "id": 11968,
+                "id": 11966,
                 "name": "address",
                 "nodeType": "ElementaryTypeName",
                 "src": "123:7:55",
@@ -1204,7 +1204,7 @@
                 "typeString": "mapping(address => uint256)"
               },
               "valueType": {
-                "id": 11969,
+                "id": 11967,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "134:7:55",
@@ -1219,10 +1219,10 @@
           },
           {
             "constant": false,
-            "id": 11973,
+            "id": 11971,
             "name": "ethPriceUsd",
             "nodeType": "VariableDeclaration",
-            "scope": 12045,
+            "scope": 12043,
             "src": "155:19:55",
             "stateVariable": true,
             "storageLocation": "default",
@@ -1231,7 +1231,7 @@
               "typeString": "uint256"
             },
             "typeName": {
-              "id": 11972,
+              "id": 11970,
               "name": "uint256",
               "nodeType": "ElementaryTypeName",
               "src": "155:7:55",
@@ -1246,20 +1246,20 @@
           {
             "anonymous": false,
             "documentation": null,
-            "id": 11981,
+            "id": 11979,
             "name": "AssetPriceUpdated",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 11980,
+              "id": 11978,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11975,
+                  "id": 11973,
                   "indexed": false,
                   "name": "_asset",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11981,
+                  "scope": 11979,
                   "src": "205:14:55",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1268,7 +1268,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11974,
+                    "id": 11972,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "205:7:55",
@@ -1283,11 +1283,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 11977,
+                  "id": 11975,
                   "indexed": false,
                   "name": "_price",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11981,
+                  "scope": 11979,
                   "src": "221:14:55",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1296,7 +1296,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11976,
+                    "id": 11974,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "221:7:55",
@@ -1310,11 +1310,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 11979,
+                  "id": 11977,
                   "indexed": false,
                   "name": "timestamp",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11981,
+                  "scope": 11979,
                   "src": "237:17:55",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1323,7 +1323,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11978,
+                    "id": 11976,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "237:7:55",
@@ -1343,20 +1343,20 @@
           {
             "anonymous": false,
             "documentation": null,
-            "id": 11987,
+            "id": 11985,
             "name": "EthPriceUpdated",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 11986,
+              "id": 11984,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11983,
+                  "id": 11981,
                   "indexed": false,
                   "name": "_price",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11987,
+                  "scope": 11985,
                   "src": "283:14:55",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1365,7 +1365,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11982,
+                    "id": 11980,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "283:7:55",
@@ -1379,11 +1379,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 11985,
+                  "id": 11983,
                   "indexed": false,
                   "name": "timestamp",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11987,
+                  "scope": 11985,
                   "src": "299:17:55",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1392,7 +1392,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11984,
+                    "id": 11982,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "299:7:55",
@@ -1411,7 +1411,7 @@
           },
           {
             "body": {
-              "id": 11998,
+              "id": 11996,
               "nodeType": "Block",
               "src": "394:38:55",
               "statements": [
@@ -1420,25 +1420,25 @@
                     "argumentTypes": null,
                     "baseExpression": {
                       "argumentTypes": null,
-                      "id": 11994,
+                      "id": 11992,
                       "name": "prices",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 11971,
+                      "referencedDeclaration": 11969,
                       "src": "411:6:55",
                       "typeDescriptions": {
                         "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
                         "typeString": "mapping(address => uint256)"
                       }
                     },
-                    "id": 11996,
+                    "id": 11994,
                     "indexExpression": {
                       "argumentTypes": null,
-                      "id": 11995,
+                      "id": 11993,
                       "name": "_asset",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 11989,
+                      "referencedDeclaration": 11987,
                       "src": "418:6:55",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
@@ -1456,30 +1456,30 @@
                       "typeString": "uint256"
                     }
                   },
-                  "functionReturnParameters": 11993,
-                  "id": 11997,
+                  "functionReturnParameters": 11991,
+                  "id": 11995,
                   "nodeType": "Return",
                   "src": "404:21:55"
                 }
               ]
             },
             "documentation": null,
-            "id": 11999,
+            "id": 11997,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "getAssetPrice",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 11990,
+              "id": 11988,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11989,
+                  "id": 11987,
                   "name": "_asset",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11999,
+                  "scope": 11997,
                   "src": "347:14:55",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1488,7 +1488,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11988,
+                    "id": 11986,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "347:7:55",
@@ -1505,15 +1505,15 @@
               "src": "346:16:55"
             },
             "returnParameters": {
-              "id": 11993,
+              "id": 11991,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11992,
+                  "id": 11990,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11999,
+                  "scope": 11997,
                   "src": "385:7:55",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1522,7 +1522,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11991,
+                    "id": 11989,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "385:7:55",
@@ -1537,7 +1537,7 @@
               ],
               "src": "384:9:55"
             },
-            "scope": 12045,
+            "scope": 12043,
             "src": "324:108:55",
             "stateMutability": "view",
             "superFunction": 1600,
@@ -1545,14 +1545,14 @@
           },
           {
             "body": {
-              "id": 12019,
+              "id": 12017,
               "nodeType": "Block",
               "src": "502:105:55",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 12010,
+                    "id": 12008,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1561,25 +1561,25 @@
                       "argumentTypes": null,
                       "baseExpression": {
                         "argumentTypes": null,
-                        "id": 12006,
+                        "id": 12004,
                         "name": "prices",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 11971,
+                        "referencedDeclaration": 11969,
                         "src": "512:6:55",
                         "typeDescriptions": {
                           "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
                           "typeString": "mapping(address => uint256)"
                         }
                       },
-                      "id": 12008,
+                      "id": 12006,
                       "indexExpression": {
                         "argumentTypes": null,
-                        "id": 12007,
+                        "id": 12005,
                         "name": "_asset",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 12001,
+                        "referencedDeclaration": 11999,
                         "src": "519:6:55",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -1601,11 +1601,11 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 12009,
+                      "id": 12007,
                       "name": "_price",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 12003,
+                      "referencedDeclaration": 12001,
                       "src": "529:6:55",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -1618,7 +1618,7 @@
                       "typeString": "uint256"
                     }
                   },
-                  "id": 12011,
+                  "id": 12009,
                   "nodeType": "ExpressionStatement",
                   "src": "512:23:55"
                 },
@@ -1628,11 +1628,11 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 12013,
+                        "id": 12011,
                         "name": "_asset",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 12001,
+                        "referencedDeclaration": 11999,
                         "src": "568:6:55",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -1641,11 +1641,11 @@
                       },
                       {
                         "argumentTypes": null,
-                        "id": 12014,
+                        "id": 12012,
                         "name": "_price",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 12003,
+                        "referencedDeclaration": 12001,
                         "src": "576:6:55",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -1656,18 +1656,18 @@
                         "argumentTypes": null,
                         "expression": {
                           "argumentTypes": null,
-                          "id": 12015,
+                          "id": 12013,
                           "name": "block",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 14638,
+                          "referencedDeclaration": 14636,
                           "src": "584:5:55",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_block",
                             "typeString": "block"
                           }
                         },
-                        "id": 12016,
+                        "id": 12014,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -1697,18 +1697,18 @@
                           "typeString": "uint256"
                         }
                       ],
-                      "id": 12012,
+                      "id": 12010,
                       "name": "AssetPriceUpdated",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 11981,
+                      "referencedDeclaration": 11979,
                       "src": "550:17:55",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$_t_address_$_t_uint256_$_t_uint256_$returns$__$",
                         "typeString": "function (address,uint256,uint256)"
                       }
                     },
-                    "id": 12017,
+                    "id": 12015,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1722,29 +1722,29 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 12018,
+                  "id": 12016,
                   "nodeType": "EmitStatement",
                   "src": "545:55:55"
                 }
               ]
             },
             "documentation": null,
-            "id": 12020,
+            "id": 12018,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "setAssetPrice",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 12004,
+              "id": 12002,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 12001,
+                  "id": 11999,
                   "name": "_asset",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12020,
+                  "scope": 12018,
                   "src": "461:14:55",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1753,7 +1753,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 12000,
+                    "id": 11998,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "461:7:55",
@@ -1768,10 +1768,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 12003,
+                  "id": 12001,
                   "name": "_price",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12020,
+                  "scope": 12018,
                   "src": "477:14:55",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1780,7 +1780,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12002,
+                    "id": 12000,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "477:7:55",
@@ -1796,12 +1796,12 @@
               "src": "460:32:55"
             },
             "returnParameters": {
-              "id": 12005,
+              "id": 12003,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "502:0:55"
             },
-            "scope": 12045,
+            "scope": 12043,
             "src": "438:169:55",
             "stateMutability": "nonpayable",
             "superFunction": 1607,
@@ -1809,54 +1809,54 @@
           },
           {
             "body": {
-              "id": 12027,
+              "id": 12025,
               "nodeType": "Block",
               "src": "670:35:55",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 12025,
+                    "id": 12023,
                     "name": "ethPriceUsd",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 11973,
+                    "referencedDeclaration": 11971,
                     "src": "687:11:55",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
                     }
                   },
-                  "functionReturnParameters": 12024,
-                  "id": 12026,
+                  "functionReturnParameters": 12022,
+                  "id": 12024,
                   "nodeType": "Return",
                   "src": "680:18:55"
                 }
               ]
             },
             "documentation": null,
-            "id": 12028,
+            "id": 12026,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "getEthUsdPrice",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 12021,
+              "id": 12019,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "636:2:55"
             },
             "returnParameters": {
-              "id": 12024,
+              "id": 12022,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 12023,
+                  "id": 12021,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12028,
+                  "scope": 12026,
                   "src": "661:7:55",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1865,7 +1865,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12022,
+                    "id": 12020,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "661:7:55",
@@ -1880,7 +1880,7 @@
               ],
               "src": "660:9:55"
             },
-            "scope": 12045,
+            "scope": 12043,
             "src": "613:92:55",
             "stateMutability": "view",
             "superFunction": null,
@@ -1888,25 +1888,25 @@
           },
           {
             "body": {
-              "id": 12043,
+              "id": 12041,
               "nodeType": "Block",
               "src": "760:92:55",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 12035,
+                    "id": 12033,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 12033,
+                      "id": 12031,
                       "name": "ethPriceUsd",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 11973,
+                      "referencedDeclaration": 11971,
                       "src": "770:11:55",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -1917,11 +1917,11 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 12034,
+                      "id": 12032,
                       "name": "_price",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 12030,
+                      "referencedDeclaration": 12028,
                       "src": "784:6:55",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -1934,7 +1934,7 @@
                       "typeString": "uint256"
                     }
                   },
-                  "id": 12036,
+                  "id": 12034,
                   "nodeType": "ExpressionStatement",
                   "src": "770:20:55"
                 },
@@ -1944,11 +1944,11 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 12038,
+                        "id": 12036,
                         "name": "_price",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 12030,
+                        "referencedDeclaration": 12028,
                         "src": "821:6:55",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -1959,18 +1959,18 @@
                         "argumentTypes": null,
                         "expression": {
                           "argumentTypes": null,
-                          "id": 12039,
+                          "id": 12037,
                           "name": "block",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 14638,
+                          "referencedDeclaration": 14636,
                           "src": "829:5:55",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_block",
                             "typeString": "block"
                           }
                         },
-                        "id": 12040,
+                        "id": 12038,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -1996,18 +1996,18 @@
                           "typeString": "uint256"
                         }
                       ],
-                      "id": 12037,
+                      "id": 12035,
                       "name": "EthPriceUpdated",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 11987,
+                      "referencedDeclaration": 11985,
                       "src": "805:15:55",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$_t_uint256_$_t_uint256_$returns$__$",
                         "typeString": "function (uint256,uint256)"
                       }
                     },
-                    "id": 12041,
+                    "id": 12039,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -2021,29 +2021,29 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 12042,
+                  "id": 12040,
                   "nodeType": "EmitStatement",
                   "src": "800:45:55"
                 }
               ]
             },
             "documentation": null,
-            "id": 12044,
+            "id": 12042,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "setEthUsdPrice",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 12031,
+              "id": 12029,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 12030,
+                  "id": 12028,
                   "name": "_price",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12044,
+                  "scope": 12042,
                   "src": "735:14:55",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2052,7 +2052,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12029,
+                    "id": 12027,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "735:7:55",
@@ -2068,19 +2068,19 @@
               "src": "734:16:55"
             },
             "returnParameters": {
-              "id": 12032,
+              "id": 12030,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "760:0:55"
             },
-            "scope": 12045,
+            "scope": 12043,
             "src": "711:141:55",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "external"
           }
         ],
-        "scope": 12046,
+        "scope": 12044,
         "src": "71:783:55"
       }
     ],
@@ -2092,7 +2092,7 @@
   },
   "networks": {},
   "schemaVersion": "3.1.0",
-  "updatedAt": "2020-07-07T09:41:51.091Z",
+  "updatedAt": "2020-07-28T08:53:26.994Z",
   "devdoc": {
     "methods": {}
   },

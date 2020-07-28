@@ -295,14 +295,14 @@
     "absolutePath": "openzeppelin-solidity/contracts/token/ERC20/ERC20Burnable.sol",
     "exportedSymbols": {
       "ERC20Burnable": [
-        14181
+        14179
       ]
     },
-    "id": 14182,
+    "id": 14180,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 14149,
+        "id": 14147,
         "literals": [
           "solidity",
           "^",
@@ -315,10 +315,10 @@
       {
         "absolutePath": "openzeppelin-solidity/contracts/GSN/Context.sol",
         "file": "../../GSN/Context.sol",
-        "id": 14150,
+        "id": 14148,
         "nodeType": "ImportDirective",
-        "scope": 14182,
-        "sourceUnit": 13438,
+        "scope": 14180,
+        "sourceUnit": 13436,
         "src": "25:31:77",
         "symbolAliases": [],
         "unitAlias": ""
@@ -326,10 +326,10 @@
       {
         "absolutePath": "openzeppelin-solidity/contracts/token/ERC20/ERC20.sol",
         "file": "./ERC20.sol",
-        "id": 14151,
+        "id": 14149,
         "nodeType": "ImportDirective",
-        "scope": 14182,
-        "sourceUnit": 14148,
+        "scope": 14180,
+        "sourceUnit": 14146,
         "src": "57:21:77",
         "symbolAliases": [],
         "unitAlias": ""
@@ -340,17 +340,17 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 14152,
+              "id": 14150,
               "name": "Context",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 13437,
+              "referencedDeclaration": 13435,
               "src": "315:7:77",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_Context_$13437",
+                "typeIdentifier": "t_contract$_Context_$13435",
                 "typeString": "contract Context"
               }
             },
-            "id": 14153,
+            "id": 14151,
             "nodeType": "InheritanceSpecifier",
             "src": "315:7:77"
           },
@@ -358,42 +358,42 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 14154,
+              "id": 14152,
               "name": "ERC20",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 14147,
+              "referencedDeclaration": 14145,
               "src": "324:5:77",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_ERC20_$14147",
+                "typeIdentifier": "t_contract$_ERC20_$14145",
                 "typeString": "contract ERC20"
               }
             },
-            "id": 14155,
+            "id": 14153,
             "nodeType": "InheritanceSpecifier",
             "src": "324:5:77"
           }
         ],
         "contractDependencies": [
-          13437,
-          14147,
-          14308
+          13435,
+          14145,
+          14306
         ],
         "contractKind": "contract",
         "documentation": "@dev Extension of {ERC20} that allows token holders to destroy both their own\ntokens and those that they have an allowance for, in a way that can be\nrecognized off-chain (via event analysis).",
         "fullyImplemented": true,
-        "id": 14181,
+        "id": 14179,
         "linearizedBaseContracts": [
-          14181,
-          14147,
-          14308,
-          13437
+          14179,
+          14145,
+          14306,
+          13435
         ],
         "name": "ERC20Burnable",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 14166,
+              "id": 14164,
               "nodeType": "Block",
               "src": "476:44:77",
               "statements": [
@@ -406,18 +406,18 @@
                         "arguments": [],
                         "expression": {
                           "argumentTypes": [],
-                          "id": 14161,
+                          "id": 14159,
                           "name": "_msgSender",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 13425,
+                          "referencedDeclaration": 13423,
                           "src": "492:10:77",
                           "typeDescriptions": {
                             "typeIdentifier": "t_function_internal_view$__$returns$_t_address_payable_$",
                             "typeString": "function () view returns (address payable)"
                           }
                         },
-                        "id": 14162,
+                        "id": 14160,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -433,11 +433,11 @@
                       },
                       {
                         "argumentTypes": null,
-                        "id": 14163,
+                        "id": 14161,
                         "name": "amount",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 14157,
+                        "referencedDeclaration": 14155,
                         "src": "506:6:77",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -456,18 +456,18 @@
                           "typeString": "uint256"
                         }
                       ],
-                      "id": 14160,
+                      "id": 14158,
                       "name": "_burn",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 14075,
+                      "referencedDeclaration": 14073,
                       "src": "486:5:77",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$_t_address_$_t_uint256_$returns$__$",
                         "typeString": "function (address,uint256)"
                       }
                     },
-                    "id": 14164,
+                    "id": 14162,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -481,29 +481,29 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 14165,
+                  "id": 14163,
                   "nodeType": "ExpressionStatement",
                   "src": "486:27:77"
                 }
               ]
             },
             "documentation": "@dev Destroys `amount` tokens from the caller.\n     * See {ERC20-_burn}.",
-            "id": 14167,
+            "id": 14165,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "burn",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 14158,
+              "id": 14156,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 14157,
+                  "id": 14155,
                   "name": "amount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 14167,
+                  "scope": 14165,
                   "src": "453:14:77",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -512,7 +512,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 14156,
+                    "id": 14154,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "453:7:77",
@@ -528,12 +528,12 @@
               "src": "452:16:77"
             },
             "returnParameters": {
-              "id": 14159,
+              "id": 14157,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "476:0:77"
             },
-            "scope": 14181,
+            "scope": 14179,
             "src": "439:81:77",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -541,7 +541,7 @@
           },
           {
             "body": {
-              "id": 14179,
+              "id": 14177,
               "nodeType": "Block",
               "src": "635:43:77",
               "statements": [
@@ -551,11 +551,11 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 14175,
+                        "id": 14173,
                         "name": "account",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 14169,
+                        "referencedDeclaration": 14167,
                         "src": "655:7:77",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -564,11 +564,11 @@
                       },
                       {
                         "argumentTypes": null,
-                        "id": 14176,
+                        "id": 14174,
                         "name": "amount",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 14171,
+                        "referencedDeclaration": 14169,
                         "src": "664:6:77",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -587,18 +587,18 @@
                           "typeString": "uint256"
                         }
                       ],
-                      "id": 14174,
+                      "id": 14172,
                       "name": "_burnFrom",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 14146,
+                      "referencedDeclaration": 14144,
                       "src": "645:9:77",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$_t_address_$_t_uint256_$returns$__$",
                         "typeString": "function (address,uint256)"
                       }
                     },
-                    "id": 14177,
+                    "id": 14175,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -612,29 +612,29 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 14178,
+                  "id": 14176,
                   "nodeType": "ExpressionStatement",
                   "src": "645:26:77"
                 }
               ]
             },
             "documentation": "@dev See {ERC20-_burnFrom}.",
-            "id": 14180,
+            "id": 14178,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "burnFrom",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 14172,
+              "id": 14170,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 14169,
+                  "id": 14167,
                   "name": "account",
                   "nodeType": "VariableDeclaration",
-                  "scope": 14180,
+                  "scope": 14178,
                   "src": "595:15:77",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -643,7 +643,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 14168,
+                    "id": 14166,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "595:7:77",
@@ -658,10 +658,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 14171,
+                  "id": 14169,
                   "name": "amount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 14180,
+                  "scope": 14178,
                   "src": "612:14:77",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -670,7 +670,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 14170,
+                    "id": 14168,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "612:7:77",
@@ -686,19 +686,19 @@
               "src": "594:33:77"
             },
             "returnParameters": {
-              "id": 14173,
+              "id": 14171,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "635:0:77"
             },
-            "scope": 14181,
+            "scope": 14179,
             "src": "577:101:77",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 14182,
+        "scope": 14180,
         "src": "289:391:77"
       }
     ],
@@ -708,14 +708,14 @@
     "absolutePath": "openzeppelin-solidity/contracts/token/ERC20/ERC20Burnable.sol",
     "exportedSymbols": {
       "ERC20Burnable": [
-        14181
+        14179
       ]
     },
-    "id": 14182,
+    "id": 14180,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 14149,
+        "id": 14147,
         "literals": [
           "solidity",
           "^",
@@ -728,10 +728,10 @@
       {
         "absolutePath": "openzeppelin-solidity/contracts/GSN/Context.sol",
         "file": "../../GSN/Context.sol",
-        "id": 14150,
+        "id": 14148,
         "nodeType": "ImportDirective",
-        "scope": 14182,
-        "sourceUnit": 13438,
+        "scope": 14180,
+        "sourceUnit": 13436,
         "src": "25:31:77",
         "symbolAliases": [],
         "unitAlias": ""
@@ -739,10 +739,10 @@
       {
         "absolutePath": "openzeppelin-solidity/contracts/token/ERC20/ERC20.sol",
         "file": "./ERC20.sol",
-        "id": 14151,
+        "id": 14149,
         "nodeType": "ImportDirective",
-        "scope": 14182,
-        "sourceUnit": 14148,
+        "scope": 14180,
+        "sourceUnit": 14146,
         "src": "57:21:77",
         "symbolAliases": [],
         "unitAlias": ""
@@ -753,17 +753,17 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 14152,
+              "id": 14150,
               "name": "Context",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 13437,
+              "referencedDeclaration": 13435,
               "src": "315:7:77",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_Context_$13437",
+                "typeIdentifier": "t_contract$_Context_$13435",
                 "typeString": "contract Context"
               }
             },
-            "id": 14153,
+            "id": 14151,
             "nodeType": "InheritanceSpecifier",
             "src": "315:7:77"
           },
@@ -771,42 +771,42 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 14154,
+              "id": 14152,
               "name": "ERC20",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 14147,
+              "referencedDeclaration": 14145,
               "src": "324:5:77",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_ERC20_$14147",
+                "typeIdentifier": "t_contract$_ERC20_$14145",
                 "typeString": "contract ERC20"
               }
             },
-            "id": 14155,
+            "id": 14153,
             "nodeType": "InheritanceSpecifier",
             "src": "324:5:77"
           }
         ],
         "contractDependencies": [
-          13437,
-          14147,
-          14308
+          13435,
+          14145,
+          14306
         ],
         "contractKind": "contract",
         "documentation": "@dev Extension of {ERC20} that allows token holders to destroy both their own\ntokens and those that they have an allowance for, in a way that can be\nrecognized off-chain (via event analysis).",
         "fullyImplemented": true,
-        "id": 14181,
+        "id": 14179,
         "linearizedBaseContracts": [
-          14181,
-          14147,
-          14308,
-          13437
+          14179,
+          14145,
+          14306,
+          13435
         ],
         "name": "ERC20Burnable",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 14166,
+              "id": 14164,
               "nodeType": "Block",
               "src": "476:44:77",
               "statements": [
@@ -819,18 +819,18 @@
                         "arguments": [],
                         "expression": {
                           "argumentTypes": [],
-                          "id": 14161,
+                          "id": 14159,
                           "name": "_msgSender",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 13425,
+                          "referencedDeclaration": 13423,
                           "src": "492:10:77",
                           "typeDescriptions": {
                             "typeIdentifier": "t_function_internal_view$__$returns$_t_address_payable_$",
                             "typeString": "function () view returns (address payable)"
                           }
                         },
-                        "id": 14162,
+                        "id": 14160,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -846,11 +846,11 @@
                       },
                       {
                         "argumentTypes": null,
-                        "id": 14163,
+                        "id": 14161,
                         "name": "amount",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 14157,
+                        "referencedDeclaration": 14155,
                         "src": "506:6:77",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -869,18 +869,18 @@
                           "typeString": "uint256"
                         }
                       ],
-                      "id": 14160,
+                      "id": 14158,
                       "name": "_burn",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 14075,
+                      "referencedDeclaration": 14073,
                       "src": "486:5:77",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$_t_address_$_t_uint256_$returns$__$",
                         "typeString": "function (address,uint256)"
                       }
                     },
-                    "id": 14164,
+                    "id": 14162,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -894,29 +894,29 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 14165,
+                  "id": 14163,
                   "nodeType": "ExpressionStatement",
                   "src": "486:27:77"
                 }
               ]
             },
             "documentation": "@dev Destroys `amount` tokens from the caller.\n     * See {ERC20-_burn}.",
-            "id": 14167,
+            "id": 14165,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "burn",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 14158,
+              "id": 14156,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 14157,
+                  "id": 14155,
                   "name": "amount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 14167,
+                  "scope": 14165,
                   "src": "453:14:77",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -925,7 +925,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 14156,
+                    "id": 14154,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "453:7:77",
@@ -941,12 +941,12 @@
               "src": "452:16:77"
             },
             "returnParameters": {
-              "id": 14159,
+              "id": 14157,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "476:0:77"
             },
-            "scope": 14181,
+            "scope": 14179,
             "src": "439:81:77",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -954,7 +954,7 @@
           },
           {
             "body": {
-              "id": 14179,
+              "id": 14177,
               "nodeType": "Block",
               "src": "635:43:77",
               "statements": [
@@ -964,11 +964,11 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 14175,
+                        "id": 14173,
                         "name": "account",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 14169,
+                        "referencedDeclaration": 14167,
                         "src": "655:7:77",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -977,11 +977,11 @@
                       },
                       {
                         "argumentTypes": null,
-                        "id": 14176,
+                        "id": 14174,
                         "name": "amount",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 14171,
+                        "referencedDeclaration": 14169,
                         "src": "664:6:77",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -1000,18 +1000,18 @@
                           "typeString": "uint256"
                         }
                       ],
-                      "id": 14174,
+                      "id": 14172,
                       "name": "_burnFrom",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 14146,
+                      "referencedDeclaration": 14144,
                       "src": "645:9:77",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$_t_address_$_t_uint256_$returns$__$",
                         "typeString": "function (address,uint256)"
                       }
                     },
-                    "id": 14177,
+                    "id": 14175,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1025,29 +1025,29 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 14178,
+                  "id": 14176,
                   "nodeType": "ExpressionStatement",
                   "src": "645:26:77"
                 }
               ]
             },
             "documentation": "@dev See {ERC20-_burnFrom}.",
-            "id": 14180,
+            "id": 14178,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "burnFrom",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 14172,
+              "id": 14170,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 14169,
+                  "id": 14167,
                   "name": "account",
                   "nodeType": "VariableDeclaration",
-                  "scope": 14180,
+                  "scope": 14178,
                   "src": "595:15:77",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1056,7 +1056,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 14168,
+                    "id": 14166,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "595:7:77",
@@ -1071,10 +1071,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 14171,
+                  "id": 14169,
                   "name": "amount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 14180,
+                  "scope": 14178,
                   "src": "612:14:77",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1083,7 +1083,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 14170,
+                    "id": 14168,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "612:7:77",
@@ -1099,19 +1099,19 @@
               "src": "594:33:77"
             },
             "returnParameters": {
-              "id": 14173,
+              "id": 14171,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "635:0:77"
             },
-            "scope": 14181,
+            "scope": 14179,
             "src": "577:101:77",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 14182,
+        "scope": 14180,
         "src": "289:391:77"
       }
     ],
@@ -1123,7 +1123,7 @@
   },
   "networks": {},
   "schemaVersion": "3.1.0",
-  "updatedAt": "2020-07-07T09:41:51.113Z",
+  "updatedAt": "2020-07-28T08:53:27.026Z",
   "devdoc": {
     "details": "Extension of {ERC20} that allows token holders to destroy both their own tokens and those that they have an allowance for, in a way that can be recognized off-chain (via event analysis).",
     "methods": {

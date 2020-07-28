@@ -12,14 +12,14 @@
     "absolutePath": "/home/justin/freelancing/aave-protocol/contracts/libraries/EthAddressLib.sol",
     "exportedSymbols": {
       "EthAddressLib": [
-        10213
+        10211
       ]
     },
-    "id": 10214,
+    "id": 10212,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 10204,
+        "id": 10202,
         "literals": [
           "solidity",
           "^",
@@ -35,16 +35,16 @@
         "contractKind": "library",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 10213,
+        "id": 10211,
         "linearizedBaseContracts": [
-          10213
+          10211
         ],
         "name": "EthAddressLib",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 10211,
+              "id": 10209,
               "nodeType": "Block",
               "src": "237:66:23",
               "statements": [
@@ -52,7 +52,7 @@
                   "expression": {
                     "argumentTypes": null,
                     "hexValue": "307845656565654565656545654565654565456545656545454565656565456565656565656545456545",
-                    "id": 10209,
+                    "id": 10207,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": true,
@@ -67,36 +67,36 @@
                     },
                     "value": "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"
                   },
-                  "functionReturnParameters": 10208,
-                  "id": 10210,
+                  "functionReturnParameters": 10206,
+                  "id": 10208,
                   "nodeType": "Return",
                   "src": "247:49:23"
                 }
               ]
             },
             "documentation": "@dev returns the address used within the protocol to identify ETH\n@return the address assigned to ETH",
-            "id": 10212,
+            "id": 10210,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "ethAddress",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 10205,
+              "id": 10203,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "203:2:23"
             },
             "returnParameters": {
-              "id": 10208,
+              "id": 10206,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 10207,
+                  "id": 10205,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 10212,
+                  "scope": 10210,
                   "src": "228:7:23",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -105,7 +105,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 10206,
+                    "id": 10204,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "228:7:23",
@@ -121,14 +121,14 @@
               ],
               "src": "227:9:23"
             },
-            "scope": 10213,
+            "scope": 10211,
             "src": "184:119:23",
             "stateMutability": "pure",
             "superFunction": null,
             "visibility": "internal"
           }
         ],
-        "scope": 10214,
+        "scope": 10212,
         "src": "25:280:23"
       }
     ],
@@ -138,14 +138,14 @@
     "absolutePath": "/home/justin/freelancing/aave-protocol/contracts/libraries/EthAddressLib.sol",
     "exportedSymbols": {
       "EthAddressLib": [
-        10213
+        10211
       ]
     },
-    "id": 10214,
+    "id": 10212,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 10204,
+        "id": 10202,
         "literals": [
           "solidity",
           "^",
@@ -161,16 +161,16 @@
         "contractKind": "library",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 10213,
+        "id": 10211,
         "linearizedBaseContracts": [
-          10213
+          10211
         ],
         "name": "EthAddressLib",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 10211,
+              "id": 10209,
               "nodeType": "Block",
               "src": "237:66:23",
               "statements": [
@@ -178,7 +178,7 @@
                   "expression": {
                     "argumentTypes": null,
                     "hexValue": "307845656565654565656545654565654565456545656545454565656565456565656565656545456545",
-                    "id": 10209,
+                    "id": 10207,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": true,
@@ -193,36 +193,36 @@
                     },
                     "value": "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"
                   },
-                  "functionReturnParameters": 10208,
-                  "id": 10210,
+                  "functionReturnParameters": 10206,
+                  "id": 10208,
                   "nodeType": "Return",
                   "src": "247:49:23"
                 }
               ]
             },
             "documentation": "@dev returns the address used within the protocol to identify ETH\n@return the address assigned to ETH",
-            "id": 10212,
+            "id": 10210,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "ethAddress",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 10205,
+              "id": 10203,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "203:2:23"
             },
             "returnParameters": {
-              "id": 10208,
+              "id": 10206,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 10207,
+                  "id": 10205,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 10212,
+                  "scope": 10210,
                   "src": "228:7:23",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -231,7 +231,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 10206,
+                    "id": 10204,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "228:7:23",
@@ -247,14 +247,14 @@
               ],
               "src": "227:9:23"
             },
-            "scope": 10213,
+            "scope": 10211,
             "src": "184:119:23",
             "stateMutability": "pure",
             "superFunction": null,
             "visibility": "internal"
           }
         ],
-        "scope": 10214,
+        "scope": 10212,
         "src": "25:280:23"
       }
     ],
@@ -266,7 +266,7 @@
   },
   "networks": {},
   "schemaVersion": "3.1.0",
-  "updatedAt": "2020-07-07T09:41:51.075Z",
+  "updatedAt": "2020-07-28T08:53:26.977Z",
   "devdoc": {
     "methods": {}
   },

@@ -65,14 +65,14 @@
     "absolutePath": "/home/justin/freelancing/aave-protocol/contracts/mocks/oracle/CLAggregators/MockAggregatorLEND.sol",
     "exportedSymbols": {
       "MockAggregatorLEND": [
-        11707
+        11705
       ]
     },
-    "id": 11708,
+    "id": 11706,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 11694,
+        "id": 11692,
         "literals": [
           "solidity",
           "^",
@@ -85,10 +85,10 @@
       {
         "absolutePath": "/home/justin/freelancing/aave-protocol/contracts/mocks/oracle/CLAggregators/MockAggregatorBase.sol",
         "file": "./MockAggregatorBase.sol",
-        "id": 11695,
+        "id": 11693,
         "nodeType": "ImportDirective",
-        "scope": 11708,
-        "sourceUnit": 11663,
+        "scope": 11706,
+        "sourceUnit": 11661,
         "src": "25:34:42",
         "symbolAliases": [],
         "unitAlias": ""
@@ -99,44 +99,44 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 11696,
+              "id": 11694,
               "name": "MockAggregatorBase",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 11662,
+              "referencedDeclaration": 11660,
               "src": "92:18:42",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_MockAggregatorBase_$11662",
+                "typeIdentifier": "t_contract$_MockAggregatorBase_$11660",
                 "typeString": "contract MockAggregatorBase"
               }
             },
-            "id": 11697,
+            "id": 11695,
             "nodeType": "InheritanceSpecifier",
             "src": "92:18:42"
           }
         ],
         "contractDependencies": [
-          11662
+          11660
         ],
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 11707,
+        "id": 11705,
         "linearizedBaseContracts": [
-          11707,
-          11662
+          11705,
+          11660
         ],
         "name": "MockAggregatorLEND",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 11705,
+              "id": 11703,
               "nodeType": "Block",
               "src": "195:2:42",
               "statements": []
             },
             "documentation": null,
-            "id": 11706,
+            "id": 11704,
             "implemented": true,
             "kind": "constructor",
             "modifiers": [
@@ -144,11 +144,11 @@
                 "arguments": [
                   {
                     "argumentTypes": null,
-                    "id": 11702,
+                    "id": 11700,
                     "name": "_initialAnswer",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 11699,
+                    "referencedDeclaration": 11697,
                     "src": "179:14:42",
                     "typeDescriptions": {
                       "typeIdentifier": "t_int256",
@@ -156,17 +156,17 @@
                     }
                   }
                 ],
-                "id": 11703,
+                "id": 11701,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 11701,
+                  "id": 11699,
                   "name": "MockAggregatorBase",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 11662,
+                  "referencedDeclaration": 11660,
                   "src": "160:18:42",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_type$_t_contract$_MockAggregatorBase_$11662_$",
+                    "typeIdentifier": "t_type$_t_contract$_MockAggregatorBase_$11660_$",
                     "typeString": "type(contract MockAggregatorBase)"
                   }
                 },
@@ -177,15 +177,15 @@
             "name": "",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 11700,
+              "id": 11698,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11699,
+                  "id": 11697,
                   "name": "_initialAnswer",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11706,
+                  "scope": 11704,
                   "src": "130:21:42",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -194,7 +194,7 @@
                     "typeString": "int256"
                   },
                   "typeName": {
-                    "id": 11698,
+                    "id": 11696,
                     "name": "int256",
                     "nodeType": "ElementaryTypeName",
                     "src": "130:6:42",
@@ -210,19 +210,19 @@
               "src": "129:23:42"
             },
             "returnParameters": {
-              "id": 11704,
+              "id": 11702,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "195:0:42"
             },
-            "scope": 11707,
+            "scope": 11705,
             "src": "117:80:42",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 11708,
+        "scope": 11706,
         "src": "61:138:42"
       }
     ],
@@ -232,14 +232,14 @@
     "absolutePath": "/home/justin/freelancing/aave-protocol/contracts/mocks/oracle/CLAggregators/MockAggregatorLEND.sol",
     "exportedSymbols": {
       "MockAggregatorLEND": [
-        11707
+        11705
       ]
     },
-    "id": 11708,
+    "id": 11706,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 11694,
+        "id": 11692,
         "literals": [
           "solidity",
           "^",
@@ -252,10 +252,10 @@
       {
         "absolutePath": "/home/justin/freelancing/aave-protocol/contracts/mocks/oracle/CLAggregators/MockAggregatorBase.sol",
         "file": "./MockAggregatorBase.sol",
-        "id": 11695,
+        "id": 11693,
         "nodeType": "ImportDirective",
-        "scope": 11708,
-        "sourceUnit": 11663,
+        "scope": 11706,
+        "sourceUnit": 11661,
         "src": "25:34:42",
         "symbolAliases": [],
         "unitAlias": ""
@@ -266,44 +266,44 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 11696,
+              "id": 11694,
               "name": "MockAggregatorBase",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 11662,
+              "referencedDeclaration": 11660,
               "src": "92:18:42",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_MockAggregatorBase_$11662",
+                "typeIdentifier": "t_contract$_MockAggregatorBase_$11660",
                 "typeString": "contract MockAggregatorBase"
               }
             },
-            "id": 11697,
+            "id": 11695,
             "nodeType": "InheritanceSpecifier",
             "src": "92:18:42"
           }
         ],
         "contractDependencies": [
-          11662
+          11660
         ],
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 11707,
+        "id": 11705,
         "linearizedBaseContracts": [
-          11707,
-          11662
+          11705,
+          11660
         ],
         "name": "MockAggregatorLEND",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 11705,
+              "id": 11703,
               "nodeType": "Block",
               "src": "195:2:42",
               "statements": []
             },
             "documentation": null,
-            "id": 11706,
+            "id": 11704,
             "implemented": true,
             "kind": "constructor",
             "modifiers": [
@@ -311,11 +311,11 @@
                 "arguments": [
                   {
                     "argumentTypes": null,
-                    "id": 11702,
+                    "id": 11700,
                     "name": "_initialAnswer",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 11699,
+                    "referencedDeclaration": 11697,
                     "src": "179:14:42",
                     "typeDescriptions": {
                       "typeIdentifier": "t_int256",
@@ -323,17 +323,17 @@
                     }
                   }
                 ],
-                "id": 11703,
+                "id": 11701,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 11701,
+                  "id": 11699,
                   "name": "MockAggregatorBase",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 11662,
+                  "referencedDeclaration": 11660,
                   "src": "160:18:42",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_type$_t_contract$_MockAggregatorBase_$11662_$",
+                    "typeIdentifier": "t_type$_t_contract$_MockAggregatorBase_$11660_$",
                     "typeString": "type(contract MockAggregatorBase)"
                   }
                 },
@@ -344,15 +344,15 @@
             "name": "",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 11700,
+              "id": 11698,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11699,
+                  "id": 11697,
                   "name": "_initialAnswer",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11706,
+                  "scope": 11704,
                   "src": "130:21:42",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -361,7 +361,7 @@
                     "typeString": "int256"
                   },
                   "typeName": {
-                    "id": 11698,
+                    "id": 11696,
                     "name": "int256",
                     "nodeType": "ElementaryTypeName",
                     "src": "130:6:42",
@@ -377,19 +377,19 @@
               "src": "129:23:42"
             },
             "returnParameters": {
-              "id": 11704,
+              "id": 11702,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "195:0:42"
             },
-            "scope": 11707,
+            "scope": 11705,
             "src": "117:80:42",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 11708,
+        "scope": 11706,
         "src": "61:138:42"
       }
     ],
@@ -401,7 +401,7 @@
   },
   "networks": {},
   "schemaVersion": "3.1.0",
-  "updatedAt": "2020-07-07T09:41:51.088Z",
+  "updatedAt": "2020-07-28T08:53:26.990Z",
   "devdoc": {
     "methods": {}
   },

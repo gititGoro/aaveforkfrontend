@@ -122,7 +122,7 @@
         "id": 630,
         "nodeType": "ImportDirective",
         "scope": 691,
-        "sourceUnit": 11048,
+        "sourceUnit": 11046,
         "src": "25:77:4",
         "symbolAliases": [],
         "unitAlias": ""
@@ -144,7 +144,7 @@
         "id": 632,
         "nodeType": "ImportDirective",
         "scope": 691,
-        "sourceUnit": 10458,
+        "sourceUnit": 10456,
         "src": "144:37:4",
         "symbolAliases": [],
         "unitAlias": ""
@@ -176,10 +176,10 @@
               "id": 635,
               "name": "VersionedInitializable",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 11047,
+              "referencedDeclaration": 11045,
               "src": "345:22:4",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_VersionedInitializable_$11047",
+                "typeIdentifier": "t_contract$_VersionedInitializable_$11045",
                 "typeString": "contract VersionedInitializable"
               }
             },
@@ -190,7 +190,7 @@
         ],
         "contractDependencies": [
           1390,
-          11047
+          11045
         ],
         "contractKind": "contract",
         "documentation": "@title FeeProvider contract\n@notice Implements calculation for the fees applied by the protocol\n@author Aave*",
@@ -198,7 +198,7 @@
         "id": 690,
         "linearizedBaseContracts": [
           690,
-          11047,
+          11045,
           1390
         ],
         "name": "FeeProvider",
@@ -211,10 +211,10 @@
               "id": 637,
               "name": "WadRayMath",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 10457,
+              "referencedDeclaration": 10455,
               "src": "380:10:4",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_WadRayMath_$10457",
+                "typeIdentifier": "t_contract$_WadRayMath_$10455",
                 "typeString": "library WadRayMath"
               }
             },
@@ -376,7 +376,7 @@
             "scope": 690,
             "src": "579:99:4",
             "stateMutability": "pure",
-            "superFunction": 11028,
+            "superFunction": 11026,
             "visibility": "internal"
           },
           {
@@ -489,7 +489,7 @@
                   "name": "initializer",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 11023,
+                  "referencedDeclaration": 11021,
                   "src": "902:11:4",
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$__$",
@@ -599,7 +599,7 @@
                       "lValueRequested": false,
                       "memberName": "wadMul",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 10291,
+                      "referencedDeclaration": 10289,
                       "src": "1529:14:4",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_uint256_$bound_to$_t_uint256_$",
@@ -846,7 +846,7 @@
         "id": 630,
         "nodeType": "ImportDirective",
         "scope": 691,
-        "sourceUnit": 11048,
+        "sourceUnit": 11046,
         "src": "25:77:4",
         "symbolAliases": [],
         "unitAlias": ""
@@ -868,7 +868,7 @@
         "id": 632,
         "nodeType": "ImportDirective",
         "scope": 691,
-        "sourceUnit": 10458,
+        "sourceUnit": 10456,
         "src": "144:37:4",
         "symbolAliases": [],
         "unitAlias": ""
@@ -900,10 +900,10 @@
               "id": 635,
               "name": "VersionedInitializable",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 11047,
+              "referencedDeclaration": 11045,
               "src": "345:22:4",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_VersionedInitializable_$11047",
+                "typeIdentifier": "t_contract$_VersionedInitializable_$11045",
                 "typeString": "contract VersionedInitializable"
               }
             },
@@ -914,7 +914,7 @@
         ],
         "contractDependencies": [
           1390,
-          11047
+          11045
         ],
         "contractKind": "contract",
         "documentation": "@title FeeProvider contract\n@notice Implements calculation for the fees applied by the protocol\n@author Aave*",
@@ -922,7 +922,7 @@
         "id": 690,
         "linearizedBaseContracts": [
           690,
-          11047,
+          11045,
           1390
         ],
         "name": "FeeProvider",
@@ -935,10 +935,10 @@
               "id": 637,
               "name": "WadRayMath",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 10457,
+              "referencedDeclaration": 10455,
               "src": "380:10:4",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_WadRayMath_$10457",
+                "typeIdentifier": "t_contract$_WadRayMath_$10455",
                 "typeString": "library WadRayMath"
               }
             },
@@ -1100,7 +1100,7 @@
             "scope": 690,
             "src": "579:99:4",
             "stateMutability": "pure",
-            "superFunction": 11028,
+            "superFunction": 11026,
             "visibility": "internal"
           },
           {
@@ -1213,7 +1213,7 @@
                   "name": "initializer",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 11023,
+                  "referencedDeclaration": 11021,
                   "src": "902:11:4",
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$__$",
@@ -1323,7 +1323,7 @@
                       "lValueRequested": false,
                       "memberName": "wadMul",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 10291,
+                      "referencedDeclaration": 10289,
                       "src": "1529:14:4",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_uint256_$bound_to$_t_uint256_$",
@@ -1549,7 +1549,7 @@
   },
   "networks": {},
   "schemaVersion": "3.1.0",
-  "updatedAt": "2020-07-07T09:41:50.984Z",
+  "updatedAt": "2020-07-28T08:53:26.880Z",
   "devdoc": {
     "author": "Aave*",
     "methods": {
