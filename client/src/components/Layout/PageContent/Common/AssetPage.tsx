@@ -23,16 +23,22 @@ import SearchIcon from '@material-ui/icons/Search';
 import doge from '../../../../images/loadingdog.gif'
 import imageData from '../../../../images/dataimages.json'
 import { EthereumContext } from "../../../contexts/EthereumContext"
-import { LoadERC20, LoadAToken, ethersMetamask, weiToEthString } from '../../../../blockchain/EthereumAPI'
+import { LoadAToken } from '../../../../blockchain/EthereumAPI'
 
+import { AToken } from 'src/blockchain/typechain-types/ethers/AToken';
 
 export interface AssetPageProps {
-    Column1Heading: string
-    Column2Heading: string
-    Column3Heading: string
+    column1Heading: string
+    column2Heading: string
+    column3Heading: string
+
+    column1Query?: (aToken: AToken) => Promise<string>
+    column2Query?: (aToken: AToken) => Promise<string>
+    column3Query?: (aToken: AToken) => Promise<string>
 }
 
 export default function AssetPage(props: AssetPageProps) {
+
     const ethereumContextProps = useContext(EthereumContext)
     const [searchText, setSearchText] = useState<string>("")
     const [allTokens, setAllTokens] = useState<boolean>(true)
@@ -42,27 +48,19 @@ export default function AssetPage(props: AssetPageProps) {
     const imageLoader = ImgSrc(ethereumContextProps.network)
     const contractListCallBack = useCallback(async () => {
         if (ethereumContextProps.blockchain) {
-            const currentAccount = ethereumContextProps.blockchain.account
             const blockchain = ethereumContextProps.blockchain
-            const loadERC20 = ((ethers: ethersMetamask) => (address: string) => LoadERC20(address, ethers.signer))(ethereumContextProps.blockchain.metamaskConnections)
             const addresses = await ethereumContextProps.blockchain.contracts.LendingPool.getReserves()
-            const tokens = addresses.map(loadERC20)
 
             const rowPromises = addresses.map(async (address): Promise<Row> => { //TODO: graph query
-                const currentToken = tokens.filter(t => t.address === address)[0]
                 const aTokenAddress = await blockchain.contracts.LendingPoolCore.getReserveATokenAddress(address)
                 const aToken = LoadAToken(aTokenAddress, blockchain.metamaskConnections.signer)
                 const icon: AssetIcon = imageLoader(address)
-                const walletBalance = await currentToken.balanceOf(currentAccount)
-                const principalBalnce = await aToken.principalBalanceOf(currentAccount)
-                const accumulatedBalance = await aToken.balanceOf(currentAccount)
-                const liquidityRate = await blockchain.contracts.LendingPoolCore.getReserveCurrentLiquidityRate(address)
-
+        
                 return {
                     icon,
-                    column1: weiToEthString(walletBalance),
-                    column2: `Current: ${weiToEthString(accumulatedBalance)}, principal: ${weiToEthString(principalBalnce)}`,
-                    column3: liquidityRate.toString().fromRAY().asPercentage(),
+                    column1: props.column1Query?await props.column1Query(aToken):'',
+                    column2:  props.column2Query?await props.column2Query(aToken):'',
+                    column3: props.column3Query?await props.column3Query(aToken):'',
                     actionHeading: "Deposit",
                     redirectAction: () => alert('redirecting to deposit asset page')
                 }
@@ -91,9 +89,9 @@ export default function AssetPage(props: AssetPageProps) {
             <TopSelectors setSearchText={setSearchText} searchText={searchText} allChecked={allTokens} setAllChecked={setAllTokens} />
         </Grid>
         <Grid item>
-            <AssetGrid Column1Heading={props.Column1Heading}
-                Column2Heading={props.Column2Heading}
-                Column3Heading={props.Column3Heading}
+            <AssetGrid Column1Heading={props.column1Heading}
+                Column2Heading={props.column2Heading}
+                Column3Heading={props.column3Heading}
                 rows={rows}
                 stablecoinsOnly={!allTokens}
                 searchText={searchText}
