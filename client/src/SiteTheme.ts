@@ -7,14 +7,18 @@ declare module '@material-ui/core/styles/createMuiTheme' {
         controlHighlight: PaletteColor
         componentBackground: PaletteColor
         standardFont: FontStyle
-        listHoverColor:PaletteColor
+        listHoverColor: PaletteColor,
+        foregroundColor: PaletteColor,
+        paper:PaletteColor
     }
     interface ThemeOptions {
         appbackground?: PaletteColor,
         controlHighlight?: PaletteColor
         componentBackground?: PaletteColor,
         standardFont?: FontStyle,
-        listHoverColor?:PaletteColor
+        listHoverColor?: PaletteColor,
+        foregroundColor?: PaletteColor,
+        paper?:PaletteColor
     }
 }
 
@@ -47,11 +51,25 @@ const theme = createMuiTheme({
         fontWeightMedium: 400,
         fontWeightBold: 800
     },
-    listHoverColor:{
+    listHoverColor: {
         light: "rgba(255,255,255,0.45)",
         main: "blue",
         dark: "rgba(200,200,200,0.4)",
         contrastText: "orange"
+    },
+    foregroundColor: {
+        light: "black",
+        main: "blue",
+        dark: "white",
+        contrastText: "orange"
+    },
+    paper:{
+        light: "rgba(230,230,230,0.45)",
+        main: "blue",
+        dark: "#3A3952",
+        contrastText: "orange"
+    },
+    overrides: {
     }
 })
 

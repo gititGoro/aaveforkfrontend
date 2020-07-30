@@ -1,21 +1,58 @@
-import { ethers } from "ethers"
-import ContractInstances from "./ContractInstances"
+import { ethers, BigNumber as ethersBigNumber } from "ethers"
+import ContractInstances, { ERC20 } from "./ContractInstances"
 import *  as contracts from './typechain-types/ethers'
 import addresses from './deployedAddresses.json'
 import { LendingPoolCoreLibraryAddresses } from './typechain-types/ethers/LendingPoolCoreFactory'
 import BigNumber from "bignumber.js"
+import { AToken } from './typechain-types/ethers/AToken'
+
+const RAY = new BigNumber(10).pow(27)
+const WAD = new BigNumber(10).pow(18)
+const RAYstring = RAY.toString()
+const WADstring = WAD.toString()
+
+declare global {
+    interface String {
+        fromRAY(): string
+        fromWAD(): string
+        asPercentage(): string
+    }
+}
+
+function fixedPoint(precisionString: string) {
+    return function () {
+        //@ts-ignore
+        const big = new BigNumber(this.toString())
+
+        if (big.isNaN())
+            return ""
+
+        return big.div(precisionString).toString();
+    }
+}
+
+String.prototype.fromRAY = fixedPoint(RAYstring)
+String.prototype.fromWAD = fixedPoint(WADstring)
+String.prototype.asPercentage = function () {
+    const big = new BigNumber(this.toString())
+    if (big.isNaN())
+        throw "percentages only apply to numbers"
+
+    return `${big.times(100)}%`
+}
 
 export const hexToNumString = (hex: string) => new BigNumber(hex).toString()
 export const numToHex = (num: string) => ethers.utils.hexValue(num)
 export const isHex = (value: string) => ethers.utils.isHexString(value)
-export const weiToEth = (value: string) => ethers.utils.parseEther(value)
+export const weiToEth = (value: string) => ethers.utils.formatEther(value.toString())
+export const weiToEthString = (value: ethersBigNumber | string) => weiToEth(value.toString()).toString()
 
 export interface ethersMetamask {
     provider: ethers.providers.Web3Provider,
     signer: ethers.Signer
 }
 
-type ethereumSendArguments = 'eth_accounts' | 'eth_chainId' | 'eth_requestAccounts'|'disconnect'
+type ethereumSendArguments = 'eth_accounts' | 'eth_chainId' | 'eth_requestAccounts' | 'disconnect'
 type ethereumOnArguments = 'accountsChanged' | 'chainChanged'
 
 interface requestParams {
@@ -63,7 +100,15 @@ export function GetEthers(ethereum: injectedEthereum): ethersMetamask {
     }
 }
 
-export async function GetContracts(signer: ethers.Signer, network: string): Promise<ContractInstances|undefined> {
+export function LoadERC20(address: string, signer: ethers.Signer): ERC20 {
+    return new contracts.Erc20Factory(signer).attach(address)
+}
+
+export function LoadAToken(address: string, signer: ethers.Signer): AToken {
+    return new contracts.ATokenFactory(signer).attach(address)
+}
+
+export async function GetContracts(signer: ethers.Signer, network: string): Promise<ContractInstances | undefined> {
     if (Object.keys(addresses).filter(key => key === network).length === 0)
         return
 
@@ -146,3 +191,4 @@ export const GetRole = async (address: string, contracts: ContractInstances): Pr
             Role.user :
             (!isOwner ? Role.lendingPoolManager : Role.addressesProviderOwner))
 }
+

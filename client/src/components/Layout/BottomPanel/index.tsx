@@ -5,7 +5,7 @@ const useStyles = makeStyles(theme => createStyles({
     root: {
         height: "60px",
         width: "400px",
-        position: "absolute",
+        position: "fixed",
         bottom: 0,
         right: 0,
         overflowX:"hidden"

@@ -24,6 +24,7 @@ import {FeeProvider} from './typechain-types/ethers/FeeProvider'
 import {TokenDistributor} from './typechain-types/ethers/TokenDistributor'
 import {LendingPoolParametersProvider} from './typechain-types/ethers/LendingPoolParametersProvider'
 import {LendingPoolAddressesProvider} from './typechain-types/ethers/LendingPoolAddressesProvider'
+import {Erc20} from './typechain-types/ethers/Erc20'
 
 export default interface Contracts {
     MockFlashLoadnReceiver: MockFlashLoanReceiver
@@ -54,3 +55,5 @@ export default interface Contracts {
     LendingPoolParametersProvider:LendingPoolParametersProvider
     LendingPoolAddressesProvider:LendingPoolAddressesProvider
 }
+
+export type ERC20 = Erc20

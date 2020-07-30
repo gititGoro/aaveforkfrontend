@@ -45,6 +45,13 @@ export default function ContractSelector() {
 
     const contractList = Object.keys(ethereumContextProps.blockchain.contracts)
         .filter(contract => isAdmin || contract !== 'LendingPoolConfigurator')
+        .sort((a, b) => {
+            if (a.startsWith('Mock'))
+                return 1
+            if (b.startsWith('Mock'))
+                return -1
+            return a.localeCompare(b)
+        })
 
     return <Grid
         container

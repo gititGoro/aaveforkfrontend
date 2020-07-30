@@ -3,7 +3,7 @@ import { useContext, useState, useEffect, useCallback } from 'react'
 import { EthereumContext } from "../../../../contexts/EthereumContext"
 import { Grid, Typography, TextField, Button, Paper, makeStyles, createStyles } from "@material-ui/core"
 import BigNumber from "bignumber.js"
-import { hexToNumString, weiToEth } from "../../../../../blockchain/EthereumAPI"
+import { hexToNumString, weiToEthString } from "../../../../../blockchain/EthereumAPI"
 interface props {
     contractName: string
     function: string
@@ -249,7 +249,7 @@ function AppropriateAction(props: appropriateActionProps) {
                 let args = props.inputs as any[]
                 args = args || []
                 if (props.mutability === 'payable')
-                    args.push({ value: weiToEth(props.payableEth) })
+                    args.push({ value: weiToEthString(props.payableEth) })
                 setTransactionPromise(Reflect.apply(props.action, undefined, args || []))
             }
             setClick(false)
