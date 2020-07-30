@@ -27,6 +27,12 @@ import { LoadAToken } from '../../../../blockchain/EthereumAPI'
 
 import { AToken } from 'src/blockchain/typechain-types/ethers/AToken';
 
+const topLevelStyles = makeStyles(theme => createStyles({
+    cell: {
+        width: "80%"
+    }
+}))
+
 export interface AssetPageProps {
     column1Heading: string
     column2Heading: string
@@ -35,10 +41,13 @@ export interface AssetPageProps {
     column1Query?: (aToken: AToken) => Promise<string>
     column2Query?: (aToken: AToken) => Promise<string>
     column3Query?: (aToken: AToken) => Promise<string>
+
+    action?: (aToken: AToken) => Promise<void>
+    actionLabel?: (aToken: AToken) => Promise<string>
 }
 
 export default function AssetPage(props: AssetPageProps) {
-
+    const classes = topLevelStyles()
     const ethereumContextProps = useContext(EthereumContext)
     const [searchText, setSearchText] = useState<string>("")
     const [allTokens, setAllTokens] = useState<boolean>(true)
@@ -55,14 +64,14 @@ export default function AssetPage(props: AssetPageProps) {
                 const aTokenAddress = await blockchain.contracts.LendingPoolCore.getReserveATokenAddress(address)
                 const aToken = LoadAToken(aTokenAddress, blockchain.metamaskConnections.signer)
                 const icon: AssetIcon = imageLoader(address)
-        
+
                 return {
                     icon,
-                    column1: props.column1Query?await props.column1Query(aToken):'',
-                    column2:  props.column2Query?await props.column2Query(aToken):'',
-                    column3: props.column3Query?await props.column3Query(aToken):'',
-                    actionHeading: "Deposit",
-                    redirectAction: () => alert('redirecting to deposit asset page')
+                    column1: props.column1Query ? await props.column1Query(aToken) : '',
+                    column2: props.column2Query ? await props.column2Query(aToken) : '',
+                    column3: props.column3Query ? await props.column3Query(aToken) : '',
+                    actionHeading: props.actionLabel ? (await props.actionLabel(aToken)) : '',
+                    redirectAction: () => props.action ? props.action(aToken) : {}
                 }
             })
             let r: Row[] = []
@@ -88,7 +97,7 @@ export default function AssetPage(props: AssetPageProps) {
         <Grid item>
             <TopSelectors setSearchText={setSearchText} searchText={searchText} allChecked={allTokens} setAllChecked={setAllTokens} />
         </Grid>
-        <Grid item>
+        <Grid item className={classes.cell}>
             <AssetGrid Column1Heading={props.column1Heading}
                 Column2Heading={props.column2Heading}
                 Column3Heading={props.column3Heading}
@@ -173,7 +182,8 @@ const useStyles = makeStyles(theme => createStyles({
     tableContainer: {
         backgroundColor: theme.paper[theme.palette.type],
         maxHeight: "800px",
-        overflowY: "scroll"
+        overflowY: "scroll",
+        width: "100%"
     },
     table: {
         color: theme.foregroundColor[theme.palette.type]
@@ -212,8 +222,8 @@ function AssetGrid(props: AssetGridProps) {
         .filter(searchFilterPredicate)
 
 
-    return filteredRows.length > 0 ? <TableContainer component={Paper} className={classes.tableContainer}>
-        <Table className={classes.table} >
+    return filteredRows.length > 0 ? <TableContainer id='hello' component={Paper} className={classes.tableContainer}  >
+        <Table className={classes.table} width={1 / 2}>
             <TableHead>
                 <StyledCell>Asset</StyledCell>
                 <StyledCell>{props.Column1Heading}</StyledCell>
@@ -229,9 +239,9 @@ function AssetGrid(props: AssetGridProps) {
                                 <Grid
                                     container
                                     direction="row"
-                                    justify="space-between"
+                                    justify="flex-start"
                                     alignItems="center"
-                                    spacing={1}
+                                    spacing={3}
                                 >
                                     <Grid item>
                                         <img src={row.icon.BASE64} width={64} />

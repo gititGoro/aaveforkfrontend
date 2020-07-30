@@ -5,6 +5,7 @@ import addresses from './deployedAddresses.json'
 import { LendingPoolCoreLibraryAddresses } from './typechain-types/ethers/LendingPoolCoreFactory'
 import BigNumber from "bignumber.js"
 import { AToken } from './typechain-types/ethers/AToken'
+import { PriceOracle } from './typechain-types/ethers/PriceOracle'
 
 const RAY = new BigNumber(10).pow(27)
 const WAD = new BigNumber(10).pow(18)
@@ -106,6 +107,11 @@ export function LoadERC20(address: string, signer: ethers.Signer): ERC20 {
 
 export function LoadAToken(address: string, signer: ethers.Signer): AToken {
     return new contracts.ATokenFactory(signer).attach(address)
+}
+
+export async function GetPriceOracle(contractIntances: ContractInstances, signer: ethers.Signer): Promise<PriceOracle> {
+    const priceOracleAddress = await contractIntances.LendingPoolAddressesProvider.getPriceOracle()
+    return new contracts.PriceOracleFactory(signer).attach(priceOracleAddress)
 }
 
 export async function GetContracts(signer: ethers.Signer, network: string): Promise<ContractInstances | undefined> {

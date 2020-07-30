@@ -13,7 +13,8 @@ interface props {
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
     root: {
-        overflowX: "hidden"
+        overflowX: "hidden",
+        overflowY:"hidden"
     }
 }))
 

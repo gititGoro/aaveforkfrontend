@@ -31,6 +31,14 @@ export default function Deposit() {
                 .asPercentage()
         }
 
+        const actionLabel =  async (aToken: AToken) => {
+            return "Deposit"
+        } 
+
+        const action =  async (aToken: AToken) =>{
+            alert('deposit')
+        }
+
         return <AssetPage
             column1Heading="Your wallet balance"
             column2Heading="Balance in Aave"
@@ -38,6 +46,8 @@ export default function Deposit() {
             column1Query={walletBalanceQuery}
             column2Query={aTokenBalanceQuery}
             column3Query={APYquery}
+            actionLabel = {actionLabel}
+            action = {action}
         />
     }
 
