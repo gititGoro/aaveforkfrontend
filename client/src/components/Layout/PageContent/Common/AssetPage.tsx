@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useContext, useEffect } from 'react';
 import {
     Table,
     TableBody,
@@ -20,21 +20,67 @@ import {
     Typography,
 } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
+import doge from '../../../../images/loadingdog.gif'
+import imageData from '../../../../images/dataimages.json'
+import { EthereumContext } from "../../../contexts/EthereumContext"
+import { LoadERC20, LoadAToken, ethersMetamask, weiToEthString } from '../../../../blockchain/EthereumAPI'
 
 
 export interface AssetPageProps {
     Column1Heading: string
     Column2Heading: string
     Column3Heading: string
-    rows: Row[]
 }
 
 export default function AssetPage(props: AssetPageProps) {
-
+    const ethereumContextProps = useContext(EthereumContext)
     const [searchText, setSearchText] = useState<string>("")
     const [allTokens, setAllTokens] = useState<boolean>(true)
 
-    return <Grid
+    const [rows, setRows] = useState<Row[]>([])
+
+    const imageLoader = ImgSrc(ethereumContextProps.network)
+    const contractListCallBack = useCallback(async () => {
+        if (ethereumContextProps.blockchain) {
+            const currentAccount = ethereumContextProps.blockchain.account
+            const blockchain = ethereumContextProps.blockchain
+            const loadERC20 = ((ethers: ethersMetamask) => (address: string) => LoadERC20(address, ethers.signer))(ethereumContextProps.blockchain.metamaskConnections)
+            const addresses = await ethereumContextProps.blockchain.contracts.LendingPool.getReserves()
+            const tokens = addresses.map(loadERC20)
+
+            const rowPromises = addresses.map(async (address): Promise<Row> => { //TODO: graph query
+                const currentToken = tokens.filter(t => t.address === address)[0]
+                const aTokenAddress = await blockchain.contracts.LendingPoolCore.getReserveATokenAddress(address)
+                const aToken = LoadAToken(aTokenAddress, blockchain.metamaskConnections.signer)
+                const icon: AssetIcon = imageLoader(address)
+                const walletBalance = await currentToken.balanceOf(currentAccount)
+                const principalBalnce = await aToken.principalBalanceOf(currentAccount)
+                const accumulatedBalance = await aToken.balanceOf(currentAccount)
+                const liquidityRate = await blockchain.contracts.LendingPoolCore.getReserveCurrentLiquidityRate(address)
+
+                return {
+                    icon,
+                    column1: weiToEthString(walletBalance),
+                    column2: `Current: ${weiToEthString(accumulatedBalance)}, principal: ${weiToEthString(principalBalnce)}`,
+                    column3: liquidityRate.toString().fromRAY().asPercentage(),
+                    actionHeading: "Deposit",
+                    redirectAction: () => alert('redirecting to deposit asset page')
+                }
+            })
+            let r: Row[] = []
+            for (let i = 0; i < rowPromises.length; i++) {
+                r.push(await rowPromises[i])
+            }
+            setRows(r)
+        }
+    }, [ethereumContextProps.blockchain])
+
+    useEffect(() => {
+        contractListCallBack()
+    })
+
+
+    return rows.length > 0 ? <Grid
         container
         direction="column"
         justify="center"
@@ -48,12 +94,12 @@ export default function AssetPage(props: AssetPageProps) {
             <AssetGrid Column1Heading={props.Column1Heading}
                 Column2Heading={props.Column2Heading}
                 Column3Heading={props.Column3Heading}
-                rows={props.rows}
+                rows={rows}
                 stablecoinsOnly={!allTokens}
                 searchText={searchText}
             />
         </Grid>
-    </Grid>
+    </Grid> : <Loading />
 }
 
 interface topSelectorProps {
@@ -75,6 +121,7 @@ const topSelectorStyles = makeStyles(theme => createStyles({
 function TopSelectors(props: topSelectorProps) {
     const selectorText = props.allChecked ? "All tokens" : "Stablecoins only"
     const classes = topSelectorStyles()
+
     return <Grid
         container
         direction="row"
@@ -217,4 +264,47 @@ function AssetGrid(props: AssetGridProps) {
                 There are no currencies matching the parameters
             </Typography>
         </div>
+}
+
+const loadingStyles = makeStyles(theme => createStyles({
+    dogeText: {
+        color: theme.foregroundColor[theme.palette.type],
+        fontFamily: theme.standardFont.fontFamily
+    }
+}))
+
+function Loading() {
+    const classes = loadingStyles()
+    return <Grid
+        container
+        direction="column"
+        justify="space-between"
+        alignItems="center"
+        spacing={10}
+    >
+        <Grid item></Grid>
+        <Grid item>
+            <img src={doge} width={200} />
+        </Grid>
+        <Grid item>
+            <Typography variant="h3" className={classes.dogeText}>
+                Loading....
+                </Typography>
+        </Grid>
+    </Grid>
+}
+
+const ImgSrc = (network: string) => {
+    const images = imageData.filter(n => n.network === network)
+
+    return (address: string): AssetIcon => {
+        if (images.length) {
+            const imageBlob = images[0].images
+            const token = imageBlob.filter(i => i.address.toLowerCase() === address.toLowerCase())
+            if (token.length)
+                return token[0]
+            return { name: "", BASE64: "" }
+        }
+        return { name: "", BASE64: "" }
+    }
 }
