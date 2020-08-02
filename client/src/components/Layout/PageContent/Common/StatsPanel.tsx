@@ -2,7 +2,8 @@ import React, { useState, useContext, useCallback, useEffect } from 'react';
 import { Grid, makeStyles, createStyles } from '@material-ui/core'
 import { EthereumContext } from 'src/components/contexts/EthereumContext';
 import { TokenAPY, WadMul, GetPriceOracle } from '../../../../blockchain/EthereumAPI'
-
+import { ImgSrc } from '../Common/TokenImage'
+import { BigNumber } from 'bignumber.js';
 
 
 const useStatsPanelStyle = makeStyles(theme => createStyles({
@@ -10,49 +11,85 @@ const useStatsPanelStyle = makeStyles(theme => createStyles({
         width: '100%',
         height: "100%",
         minHeight: "900px",
-        fontSize: theme.standardFont.fontSize + 4,
+        fontSize: theme.standardFont.fontSize + 3,
         fontWeight: theme.standardFont.fontWeightMedium,
         fontFamily: theme.standardFont.fontFamily
     },
 
 }))
 
-export default function StatsPanel(props: { assetId: string, deposit?: boolean }) {
+export type jaNee = 'YES' | 'NO'
+
+interface statsPanelProps {
+    assetId: string,
+    deposit?: boolean
+    borrowingEnabled: jaNee
+    setBorrowingEnabled: (e: jaNee) => void
+}
+
+export default function StatsPanel(props: statsPanelProps) {
     const ethereumContext = useContext(EthereumContext)
     const classes = useStatsPanelStyle()
     const [utilizationRate, setUtilizationRate] = useState<string>()
     const [availableLiquidity, setAvailableLiquidity] = useState<string>()
     const [dollarPrice, setDollarPrice] = useState<string>()
     const [APY, setAPY] = useState<string>()
-    const [collateralEnabled, setCollateralEnabled] = useState<'YES' | 'NO'>('YES')
     const [maxLTV, setMaxLTV] = useState<string>()
     const [liquidationThreshold, setLiquidationThreshold] = useState<string>()
     const [liquidationPenalty, setLiquidationPenalty] = useState<string>()
 
-    const fetchDepositStatsCallback = useCallback(async () => {
-        if (ethereumContext.blockchain && props.deposit) {
+    const [stableBorrowRate, setStableBorrowrate] = useState<string>("")
+    const [variableBorrowRate, setVariableBorrowrate] = useState<string>("")
+    const [healthFactor, setHealthFactor] = useState<string>("")
+    const [currentBorrowValueInToken, setCurrentBorrowValueInToken] = useState<string>("")
+
+    const imageGetter = ImgSrc(ethereumContext.network)
+    const tokenName = imageGetter(props.assetId).name
+
+    const commonPropsCallBack = useCallback(async () => {
+        if (ethereumContext.blockchain) {
             const blockchain = ethereumContext.blockchain
             const reserveData = await blockchain.contracts.LendingPoolDataProvider.getReserveData(props.assetId)
-            setUtilizationRate(reserveData.utilizationRate.toString())
+            setUtilizationRate(new BigNumber(reserveData.utilizationRate.toString().fromRAY()).decimalPlaces(5).toString())
             setAvailableLiquidity(reserveData.availableLiquidity.toString().fromWAD().truncBig())
-            setAPY(await TokenAPY(props.assetId, blockchain.contracts))
-
-            const configurationdata = await blockchain.contracts.LendingPool.getReserveConfigurationData(props.assetId)
-            setMaxLTV(configurationdata.ltv.toString())
-            setLiquidationThreshold(configurationdata.liquidationThreshold.toString())
-            setLiquidationPenalty(configurationdata.liquidationBonus.toString())
-            setCollateralEnabled(configurationdata.usageAsCollateralEnabled ? 'YES' : 'NO')
             const oracle = await GetPriceOracle(blockchain.contracts, blockchain.metamaskConnections.signer)
             const ethPrice = await oracle.getAssetPrice(props.assetId)
             const ethDollarPrice = await oracle.getEthUsdPrice()
             setDollarPrice(WadMul(ethPrice, ethDollarPrice).toString().fromWAD())
+        }
+    }, [ethereumContext.blockchain])
 
+    const fetchDepositStatsCallback = useCallback(async () => {
+        if (ethereumContext.blockchain && props.deposit) {
+            const blockchain = ethereumContext.blockchain
+            setAPY(await TokenAPY(props.assetId, blockchain.contracts))
+            const configurationdata = await blockchain.contracts.LendingPool.getReserveConfigurationData(props.assetId)
+            setMaxLTV(configurationdata.ltv.toString())
+            setLiquidationThreshold(configurationdata.liquidationThreshold.toString())
+            setLiquidationPenalty(configurationdata.liquidationBonus.toString())
+            props.setBorrowingEnabled(configurationdata.usageAsCollateralEnabled ? 'YES' : 'NO')
+        }
+    }, [ethereumContext.blockchain])
+
+    const fetchBorrowStatsCallback = useCallback(async () => {
+        if (ethereumContext.blockchain && !props.deposit) {
+            const blockchain = ethereumContext.blockchain
+            const reserveData = await blockchain.contracts.LendingPoolDataProvider.getReserveData(props.assetId)
+            setStableBorrowrate(reserveData.stableBorrowRate.toString().fromRAY())
+            setVariableBorrowrate(reserveData.variableBorrowRate.toString().fromRAY())
+            const userData = await blockchain.contracts.LendingPoolDataProvider.calculateUserGlobalData(blockchain.account)
+            setHealthFactor(new BigNumber(userData.healthFactor.toString().fromWAD()).decimalPlaces(4).toString())
+            const userReserveData = await blockchain.contracts.LendingPool.getUserReserveData(props.assetId, blockchain.account)
+            setCurrentBorrowValueInToken(new BigNumber(userReserveData.currentBorrowBalance.toString().fromWAD()).decimalPlaces(4).toString())
         }
     }, [ethereumContext.blockchain])
 
     useEffect(() => {
         if (props.deposit)
             fetchDepositStatsCallback()
+        else
+            fetchBorrowStatsCallback()
+        commonPropsCallBack()
     }, [ethereumContext.blockchain])
 
     return (
@@ -61,37 +98,50 @@ export default function StatsPanel(props: { assetId: string, deposit?: boolean }
             direction="column"
             justify="flex-start"
             alignItems="center"
-            spacing={4}
+            spacing={5}
             className={classes.root}
         >
             <StatRow title="Utilization Rate" suffix=" %">
                 {utilizationRate}
             </StatRow>
-            <StatRow title="Available Liquidity" suffix=" DAI">
+            <StatRow title="Available Liquidity" suffix={` ${tokenName}`}>
                 {availableLiquidity}
             </StatRow>
             <StatRow title="Asset Price" prefix="$">
                 {dollarPrice}
             </StatRow>
-            <StatRow title="APY" suffix="%" color='red'>
+
+            <StatRow title="APY" suffix="%" color='red' hide={!props.deposit}>
                 {APY}
             </StatRow>
-            <StatRow title="Can be used as collateral" color='green'>
-                {collateralEnabled}
+            <StatRow title="Can be used as collateral" color='green' hide={!props.deposit}>
+                {props.setBorrowingEnabled}
             </StatRow>
-            <StatRow title="Maximum LTV" suffix=" %">
+            <StatRow title="Maximum LTV" suffix=" %" hide={!props.deposit}>
                 {maxLTV}
             </StatRow>
-            <StatRow title="Liquidation threshold" suffix=" %">
+            <StatRow title="Liquidation threshold" suffix=" %" hide={!props.deposit}>
                 {liquidationThreshold}
             </StatRow>
-            <StatRow title="Liquidation penalty" suffix=" %">
+            <StatRow title="Liquidation penalty" suffix=" %" hide={!props.deposit}>
                 {liquidationPenalty}
+            </StatRow>
+
+            <StatRow title="Stable borrow rate" suffix=" %" hide={props.deposit}>
+                {stableBorrowRate}
+            </StatRow>
+            <StatRow title="Variable borrow rate" suffix=" %" hide={props.deposit}>
+                {variableBorrowRate}
+            </StatRow>
+            <StatRow title="Healthfactor" hide={props.deposit}>
+                {healthFactor}
+            </StatRow>
+            <StatRow title="Current borrowing" suffix={` ${tokenName}`} hide={props.deposit}>
+                {currentBorrowValueInToken}
             </StatRow>
         </Grid>
     )
 }
-
 
 const useStatRowStyle = makeStyles(theme => createStyles({
     root: {
@@ -115,27 +165,31 @@ interface statRowProps {
     prefix?: string
     suffix?: string
     color?: 'green' | 'red'
+    hide?: boolean
 }
 
 function StatRow(props: statRowProps) {
     const classes = useStatRowStyle()
     const colorClass = props.color ? classes[props.color + 'Cell'] : ''
 
-    return <Grid item className={classes.encasingCell}>
-        <Grid
-            container
-            direction="row"
-            justify="space-between"
-            alignItems="baseline"
-            className={classes.root}
-            spacing={1}
-        >
-            <Grid item>
-                {props.title}
+    return (props.hide ?
+        <div></div>
+        :
+        <Grid item className={classes.encasingCell}>
+            <Grid
+                container
+                direction="row"
+                justify="space-between"
+                alignItems="baseline"
+                className={classes.root}
+                spacing={1}
+            >
+                <Grid item>
+                    {props.title}
+                </Grid>
+                <Grid item>
+                    {props.prefix || ''}{<span className={colorClass}>{props.children}</span>}{props.suffix || ''}
+                </Grid>
             </Grid>
-            <Grid item>
-                {props.prefix || ''}{<span className={colorClass}>{props.children}</span>}{props.suffix || ''}
-            </Grid>
-        </Grid>
-    </Grid>
+        </Grid>)
 }

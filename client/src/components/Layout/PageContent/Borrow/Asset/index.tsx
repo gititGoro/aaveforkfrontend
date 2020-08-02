@@ -6,7 +6,7 @@ import { EthereumContext } from 'src/components/contexts/EthereumContext';
 import { BlockchainTransaction, BlockchainReceipt, ethToWei, getAvailableBorrows, LoadERC20 } from '../../../../../blockchain/EthereumAPI'
 import { useAlert } from 'react-alert'
 import Loading from '../../Common/Loading'
-import StatsPanel from '../../Common/StatsPanel'
+import StatsPanel, { jaNee } from '../../Common/StatsPanel'
 import { ImgSrc } from '../../Common/TokenImage';
 
 interface assetProps {
@@ -42,6 +42,7 @@ export function Asset(props: assetProps) {
     const { assetId } = useParams()
     const classes = useAssetStyles()
     const [loading, setLoading] = useState<boolean>(true)
+    const [borrowingEnabled, setBorrowingEnabled] = useState<jaNee>('YES')
 
     return (<div>
         <Loading invisible={!loading} />
@@ -55,13 +56,13 @@ export function Asset(props: assetProps) {
         >
             <Grid item className={classes.PurchaseCell}>
                 <StyledPaper>
-                    <BorrowPanel assetId={assetId} setRedirect={props.setRedirect} setLoading={setLoading} />
+                    <BorrowPanel assetId={assetId} setRedirect={props.setRedirect} setLoading={setLoading} borrowingEnabled={borrowingEnabled} />
                 </StyledPaper>
             </Grid>
             <Hidden mdDown>
                 <Grid item className={classes.StatsCell}>
                     <StyledPaper>
-                        <StatsPanel assetId={assetId} />
+                        <StatsPanel assetId={assetId} borrowingEnabled={borrowingEnabled} setBorrowingEnabled={setBorrowingEnabled} />
                     </StyledPaper>
                 </Grid>
             </Hidden>
@@ -72,7 +73,7 @@ export function Asset(props: assetProps) {
 const useBorrowStyles = makeStyles(theme => createStyles({
     borrowButton: {
         backgroundColor: theme.buttonColor[theme.palette.type],
-        color:'white',
+        color: 'white',
         "&:disabled": {
             backgroundColor: "#E1E1E1",
             dark: {
@@ -119,6 +120,7 @@ interface purchasePanelProps {
     assetId: string,
     setRedirect: (r: string) => void
     setLoading: (l: boolean) => void
+    borrowingEnabled: jaNee
 }
 
 /*
@@ -184,6 +186,7 @@ function BorrowPanel(props: purchasePanelProps) {
                     break;
 
                 case PurchasePanelTransactionStates.borrowClicked:
+                    console.log('borrowing: ' + borrowValue)
                     const borrowTX = blockchain
                         .contracts
                         .LendingPool
@@ -248,7 +251,7 @@ function BorrowPanel(props: purchasePanelProps) {
             <Grid item>
                 <Button
                     className={classes.borrowButton}
-                    disabled={!valid}
+                    disabled={!valid || props.borrowingEnabled === 'NO'}
                     onClick={() => setTransactionState(PurchasePanelTransactionStates.borrowClicked)}>
                     Borrow
                 </Button>

@@ -6,7 +6,7 @@ import { EthereumContext } from 'src/components/contexts/EthereumContext';
 import { ApproveLendingPoolCore, LendingPoolCoreApproved, BlockchainTransaction, BlockchainReceipt, LoadERC20, weiToEthString, ethToWei } from '../../../../../blockchain/EthereumAPI'
 import { useAlert } from 'react-alert'
 import Loading from '../../Common/Loading'
-import StatsPanel from '../../Common/StatsPanel'
+import StatsPanel, { jaNee } from '../../Common/StatsPanel'
 import { ImgSrc } from '../../Common/TokenImage';
 
 interface assetProps {
@@ -42,6 +42,7 @@ export function Asset(props: assetProps) {
     const { assetId } = useParams()
     const classes = useAssetStyles()
     const [loading, setLoading] = useState<boolean>(true)
+    const [borrowingEnabled, setBorrowingEnabled] = useState<jaNee>('YES')
 
     return (<div>
         <Loading invisible={!loading} />
@@ -61,7 +62,7 @@ export function Asset(props: assetProps) {
             <Hidden mdDown>
                 <Grid item className={classes.StatsCell}>
                     <StyledPaper>
-                        <StatsPanel assetId={assetId} deposit />
+                        <StatsPanel assetId={assetId} deposit borrowingEnabled= {borrowingEnabled} setBorrowingEnabled={setBorrowingEnabled}/>
                     </StyledPaper>
                 </Grid>
             </Hidden>
