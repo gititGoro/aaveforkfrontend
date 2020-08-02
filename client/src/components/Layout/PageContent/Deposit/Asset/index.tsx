@@ -1,5 +1,5 @@
 import React, { useState, useContext, useCallback, useEffect } from 'react';
-import { Paper, Grid, makeStyles, createStyles, Typography, Button, Link } from '@material-ui/core'
+import { Paper, Grid, makeStyles, createStyles, Typography, Button, Link, Hidden } from '@material-ui/core'
 import { useParams } from "react-router-dom";
 import RangedTextField, { range as PercentageRange } from 'src/components/Layout/PageContent/Common/RangedTextField'
 import { EthereumContext } from 'src/components/contexts/EthereumContext';
@@ -15,7 +15,12 @@ interface assetProps {
 const useAssetStyles = makeStyles(theme => createStyles({
     PurchaseCell: {
         minWidth: "500px",
-        width: "70%",
+        [theme.breakpoints.up('sm')]: {
+            width: "70%",
+        },
+        [theme.breakpoints.down('md')]: {
+            width: "95%",
+        },
         padding: "20px"
     },
     StatsCell: {
@@ -36,6 +41,7 @@ export function Asset(props: assetProps) {
     const { assetId } = useParams()
     const classes = useAssetStyles()
     const [loading, setLoading] = useState<boolean>(true)
+
     return (<div>
         <Loading invisible={!loading} />
         <Grid
@@ -51,11 +57,13 @@ export function Asset(props: assetProps) {
                     <PurchasePanel assetId={assetId} setRedirect={props.setRedirect} setLoading={setLoading} />
                 </StyledPaper>
             </Grid>
-            <Grid item className={classes.StatsCell}>
-                <StyledPaper>
-                    <StatsPanel />
-                </StyledPaper>
-            </Grid>
+            <Hidden mdDown>
+                <Grid item className={classes.StatsCell}>
+                    <StyledPaper>
+                        <StatsPanel />
+                    </StyledPaper>
+                </Grid>
+            </Hidden>
         </Grid>
     </div>)
 }
@@ -323,41 +331,45 @@ Utilization rate,Available liquidity,Asset price,Deposit APY,Can be used as coll
 */
 function StatsPanel() {
     const classes = useStatsPanelStyle()
+    //const [utilizationRate,setUtilizationRate] = useState<string>()
 
-    return (<Grid
-        container
-        direction="column"
-        justify="flex-start"
-        alignItems="center"
-        spacing={4}
-        className={classes.root}
-    >
-        <StatRow title="Utilization Rate" suffix=" %">
-            65.39
+    return (
+
+        <Grid
+            container
+            direction="column"
+            justify="flex-start"
+            alignItems="center"
+            spacing={4}
+            className={classes.root}
+        >
+            <StatRow title="Utilization Rate" suffix=" %">
+                65.39
             </StatRow>
-        <StatRow title="Available Liquidity" suffix=" DAI">
-            123411345
+            <StatRow title="Available Liquidity" suffix=" DAI">
+                123411345
             </StatRow>
-        <StatRow title="Asset Price" prefix="$">
-            1.01
+            <StatRow title="Asset Price" prefix="$">
+                1.01
             </StatRow>
 
-        <StatRow title="APY" suffix="%" color='red'>
-            4.2
+            <StatRow title="APY" suffix="%" color='red'>
+                4.2
             </StatRow>
-        <StatRow title="Can be used as collateral" color='green'>
-            Yes
+            <StatRow title="Can be used as collateral" color='green'>
+                Yes
             </StatRow>
-        <StatRow title="Maximum LTV" suffix=" %">
-            75
+            <StatRow title="Maximum LTV" suffix=" %">
+                75
             </StatRow>
-        <StatRow title="Liquidation threshold" suffix=" %">
-            80
+            <StatRow title="Liquidation threshold" suffix=" %">
+                80
             </StatRow>
-        <StatRow title="Liquidation penalty" suffix=" %">
-            5
+            <StatRow title="Liquidation penalty" suffix=" %">
+                5
          </StatRow>
-    </Grid>)
+        </Grid>
+    )
 }
 
 
