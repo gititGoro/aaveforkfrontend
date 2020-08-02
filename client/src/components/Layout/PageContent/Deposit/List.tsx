@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import AssetPage from "../Common/AssetPage"
-import { weiToEthString, LoadERC20 } from '../../../../blockchain/EthereumAPI'
+import { weiToEthString, LoadERC20, TokenAPY } from '../../../../blockchain/EthereumAPI'
 import { AToken } from 'src/blockchain/typechain-types/ethers/AToken';
 import { EthereumContext } from '../../../contexts/EthereumContext'
 
@@ -28,11 +28,7 @@ export function List(props: props) {
 
         const APYquery = async (aToken: AToken) => {
             const baseTokenAddress = await aToken.underlyingAssetAddress()
-
-            return (await blockchain.contracts.LendingPoolCore.getReserveCurrentLiquidityRate(baseTokenAddress))
-                .toString()
-                .fromRAY()
-                .asPercentage()
+            return TokenAPY(baseTokenAddress,blockchain.contracts)
         }
 
         const actionLabel = async (aToken: AToken) => {

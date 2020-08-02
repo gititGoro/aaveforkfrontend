@@ -19,6 +19,7 @@ declare global {
         fromRAY(): string
         fromWAD(): string
         asPercentage(): string
+        truncBig(): string
     }
 }
 
@@ -43,6 +44,10 @@ String.prototype.asPercentage = function () {
 
     return `${big.times(100)}%`
 }
+String.prototype.truncBig = function (): string {
+    const big = new BigNumber(this.toString())
+    return big.isNaN() ? this.toString() : big.decimalPlaces(4).toString()
+}
 
 export const hexToNumString = (hex: string) => new BigNumber(hex).toString()
 export const numToHex = (num: string) => ethers.utils.hexValue(num)
@@ -50,7 +55,9 @@ export const isHex = (value: string) => ethers.utils.isHexString(value)
 export const weiToEth = (value: string) => ethers.utils.formatEther(value.toString())
 export const ethToWei = (value: string) => ethers.utils.parseEther(value).toString()
 export const weiToEthString = (value: ethersBigNumber | string) => weiToEth(value.toString()).toString()
-
+export const WadMul = (lhs: ethersBigNumber, rhs: ethersBigNumber) => {
+    return lhs.mul(rhs).div(WAD.toString())
+}
 export interface ethersMetamask {
     provider: ethers.providers.Web3Provider,
     signer: ethers.Signer
@@ -138,6 +145,13 @@ export async function ApproveLendingPoolCore(tokenId: string, contractIntances: 
         return false
     const token = LoadERC20(tokenId, signer)
     return token.approve(contractIntances.LendingPoolCore.address, UINTMAX)
+}
+
+export async function TokenAPY(reserveAddress: string, contracts: ContractInstances): Promise<string> {
+    return (await contracts.LendingPoolCore.getReserveCurrentLiquidityRate(reserveAddress))
+        .toString()
+        .fromRAY()
+        .asPercentage()
 }
 
 export async function GetContracts(signer: ethers.Signer, network: string): Promise<ContractInstances | undefined> {

@@ -3,7 +3,7 @@ import { Paper, Grid, makeStyles, createStyles, Typography, Button, Link, Hidden
 import { useParams } from "react-router-dom";
 import RangedTextField, { range as PercentageRange } from 'src/components/Layout/PageContent/Common/RangedTextField'
 import { EthereumContext } from 'src/components/contexts/EthereumContext';
-import { ApproveLendingPoolCore, LendingPoolCoreApproved, BlockchainTransaction, BlockchainReceipt, LoadERC20, weiToEthString, ethToWei } from '../../../../../blockchain/EthereumAPI'
+import { ApproveLendingPoolCore, LendingPoolCoreApproved, BlockchainTransaction, BlockchainReceipt, LoadERC20, weiToEthString, ethToWei, TokenAPY, WadMul } from '../../../../../blockchain/EthereumAPI'
 import { useAlert } from 'react-alert'
 import Loading from '../../Common/Loading'
 import { ContractTransaction } from 'ethers';
@@ -60,20 +60,13 @@ export function Asset(props: assetProps) {
             <Hidden mdDown>
                 <Grid item className={classes.StatsCell}>
                     <StyledPaper>
-                        <StatsPanel />
+                        <StatsPanel assetId={assetId} />
                     </StyledPaper>
                 </Grid>
             </Hidden>
         </Grid>
     </div>)
 }
-/*
-How much would you like to deposit
-Manually enter an amount or choose a percen.5tage
-Adorned text box3 that binds text to either empty or range
-percentage buttons
-Button that is either approve/deposit
-*/
 
 const usePurchaseStyles = makeStyles(theme => createStyles({
     despositButton: {
@@ -327,14 +320,59 @@ const useStatsPanelStyle = makeStyles(theme => createStyles({
 }))
 
 /*
-Utilization rate,Available liquidity,Asset price,Deposit APY,Can be used as collateral,Maximum LTV,Liquidation threshold,Liquidation penalty
+LendingPooldataprovider.getReserveData
+    ->utilization rate
+    -> available liquidity
+EtheretumAPI
+ -> APY
+
+LendingPool.getReserveConfigurationData
+ -> LTV
+ -> LiquidationThreashold
+ -> LiquidationBonus
+ ->usageAsCollateralEnabled
+
+ Asset: Price. price in eth * ethdollar price
+ Price Oracle
 */
-function StatsPanel() {
+function StatsPanel(props: { assetId: string }) {
+    const ethereumContext = useContext(EthereumContext)
     const classes = useStatsPanelStyle()
-    //const [utilizationRate,setUtilizationRate] = useState<string>()
+    const [utilizationRate, setUtilizationRate] = useState<string>()
+    const [availableLiquidity, setAvailableLiquidity] = useState<string>()
+    const [dollarPrice, setDollarPrice] = useState<string>()
+    const [APY, setAPY] = useState<string>()
+    const [collateralEnabled, setCollateralEnabled] = useState<'YES' | 'NO'>('YES')
+    const [maxLTV, setMaxLTV] = useState<string>()
+    const [liquidationThreshold, setLiquidationThreshold] = useState<string>()
+    const [liquidationPenalty, setLiquidationPenalty] = useState<string>()
+
+    const fetchStatsCallback = useCallback(async () => {
+        if (ethereumContext.blockchain) {
+            const blockchain = ethereumContext.blockchain
+            const reserveData = await blockchain.contracts.LendingPoolDataProvider.getReserveData(props.assetId)
+            setUtilizationRate(reserveData.utilizationRate.toString())
+            setAvailableLiquidity(reserveData.availableLiquidity.toString().fromWAD().truncBig())
+            setAPY(await TokenAPY(props.assetId, blockchain.contracts))
+
+            const configurationdata = await blockchain.contracts.LendingPool.getReserveConfigurationData(props.assetId)
+            setMaxLTV(configurationdata.ltv.toString())
+            setLiquidationThreshold(configurationdata.liquidationThreshold.toString())
+            setLiquidationPenalty(configurationdata.liquidationBonus.toString())
+            setCollateralEnabled(configurationdata.usageAsCollateralEnabled ? 'YES' : 'NO')
+
+            const ethPrice = await blockchain.contracts.PriceOracle.getAssetPrice(props.assetId)
+            const ethDollarPrice = await blockchain.contracts.PriceOracle.getEthUsdPrice()
+            setDollarPrice(WadMul(ethPrice, ethDollarPrice).toString().fromWAD())
+
+        }
+    }, [ethereumContext.blockchain])
+
+    useEffect(() => {
+        fetchStatsCallback()
+    }, [ethereumContext.blockchain])
 
     return (
-
         <Grid
             container
             direction="column"
@@ -344,30 +382,29 @@ function StatsPanel() {
             className={classes.root}
         >
             <StatRow title="Utilization Rate" suffix=" %">
-                65.39
+                {utilizationRate}
             </StatRow>
             <StatRow title="Available Liquidity" suffix=" DAI">
-                123411345
+                {availableLiquidity}
             </StatRow>
             <StatRow title="Asset Price" prefix="$">
-                1.01
+                {dollarPrice}
             </StatRow>
-
             <StatRow title="APY" suffix="%" color='red'>
-                4.2
+                {APY}
             </StatRow>
             <StatRow title="Can be used as collateral" color='green'>
-                Yes
+                {collateralEnabled}
             </StatRow>
             <StatRow title="Maximum LTV" suffix=" %">
-                75
+                {maxLTV}
             </StatRow>
             <StatRow title="Liquidation threshold" suffix=" %">
-                80
+                {liquidationThreshold}
             </StatRow>
             <StatRow title="Liquidation penalty" suffix=" %">
-                5
-         </StatRow>
+                {liquidationPenalty}
+            </StatRow>
         </Grid>
     )
 }
