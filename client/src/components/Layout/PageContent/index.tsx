@@ -41,7 +41,6 @@ export default function PageContent(props: props) {
     }
     React.useEffect(() => {
         if (renderRedirect !== '') {
-            console.log('setting renderRedirect to nothin')
             setRedirection('')
         }
     })

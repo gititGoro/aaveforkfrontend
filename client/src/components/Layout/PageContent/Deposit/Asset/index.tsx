@@ -136,7 +136,7 @@ function PurchasePanel(props: purchasePanelProps) {
     const [alertOnApproval, setAlertOnApproval] = useState<boolean>(false)
     const [balance, setBalance] = useState<string>("0")
     const [percentage, setPercentage] = useState<PercentageRange>(0)
-    
+
     const resetInput = () =>{
         setPurchaseValue('')
         setPercentage(0)
@@ -169,7 +169,6 @@ function PurchasePanel(props: purchasePanelProps) {
                     break;
                 case PurchasePanelTransactionStates.approvalAwaitingUserWalletConfirmation:
                     if (!transaction) {
-                        console.log('no transaction')
                         setTransactionState(PurchasePanelTransactionStates.approvalFailed)
                         alert.error('User rejected transaction')
                         break;
@@ -211,7 +210,6 @@ function PurchasePanel(props: purchasePanelProps) {
                     break;
                 case PurchasePanelTransactionStates.depositAwaitingUserWalletConfirmation:
                     if (!transaction) {
-                        console.log('no transaction')
                         setTransactionState(PurchasePanelTransactionStates.depositFailed)
                         alert.error('user cancelled')
                         break;
@@ -312,7 +310,6 @@ function PurchasePanel(props: purchasePanelProps) {
 Utilization rate,Available liquidity,Asset price,Deposit APY,Can be used as collateral,Maximum LTV,Liquidation threshold,Liquidation penalty
 */
 function StatsPanel() {
-    console.log('stats panel')
     return <div>Stats aplenty</div>
 }
 
