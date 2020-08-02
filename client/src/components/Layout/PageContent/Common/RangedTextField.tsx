@@ -148,9 +148,10 @@ const rangeSelectorStyle = makeStyles(theme => createStyles({
   },
   selectedCell: {
     margin: '15px 10px',
-    backgroundColor: theme.backgroundSelect[theme.palette.type],
+    background: theme.backgroundSelect[theme.palette.type],
     borderColor: theme.backgroundSelectBorder[theme.palette.type],
     borderWidth: '1px',
+    opacity: theme.palette.type === 'light' ? 0.65 : 1,
     borderStyle: 'solid',
     padding: '6px',
     fontSize: theme.standardFont.fontSize,

@@ -137,7 +137,7 @@ export async function ApproveLendingPoolCore(tokenId: string, contractIntances: 
     if (tokenId === contractIntances.EthAddress)
         return false
     const token = LoadERC20(tokenId, signer)
-    return await token.approve(contractIntances.LendingPoolCore.address, UINTMAX)
+    return token.approve(contractIntances.LendingPoolCore.address, UINTMAX)
 }
 
 export async function GetContracts(signer: ethers.Signer, network: string): Promise<ContractInstances | undefined> {

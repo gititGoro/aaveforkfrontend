@@ -78,7 +78,7 @@ const theme = createMuiTheme({
         contrastText: "orange"
     },
     backgroundSelect: {
-        light: "rgba(230,230,230,0.45)",
+        light:"linear-gradient(to bottom right, #C00BA0, #00AAAA)",
         main: "blue",
         dark: "white",
         contrastText: "orange"

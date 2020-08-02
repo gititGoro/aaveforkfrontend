@@ -1,11 +1,12 @@
 import React, { useState, useContext, useCallback, useEffect } from 'react';
 import { Paper, Grid, makeStyles, createStyles, Typography, Button, Link } from '@material-ui/core'
 import { useParams } from "react-router-dom";
-import RangedTextField, {range as PercentageRange} from 'src/components/Layout/PageContent/Common/RangedTextField'
+import RangedTextField, { range as PercentageRange } from 'src/components/Layout/PageContent/Common/RangedTextField'
 import { EthereumContext } from 'src/components/contexts/EthereumContext';
 import { ApproveLendingPoolCore, LendingPoolCoreApproved, BlockchainTransaction, BlockchainReceipt, LoadERC20, weiToEthString, ethToWei } from '../../../../../blockchain/EthereumAPI'
 import { useAlert } from 'react-alert'
 import Loading from '../../Common/Loading'
+import { ContractTransaction } from 'ethers';
 
 interface assetProps {
     setRedirect: (r: string) => void
@@ -20,11 +21,8 @@ const useAssetStyles = makeStyles(theme => createStyles({
     StatsCell: {
         maxWidth: "600px",
         width: "25%",
-        padding: "200px"
     },
     ContainerGrid: {
-        position: "relative",
-        zIndex: 0,
         margin: "50px 0 0 25px",
         minHeight: "900px",
     },
@@ -45,7 +43,7 @@ export function Asset(props: assetProps) {
             direction="row"
             justify="flex-start"
             alignItems="stretch"
-            spacing={4}
+            spacing={3}
             className={loading ? classes.hiddenContainerGrid : classes.ContainerGrid}
         >
             <Grid item className={classes.PurchaseCell}>
@@ -99,6 +97,7 @@ const usePurchaseStyles = makeStyles(theme => createStyles({
     }
     , grid: {
         textAlign: 'center',
+        marginTop:'-16px'
     },
     narrowColumn: {
         width: '600px'
@@ -137,7 +136,7 @@ function PurchasePanel(props: purchasePanelProps) {
     const [balance, setBalance] = useState<string>("0")
     const [percentage, setPercentage] = useState<PercentageRange>(0)
 
-    const resetInput = () =>{
+    const resetInput = () => {
         setPurchaseValue('')
         setPercentage(0)
 
@@ -160,9 +159,9 @@ function PurchasePanel(props: purchasePanelProps) {
                     }
                     break;
                 case PurchasePanelTransactionStates.approvalClicked:
-                    const tx = await ApproveLendingPoolCore(props.assetId, blockchain.contracts, blockchain.metamaskConnections.signer)
+                    const tx = ApproveLendingPoolCore(props.assetId, blockchain.contracts, blockchain.metamaskConnections.signer)
                     if (tx) {
-                        setTransaction(tx)
+                        setTransaction(tx as Promise<ContractTransaction>)
                         setTransactionState(PurchasePanelTransactionStates.approvalAwaitingUserWalletConfirmation)
                         setAlertOnApproval(true)
                     }
@@ -170,13 +169,14 @@ function PurchasePanel(props: purchasePanelProps) {
                 case PurchasePanelTransactionStates.approvalAwaitingUserWalletConfirmation:
                     if (!transaction) {
                         setTransactionState(PurchasePanelTransactionStates.approvalFailed)
-                        alert.error('User rejected transaction')
+                        alert.error('user cancelled')
                         break;
                     }
-                    setTransaction((transaction as BlockchainTransaction).wait())
+                    alert.info('wallet request pending')
+                    const approvalWait = (await (transaction as Promise<BlockchainTransaction>)).wait()
+                    setTransaction(approvalWait)
                     setTransactionState(PurchasePanelTransactionStates.awaitingApprovalBlockConfirmation)
                     break;
-
                 case PurchasePanelTransactionStates.approvalFailed:
                     if (alertOnApproval)
                         alert.error('Approve transaction failed')
@@ -190,6 +190,7 @@ function PurchasePanel(props: purchasePanelProps) {
                     setTransaction(undefined)
                     break;
                 case PurchasePanelTransactionStates.awaitingApprovalBlockConfirmation:
+                    alert.info('awaiting blockchain confirmation')
                     const approvalReceipt = await (transaction as Promise<BlockchainReceipt>)
                     if (approvalReceipt.status === 0) {
                         setTransactionState(PurchasePanelTransactionStates.approvalFailed)
@@ -204,7 +205,7 @@ function PurchasePanel(props: purchasePanelProps) {
                     if (depositReceipt.status === 0) {
                         setTransactionState(PurchasePanelTransactionStates.depositFailed)
                     } else {
-                       resetInput()
+                        resetInput()
                         setTransactionState(PurchasePanelTransactionStates.depositSuccess)
                     }
                     break;
@@ -274,13 +275,13 @@ function PurchasePanel(props: purchasePanelProps) {
                 </Typography>
             </Grid>
             <Grid item>
-                <RangedTextField 
-                setValid={setValid} 
-                onChange={setPurchaseValue} 
-                value={purchaseValue} 
-                assetId={props.assetId} 
-                percentage={percentage}
-                setPercentage={setPercentage} />
+                <RangedTextField
+                    setValid={setValid}
+                    onChange={setPurchaseValue}
+                    value={purchaseValue}
+                    assetId={props.assetId}
+                    percentage={percentage}
+                    setPercentage={setPercentage} />
             </Grid>
             <Grid item>
                 You can deposit a maximum of {balance}
@@ -305,12 +306,52 @@ function PurchasePanel(props: purchasePanelProps) {
         </Grid>)
 }
 
+const useStatsPanelStyle = makeStyles(theme => createStyles({
+    root: {
+        height: "100%",
+        minHeight: "900px",
+    }
+}))
 
 /*
 Utilization rate,Available liquidity,Asset price,Deposit APY,Can be used as collateral,Maximum LTV,Liquidation threshold,Liquidation penalty
 */
 function StatsPanel() {
-    return <div>Stats aplenty</div>
+    const classes = useStatsPanelStyle()
+
+    return (<Grid
+        container
+        direction="column"
+        justify="flex-start"
+        alignItems="flex-start"
+        spacing={4}
+        className={classes.root}
+    >
+        <Grid item>
+            Utilization rate
+      </Grid>
+        <Grid item>
+            Available Liqidity
+      </Grid>
+        <Grid item>
+            Asset Price
+      </Grid>
+        <Grid item>
+            Deposit APY
+      </Grid>
+        <Grid item>
+            Can be used as collateral
+      </Grid>
+        <Grid item>
+            Maximum LTV
+      </Grid>
+        <Grid item>
+            Liquidation threshold
+      </Grid>
+        <Grid item>
+            Liquidation penalty
+      </Grid>
+    </Grid>)
 }
 
 const paperStyles = makeStyles(theme => createStyles({
