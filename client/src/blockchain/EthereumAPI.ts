@@ -154,6 +154,29 @@ export async function TokenAPY(reserveAddress: string, contracts: ContractInstan
         .asPercentage()
 }
 
+export async function getAvailableBorrows(reserveAddress: string, contracts: ContractInstances, wallet: ethersMetamask): Promise<string> {
+
+    const oracle = await GetPriceOracle(contracts, wallet.signer)
+    const account = await wallet.signer.getAddress()
+    const userData = await contracts.LendingPoolDataProvider.getUserAccountData(account)
+    const availableEthBorrows = userData.availableBorrowsETH.mul(WADstring)
+    const ethPriceOfToken = await oracle?.getAssetPrice(reserveAddress)
+    if (!ethPriceOfToken)
+        return "price not set"
+    if (ethPriceOfToken.isZero())
+        return "price not set"
+
+    const theoreticalTotalAvailable = availableEthBorrows.div(ethPriceOfToken)
+    const reserveData = (await contracts.LendingPoolDataProvider.getReserveData(reserveAddress))
+    const availableLiquidity = reserveData.availableLiquidity.toString()
+    if (theoreticalTotalAvailable.gt(availableLiquidity)) {
+        return availableLiquidity.fromWAD()
+    }
+    return theoreticalTotalAvailable
+        .toString()
+        .fromWAD()
+}
+
 export async function GetContracts(signer: ethers.Signer, network: string): Promise<ContractInstances | undefined> {
     if (Object.keys(addresses).filter(key => key === network).length === 0)
         return

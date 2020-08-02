@@ -2,32 +2,21 @@ import React, { useContext } from 'react';
 import AssetPage from "../Common/AssetPage"
 import { AToken } from 'src/blockchain/typechain-types/ethers/AToken';
 import { EthereumContext } from '../../../contexts/EthereumContext'
-import { GetPriceOracle } from 'src/blockchain/EthereumAPI'
+import { getAvailableBorrows } from 'src/blockchain/EthereumAPI'
 
-export function List() {
+interface props {
+    redirect: (assetID: string) => void
+}
+
+export function List(props: props) {
     const ethereumContextProps = useContext(EthereumContext)
 
     if (ethereumContextProps.blockchain) {
         const blockchain = ethereumContextProps.blockchain
 
         const availableQuery = async (aToken: AToken): Promise<string> => {
-            const oracle = await GetPriceOracle(blockchain.contracts, blockchain.metamaskConnections.signer)
-            const userData = await blockchain.contracts.LendingPoolDataProvider.getUserAccountData(blockchain.account)
             const reserveAddress = await aToken.underlyingAssetAddress()
-            const availableEthBorrows = userData.availableBorrowsETH
-            const ethPriceOfToken = await oracle?.getAssetPrice(reserveAddress)
-            if (!ethPriceOfToken)
-                return "price not set"
-            if (ethPriceOfToken.isZero())
-                return "price not set"
-
-            const theoreticalTotalAvailable = availableEthBorrows.div(ethPriceOfToken)
-            const reserveData = (await blockchain.contracts.LendingPoolDataProvider.getReserveData(reserveAddress))
-            const availableLiquidity = reserveData.availableLiquidity.toString()
-            if (theoreticalTotalAvailable.gt(availableLiquidity)) {
-                return availableLiquidity
-            }
-            return theoreticalTotalAvailable.toString()
+            return await getAvailableBorrows(reserveAddress, blockchain.contracts, blockchain.metamaskConnections)
         }
 
         const variableAPRQuery = async (aToken: AToken): Promise<string> => {
@@ -51,7 +40,8 @@ export function List() {
         }
 
         const action = async (aToken: AToken) => {
-            alert('borrow')
+            const reserve = await aToken.underlyingAssetAddress()
+            props.redirect(reserve)
         }
         return <AssetPage
             column1Heading="Available to you"

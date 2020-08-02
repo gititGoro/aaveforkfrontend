@@ -3,10 +3,11 @@ import { Paper, Grid, makeStyles, createStyles, Typography, Button, Link, Hidden
 import { useParams } from "react-router-dom";
 import RangedTextField, { range as PercentageRange } from 'src/components/Layout/PageContent/Common/RangedTextField'
 import { EthereumContext } from 'src/components/contexts/EthereumContext';
-import { ApproveLendingPoolCore, LendingPoolCoreApproved, BlockchainTransaction, BlockchainReceipt, LoadERC20, weiToEthString, ethToWei, TokenAPY, WadMul } from '../../../../../blockchain/EthereumAPI'
+import { ApproveLendingPoolCore, LendingPoolCoreApproved, BlockchainTransaction, BlockchainReceipt, LoadERC20, weiToEthString, ethToWei } from '../../../../../blockchain/EthereumAPI'
 import { useAlert } from 'react-alert'
 import Loading from '../../Common/Loading'
-import { ContractTransaction } from 'ethers';
+import StatsPanel from '../../Common/StatsPanel'
+import { ImgSrc } from '../../Common/TokenImage';
 
 interface assetProps {
     setRedirect: (r: string) => void
@@ -60,7 +61,7 @@ export function Asset(props: assetProps) {
             <Hidden mdDown>
                 <Grid item className={classes.StatsCell}>
                     <StyledPaper>
-                        <StatsPanel assetId={assetId} />
+                        <StatsPanel assetId={assetId} deposit />
                     </StyledPaper>
                 </Grid>
             </Hidden>
@@ -71,7 +72,7 @@ export function Asset(props: assetProps) {
 const usePurchaseStyles = makeStyles(theme => createStyles({
     despositButton: {
         backgroundColor: theme.buttonColor[theme.palette.type],
-        color: theme.foregroundColor[theme.palette.type],
+        color: 'white',
         "&:disabled": {
             backgroundColor: "#E1E1E1",
             dark: {
@@ -136,6 +137,9 @@ function PurchasePanel(props: purchasePanelProps) {
     const [alertOnApproval, setAlertOnApproval] = useState<boolean>(false)
     const [balance, setBalance] = useState<string>("0")
     const [percentage, setPercentage] = useState<PercentageRange>(0)
+    const imageLoader = ImgSrc(ethereumContext.network)
+    const tokenName = imageLoader(props.assetId).name
+
 
     const resetInput = () => {
         setPurchaseValue('')
@@ -148,8 +152,15 @@ function PurchasePanel(props: purchasePanelProps) {
 
         if (ethereumContext.blockchain) {
             const blockchain = ethereumContext.blockchain
-            const token = LoadERC20(props.assetId, blockchain.metamaskConnections.signer)
-            setBalance(weiToEthString((await token.balanceOf(blockchain.account)).toString()))
+            let balWei: string = "0"
+            if (props.assetId === blockchain.contracts.EthAddress) {
+                balWei = await (await blockchain.metamaskConnections.signer.getBalance()).toString()
+            }
+            else {
+                const tokenERC20 = LoadERC20(props.assetId, ethereumContext.blockchain.metamaskConnections.signer)
+                balWei = await (await tokenERC20.balanceOf(ethereumContext.blockchain.account)).toString()
+            }
+            setBalance(weiToEthString(balWei))
             switch (transactionState) {
                 case PurchasePanelTransactionStates.unapprovedAndLoading:
                     const approved: boolean = await LendingPoolCoreApproved(props.assetId, blockchain.contracts, blockchain.metamaskConnections.signer)
@@ -162,7 +173,7 @@ function PurchasePanel(props: purchasePanelProps) {
                 case PurchasePanelTransactionStates.approvalClicked:
                     const tx = ApproveLendingPoolCore(props.assetId, blockchain.contracts, blockchain.metamaskConnections.signer)
                     if (tx) {
-                        setTransaction(tx as Promise<ContractTransaction>)
+                        setTransaction(tx as Promise<any>)
                         setTransactionState(PurchasePanelTransactionStates.approvalAwaitingUserWalletConfirmation)
                         setAlertOnApproval(true)
                     }
@@ -248,7 +259,6 @@ function PurchasePanel(props: purchasePanelProps) {
         }
     }, [transactionState])
 
-
     useEffect(() => {
         blockChainInteractionCallBack()
     }, [transactionState])
@@ -282,10 +292,12 @@ function PurchasePanel(props: purchasePanelProps) {
                     value={purchaseValue}
                     assetId={props.assetId}
                     percentage={percentage}
-                    setPercentage={setPercentage} />
+                    setPercentage={setPercentage}
+                    limit={balance}
+                />
             </Grid>
             <Grid item>
-                You can deposit a maximum of {balance}
+                You can deposit a maximum of {balance} {tokenName}
             </Grid>
             <Grid item>
                 {depositVisible ?
@@ -305,156 +317,6 @@ function PurchasePanel(props: purchasePanelProps) {
                 <Link className={classes.link} component="button" onClick={() => props.setRedirect('/deposit')}>Go back</Link>
             </Grid>
         </Grid>)
-}
-
-const useStatsPanelStyle = makeStyles(theme => createStyles({
-    root: {
-        width: '100%',
-        height: "100%",
-        minHeight: "900px",
-        fontSize: theme.standardFont.fontSize + 4,
-        fontWeight: theme.standardFont.fontWeightMedium,
-        fontFamily: theme.standardFont.fontFamily
-    },
-
-}))
-
-/*
-LendingPooldataprovider.getReserveData
-    ->utilization rate
-    -> available liquidity
-EtheretumAPI
- -> APY
-
-LendingPool.getReserveConfigurationData
- -> LTV
- -> LiquidationThreashold
- -> LiquidationBonus
- ->usageAsCollateralEnabled
-
- Asset: Price. price in eth * ethdollar price
- Price Oracle
-*/
-function StatsPanel(props: { assetId: string }) {
-    const ethereumContext = useContext(EthereumContext)
-    const classes = useStatsPanelStyle()
-    const [utilizationRate, setUtilizationRate] = useState<string>()
-    const [availableLiquidity, setAvailableLiquidity] = useState<string>()
-    const [dollarPrice, setDollarPrice] = useState<string>()
-    const [APY, setAPY] = useState<string>()
-    const [collateralEnabled, setCollateralEnabled] = useState<'YES' | 'NO'>('YES')
-    const [maxLTV, setMaxLTV] = useState<string>()
-    const [liquidationThreshold, setLiquidationThreshold] = useState<string>()
-    const [liquidationPenalty, setLiquidationPenalty] = useState<string>()
-
-    const fetchStatsCallback = useCallback(async () => {
-        if (ethereumContext.blockchain) {
-            const blockchain = ethereumContext.blockchain
-            const reserveData = await blockchain.contracts.LendingPoolDataProvider.getReserveData(props.assetId)
-            setUtilizationRate(reserveData.utilizationRate.toString())
-            setAvailableLiquidity(reserveData.availableLiquidity.toString().fromWAD().truncBig())
-            setAPY(await TokenAPY(props.assetId, blockchain.contracts))
-
-            const configurationdata = await blockchain.contracts.LendingPool.getReserveConfigurationData(props.assetId)
-            setMaxLTV(configurationdata.ltv.toString())
-            setLiquidationThreshold(configurationdata.liquidationThreshold.toString())
-            setLiquidationPenalty(configurationdata.liquidationBonus.toString())
-            setCollateralEnabled(configurationdata.usageAsCollateralEnabled ? 'YES' : 'NO')
-
-            const ethPrice = await blockchain.contracts.PriceOracle.getAssetPrice(props.assetId)
-            const ethDollarPrice = await blockchain.contracts.PriceOracle.getEthUsdPrice()
-            setDollarPrice(WadMul(ethPrice, ethDollarPrice).toString().fromWAD())
-
-        }
-    }, [ethereumContext.blockchain])
-
-    useEffect(() => {
-        fetchStatsCallback()
-    }, [ethereumContext.blockchain])
-
-    return (
-        <Grid
-            container
-            direction="column"
-            justify="flex-start"
-            alignItems="center"
-            spacing={4}
-            className={classes.root}
-        >
-            <StatRow title="Utilization Rate" suffix=" %">
-                {utilizationRate}
-            </StatRow>
-            <StatRow title="Available Liquidity" suffix=" DAI">
-                {availableLiquidity}
-            </StatRow>
-            <StatRow title="Asset Price" prefix="$">
-                {dollarPrice}
-            </StatRow>
-            <StatRow title="APY" suffix="%" color='red'>
-                {APY}
-            </StatRow>
-            <StatRow title="Can be used as collateral" color='green'>
-                {collateralEnabled}
-            </StatRow>
-            <StatRow title="Maximum LTV" suffix=" %">
-                {maxLTV}
-            </StatRow>
-            <StatRow title="Liquidation threshold" suffix=" %">
-                {liquidationThreshold}
-            </StatRow>
-            <StatRow title="Liquidation penalty" suffix=" %">
-                {liquidationPenalty}
-            </StatRow>
-        </Grid>
-    )
-}
-
-
-const useStatRowStyle = makeStyles(theme => createStyles({
-    root: {
-        // border: '2px solid red',
-        marginLeft: '10px'
-    },
-    redCell: {
-        color: 'red'
-    },
-    greenCell: {
-        color: 'green'
-    },
-    encasingCell: {
-        width: '100%'
-    }
-}))
-
-interface statRowProps {
-    title: string
-    children?: any
-    prefix?: string
-    suffix?: string
-    color?: 'green' | 'red'
-}
-
-function StatRow(props: statRowProps) {
-    const classes = useStatRowStyle()
-    const colorClass = props.color ? classes[props.color + 'Cell'] : ''
-
-    return <Grid item className={classes.encasingCell}>
-        <Grid
-            container
-            direction="row"
-            justify="space-between"
-            alignItems="baseline"
-            className={classes.root}
-            spacing={1}
-        >
-            <Grid item>
-                {props.title}
-            </Grid>
-            <Grid item>
-                {props.prefix || ''}{<span className={colorClass}>{props.children}</span>}{props.suffix || ''}
-            </Grid>
-        </Grid>
-    </Grid>
 }
 
 const paperStyles = makeStyles(theme => createStyles({

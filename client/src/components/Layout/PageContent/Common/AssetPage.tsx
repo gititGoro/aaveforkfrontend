@@ -21,12 +21,11 @@ import {
 } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import Loading from './Loading'
-
-import imageData from '../../../../images/dataimages.json'
 import { EthereumContext } from "../../../contexts/EthereumContext"
 import { LoadAToken } from '../../../../blockchain/EthereumAPI'
 
 import { AToken } from 'src/blockchain/typechain-types/ethers/AToken';
+import { ImgSrc } from './TokenImage';
 
 const topLevelStyles = makeStyles(theme => createStyles({
     invisibleContainer: {
@@ -281,20 +280,4 @@ function AssetGrid(props: AssetGridProps) {
                 There are no currencies matching the parameters
             </Typography>
         </div>
-}
-
-
-const ImgSrc = (network: string) => {
-    const images = imageData.filter(n => n.network === network)
-
-    return (address: string): AssetIcon => {
-        if (images.length) {
-            const imageBlob = images[0].images
-            const token = imageBlob.filter(i => i.address.toLowerCase() === address.toLowerCase())
-            if (token.length)
-                return token[0]
-            return { name: "", BASE64: "" }
-        }
-        return { name: "", BASE64: "" }
-    }
 }

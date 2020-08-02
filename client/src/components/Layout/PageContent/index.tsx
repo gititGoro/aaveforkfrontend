@@ -6,6 +6,7 @@ import {
 import { List as Borrow } from "./Borrow/List"
 import { List as Deposit } from "./Deposit/List"
 import { Asset as DepositAsset } from './Deposit/Asset/index'
+import { Asset as BorrowAsset } from './Borrow/Asset/index'
 import Liquidation from "./Liquidation/index"
 import { makeStyles, createStyles } from '@material-ui/core'
 import { useState } from 'react'
@@ -36,9 +37,14 @@ export default function PageContent(props: props) {
     const classes = useStyles()
     const [redirection, setRedirection] = useState<string>("")
     const renderRedirect = redirection !== '' ? <Redirect to={redirection} /> : ''
-    const setDepositPurchaseRedirect = (assetId: string) => {
-        setRedirection(`/deposit/purchase/${assetId}`)
+   
+    const setParameterRedirect = (section:string)=> (assetId:string)=>{
+        setRedirection(`/${section}/${assetId}`)
     }
+   
+    const depositAssetRedirect = setParameterRedirect('deposit/purchase')
+    const borrowAssetRedirect = setParameterRedirect('borrow/collateral')
+
     React.useEffect(() => {
         if (renderRedirect !== '') {
             setRedirection('')
@@ -53,12 +59,17 @@ export default function PageContent(props: props) {
             <Route path='/admin' exact>
                 {props.isAdmin ? <Dashboard /> : <Redirect to="/" />}
             </Route>
-            <Route path='/borrow' exact component={Borrow} />
-            <Route path='/deposit' exact>
-                <Deposit redirect={setDepositPurchaseRedirect} />
+            <Route path='/borrow' exact>
+                <Borrow redirect={borrowAssetRedirect}/>
             </Route>
-            <Route path='/deposit/purchase/:assetId' component={DepositAsset}>
+            <Route path='/deposit' exact>
+                <Deposit redirect={depositAssetRedirect} />
+            </Route>
+            <Route path='/deposit/purchase/:assetId'>
                 <DepositAsset setRedirect={setRedirection} />
+            </Route>
+            <Route path='/borrow/collateral/:assetId'>
+                <BorrowAsset setRedirect={setRedirection} />
             </Route>
             <Route path='/liquidation' exact component={Liquidation} />
         </Switch>

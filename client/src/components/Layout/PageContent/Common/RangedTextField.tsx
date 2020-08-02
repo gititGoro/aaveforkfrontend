@@ -5,9 +5,8 @@ import InputBase from '@material-ui/core/InputBase';
 import IconButton from '@material-ui/core/IconButton';
 import assetImages from 'src/images/dataimages.json'
 import { EthereumContext } from 'src/components/contexts/EthereumContext'
-import { useContext, useState, useEffect, useCallback } from 'react'
+import { useContext, useEffect } from 'react'
 import { Typography, Grid } from '@material-ui/core';
-import { weiToEthString, LoadERC20 } from 'src/blockchain/EthereumAPI';
 import BigNumber from 'bignumber.js';
 
 export type range = 0 | 25 | 50 | 75 | 100
@@ -46,37 +45,19 @@ interface rangedTextFieldProps {
   setValid: (v: boolean) => void
   percentage: range
   setPercentage: (r: range) => void
+  limit: string
 }
 
 
 export default function RangedTextField(props: rangedTextFieldProps) {
   const classes = useStyles();
   const ethereumContext = useContext(EthereumContext)
-  const [balance, setBalance] = useState<string>("")
-
-  const tokenCallback = useCallback(async () => {
-    if (ethereumContext.blockchain) {
-      let balWei
-      if (props.assetId === ethereumContext.blockchain.contracts.EthAddress) {
-        balWei = await ethereumContext.blockchain.metamaskConnections.signer.getBalance()
-      }
-      else {
-        const tokenERC20 = LoadERC20(props.assetId, ethereumContext.blockchain.metamaskConnections.signer)
-        balWei = await tokenERC20.balanceOf(ethereumContext.blockchain.account)
-      }
-      setBalance(weiToEthString(balWei))
-    }
-  }, [props.assetId])
-
-  useEffect(() => {
-    tokenCallback()
-  })
 
   const rangeSelect = (r: range) => {
     props.setPercentage(r)
-    const bigBalance = new BigNumber(balance)
-    if (!bigBalance.isNaN()) {
-      props.onChange(bigBalance.times(r / 100).toString())
+    const bigLimit = new BigNumber(props.limit)
+    if (!bigLimit.isNaN()) {
+      props.onChange(bigLimit.times(r / 100).toString())
     }
   }
 
@@ -94,8 +75,8 @@ export default function RangedTextField(props: rangedTextFieldProps) {
 
   const validateValue = (v: string): boolean => {
     const big = new BigNumber(v)
-    const bigBalance = new BigNumber(balance)
-    return !big.isNaN() && big.isLessThanOrEqualTo(bigBalance)
+    const bigLimit = new BigNumber(props.limit)
+    return !big.isNaN() && big.isLessThanOrEqualTo(bigLimit)
   }
 
   return (
