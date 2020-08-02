@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import { useLocation, Redirect } from "react-router-dom";
 import { ListItem, ListItemIcon, Divider, makeStyles, createStyles, Theme } from '@material-ui/core'
 import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
@@ -21,10 +21,10 @@ const useStyles = makeStyles((theme: Theme) =>
             '&:hover': {
                 backgroundColor: theme.listHoverColor[theme.palette.type],
             },
-            zIndex:0
+            zIndex: 0
         },
         listItemSelected: {
-            zIndex:0,
+            zIndex: 0,
             backgroundColor: theme.listHoverColor[theme.palette.type],
             '&:hover': {
                 backgroundColor: theme.listHoverColor[theme.palette.type],
@@ -50,7 +50,7 @@ const classSetterFactory =
 
 const showTextFactory = (expanded: boolean) => (text: string) => expanded ? text : ''
 
-export default function ShortcutButtons(props: { expanded: boolean,isAdmin:boolean }) {
+export default function ShortcutButtons(props: { expanded: boolean, isAdmin: boolean }) {
 
 
     const classes = useStyles()
@@ -59,12 +59,12 @@ export default function ShortcutButtons(props: { expanded: boolean,isAdmin:boole
 
     const selectionFactory = classSetterFactory(classes.listItem, classes.listItemSelected)
     const classDecider = selectionFactory(location)
-    const [redirectURL, setRedirectURL] = useState<''|'deposit'|'borrow'|'liquidation'|'admin'>("")
+    const [redirectURL, setRedirectURL] = useState<'' | 'deposit' | 'borrow' | 'liquidation' | 'admin'>("")
 
     if (location.pathname.length > 1 && location.pathname.substring(1) === redirectURL) {
         setRedirectURL('')
     }
-    const renderRedirect = redirectURL === '' ? '' : <Redirect to={redirectURL} />
+    const renderRedirect = redirectURL === '' ? '' : <Redirect to={'/' + redirectURL} />
     return <div className={classes.MenuItems}>
         {renderRedirect}
         <ListItem className={classDecider("deposit")} button key="deposit" onClick={() => setRedirectURL('deposit')}>
@@ -86,16 +86,16 @@ export default function ShortcutButtons(props: { expanded: boolean,isAdmin:boole
             </ListItemIcon>
             {showText("liquidation")}
         </ListItem>
-        {props.isAdmin?
-        <div>
-      <Divider className={classes.divider} />
-      <ListItem className={classDecider("dashboard")} button key="dashboard" onClick={() => setRedirectURL('admin')}>
-            <ListItemIcon>
-                <DeveloperBoardIcon className={classes.icon} />
-            </ListItemIcon>
-            {showText("dashboard")}
-        </ListItem>   
-        </div>:""}
+        {props.isAdmin ?
+            <div>
+                <Divider className={classes.divider} />
+                <ListItem className={classDecider("dashboard")} button key="dashboard" onClick={() => setRedirectURL('admin')}>
+                    <ListItemIcon>
+                        <DeveloperBoardIcon className={classes.icon} />
+                    </ListItemIcon>
+                    {showText("dashboard")}
+                </ListItem>
+            </div> : ""}
     </div>
 }
 

@@ -20,7 +20,8 @@ import {
     Typography,
 } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
-import doge from '../../../../images/loadingdog.gif'
+import Loading from './Loading'
+
 import imageData from '../../../../images/dataimages.json'
 import { EthereumContext } from "../../../contexts/EthereumContext"
 import { LoadAToken } from '../../../../blockchain/EthereumAPI'
@@ -28,6 +29,9 @@ import { LoadAToken } from '../../../../blockchain/EthereumAPI'
 import { AToken } from 'src/blockchain/typechain-types/ethers/AToken';
 
 const topLevelStyles = makeStyles(theme => createStyles({
+    invisibleContainer: {
+        display: "none"
+    },
     cell: {
         width: "80%"
     }
@@ -58,9 +62,10 @@ export default function AssetPage(props: AssetPageProps) {
     const contractListCallBack = useCallback(async () => {
         if (ethereumContextProps.blockchain) {
             const blockchain = ethereumContextProps.blockchain
-            const addresses = await ethereumContextProps.blockchain.contracts.LendingPool.getReserves()
+            let addresses = await ethereumContextProps.blockchain.contracts.LendingPool.getReserves()
+            const fullAddresses = [...addresses/*,blockchain.contracts.EthAddress*/] //TODO load eth address
 
-            const rowPromises = addresses.map(async (address): Promise<Row> => { //TODO: graph query
+            const rowPromises = fullAddresses.map(async (address): Promise<Row> => { //TODO: graph query
                 const aTokenAddress = await blockchain.contracts.LendingPoolCore.getReserveATokenAddress(address)
                 const aToken = LoadAToken(aTokenAddress, blockchain.metamaskConnections.signer)
                 const icon: AssetIcon = imageLoader(address)
@@ -87,26 +92,30 @@ export default function AssetPage(props: AssetPageProps) {
     })
 
 
-    return rows.length > 0 ? <Grid
-        container
-        direction="column"
-        justify="center"
-        alignItems="center"
-        spacing={5}
-    >
-        <Grid item>
-            <TopSelectors setSearchText={setSearchText} searchText={searchText} allChecked={allTokens} setAllChecked={setAllTokens} />
+    return (<div>
+        <Grid
+            container
+            direction="column"
+            justify="center"
+            alignItems="center"
+            spacing={5}
+            className={rows.length === 0 ? classes.invisibleContainer : undefined}
+        >
+            <Grid item>
+                <TopSelectors setSearchText={setSearchText} searchText={searchText} allChecked={allTokens} setAllChecked={setAllTokens} />
+            </Grid>
+            <Grid item className={classes.cell}>
+                <AssetGrid Column1Heading={props.column1Heading}
+                    Column2Heading={props.column2Heading}
+                    Column3Heading={props.column3Heading}
+                    rows={rows}
+                    stablecoinsOnly={!allTokens}
+                    searchText={searchText}
+                />
+            </Grid>
         </Grid>
-        <Grid item className={classes.cell}>
-            <AssetGrid Column1Heading={props.column1Heading}
-                Column2Heading={props.column2Heading}
-                Column3Heading={props.column3Heading}
-                rows={rows}
-                stablecoinsOnly={!allTokens}
-                searchText={searchText}
-            />
-        </Grid>
-    </Grid> : <Loading />
+        <Loading invisible={rows.length > 0} />
+    </div>)
 }
 
 interface topSelectorProps {
@@ -274,33 +283,6 @@ function AssetGrid(props: AssetGridProps) {
         </div>
 }
 
-const loadingStyles = makeStyles(theme => createStyles({
-    dogeText: {
-        color: theme.foregroundColor[theme.palette.type],
-        fontFamily: theme.standardFont.fontFamily
-    }
-}))
-
-function Loading() {
-    const classes = loadingStyles()
-    return <Grid
-        container
-        direction="column"
-        justify="space-between"
-        alignItems="center"
-        spacing={10}
-    >
-        <Grid item></Grid>
-        <Grid item>
-            <img src={doge} width={200} />
-        </Grid>
-        <Grid item>
-            <Typography variant="h3" className={classes.dogeText}>
-                Loading....
-                </Typography>
-        </Grid>
-    </Grid>
-}
 
 const ImgSrc = (network: string) => {
     const images = imageData.filter(n => n.network === network)

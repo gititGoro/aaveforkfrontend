@@ -4,7 +4,11 @@ import { weiToEthString, LoadERC20 } from '../../../../blockchain/EthereumAPI'
 import { AToken } from 'src/blockchain/typechain-types/ethers/AToken';
 import { EthereumContext } from '../../../contexts/EthereumContext'
 
-export default function Deposit() {
+interface props {
+    redirect: (assetID: string) => void
+}
+
+export function List(props: props) {
     const ethereumContextProps = useContext(EthereumContext)
 
     if (ethereumContextProps.blockchain) {
@@ -31,12 +35,13 @@ export default function Deposit() {
                 .asPercentage()
         }
 
-        const actionLabel =  async (aToken: AToken) => {
+        const actionLabel = async (aToken: AToken) => {
             return "Deposit"
-        } 
+        }
 
-        const action =  async (aToken: AToken) =>{
-            alert('deposit')
+        const action = async (aToken: AToken) => {
+            const reserve = await aToken.underlyingAssetAddress()
+            props.redirect(reserve)
         }
 
         return <AssetPage
@@ -46,8 +51,8 @@ export default function Deposit() {
             column1Query={walletBalanceQuery}
             column2Query={aTokenBalanceQuery}
             column3Query={APYquery}
-            actionLabel = {actionLabel}
-            action = {action}
+            actionLabel={actionLabel}
+            action={action}
         />
     }
 

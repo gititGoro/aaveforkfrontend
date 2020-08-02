@@ -5,6 +5,9 @@ import App from './App';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import theme from './SiteTheme'
 import { brightMode } from './components/Layout/BottomPanel';
+import { transitions, positions, Provider as AlertProvider } from 'react-alert'
+//@ts-ignore
+import AlertTemplate from 'react-alert-template-basic'
 
 
 ReactDOM.render(
@@ -33,7 +36,19 @@ function ThemedApp() {
     }
   })
 
+  const alertOptions = {
+    // you can also just use 'bottom center'
+    position: positions.BOTTOM_CENTER,
+    timeout: 5000,
+    offset: '30px',
+    // you can also just use 'scale'
+    transition: transitions.SCALE,
+  }
+
+
   return <ThemeProvider theme={themetoUse}>
-    <App brightMode={mode} setBrightMode={setModeRemember} />
+    <AlertProvider template={AlertTemplate as any} {...alertOptions}>
+      <App brightMode={mode} setBrightMode={setModeRemember} />
+    </AlertProvider>
   </ThemeProvider>
 }

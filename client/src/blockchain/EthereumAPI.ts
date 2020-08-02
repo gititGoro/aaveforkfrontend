@@ -6,11 +6,13 @@ import { LendingPoolCoreLibraryAddresses } from './typechain-types/ethers/Lendin
 import BigNumber from "bignumber.js"
 import { AToken } from './typechain-types/ethers/AToken'
 import { PriceOracle } from './typechain-types/ethers/PriceOracle'
+import { Ierc20DetailedBytes } from './typechain-types/ethers/Ierc20DetailedBytes'
 
 const RAY = new BigNumber(10).pow(27)
 const WAD = new BigNumber(10).pow(18)
 const RAYstring = RAY.toString()
 const WADstring = WAD.toString()
+const UINTMAX = '115792089237316195423570985008687907853269984665640564039457584007913129639934'
 
 declare global {
     interface String {
@@ -46,6 +48,7 @@ export const hexToNumString = (hex: string) => new BigNumber(hex).toString()
 export const numToHex = (num: string) => ethers.utils.hexValue(num)
 export const isHex = (value: string) => ethers.utils.isHexString(value)
 export const weiToEth = (value: string) => ethers.utils.formatEther(value.toString())
+export const ethToWei = (value: string) => ethers.utils.parseEther(value).toString()
 export const weiToEthString = (value: ethersBigNumber | string) => weiToEth(value.toString()).toString()
 
 export interface ethersMetamask {
@@ -103,7 +106,13 @@ export function GetEthers(ethereum: injectedEthereum): ethersMetamask {
 
 export function LoadERC20(address: string, signer: ethers.Signer): ERC20 {
     return new contracts.Erc20Factory(signer).attach(address)
+
 }
+
+export function LoadERC20Detailed(address: string, signer: ethers.Signer): Ierc20DetailedBytes {
+    return new contracts.Ierc20DetailedBytesFactory(signer).attach(address)
+}
+
 
 export function LoadAToken(address: string, signer: ethers.Signer): AToken {
     return new contracts.ATokenFactory(signer).attach(address)
@@ -112,6 +121,23 @@ export function LoadAToken(address: string, signer: ethers.Signer): AToken {
 export async function GetPriceOracle(contractIntances: ContractInstances, signer: ethers.Signer): Promise<PriceOracle> {
     const priceOracleAddress = await contractIntances.LendingPoolAddressesProvider.getPriceOracle()
     return new contracts.PriceOracleFactory(signer).attach(priceOracleAddress)
+}
+
+export async function LendingPoolCoreApproved(tokenId: string, contractIntances: ContractInstances, signer: ethers.Signer): Promise<boolean> {
+    if (tokenId === contractIntances.EthAddress)
+        return true
+    const token = LoadERC20(tokenId, signer)
+    const userAddress = await signer.getAddress()
+    const userBalance = await token.balanceOf(userAddress)
+    const allowance = await token.allowance(userAddress, contractIntances.LendingPoolCore.address)
+    return allowance.gte(userBalance)
+}
+
+export async function ApproveLendingPoolCore(tokenId: string, contractIntances: ContractInstances, signer: ethers.Signer): Promise<ethers.ContractTransaction | false> {
+    if (tokenId === contractIntances.EthAddress)
+        return false
+    const token = LoadERC20(tokenId, signer)
+    return await token.approve(contractIntances.LendingPoolCore.address, UINTMAX)
 }
 
 export async function GetContracts(signer: ethers.Signer, network: string): Promise<ContractInstances | undefined> {
@@ -176,7 +202,8 @@ export async function GetContracts(signer: ethers.Signer, network: string): Prom
         LendingPoolLiquidationManager,
         FeeProvider,
         TokenDistributor,
-        LendingPoolParametersProvider
+        LendingPoolParametersProvider,
+        EthAddress: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE'
     }
 }
 
@@ -198,3 +225,5 @@ export const GetRole = async (address: string, contracts: ContractInstances): Pr
             (!isOwner ? Role.lendingPoolManager : Role.addressesProviderOwner))
 }
 
+export type BlockchainTransaction = ethers.ContractTransaction
+export type BlockchainReceipt = ethers.ContractReceipt

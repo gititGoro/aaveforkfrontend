@@ -54,6 +54,7 @@ export default interface Contracts {
     TokenDistributor:TokenDistributor
     LendingPoolParametersProvider:LendingPoolParametersProvider
     LendingPoolAddressesProvider:LendingPoolAddressesProvider
+    EthAddress:'0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE'
 }
 
 export type ERC20 = Erc20

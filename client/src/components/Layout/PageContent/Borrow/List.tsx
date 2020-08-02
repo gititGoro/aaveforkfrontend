@@ -4,7 +4,7 @@ import { AToken } from 'src/blockchain/typechain-types/ethers/AToken';
 import { EthereumContext } from '../../../contexts/EthereumContext'
 import { GetPriceOracle } from 'src/blockchain/EthereumAPI'
 
-export default function Borrow() {
+export function List() {
     const ethereumContextProps = useContext(EthereumContext)
 
     if (ethereumContextProps.blockchain) {

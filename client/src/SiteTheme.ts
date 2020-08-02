@@ -9,7 +9,11 @@ declare module '@material-ui/core/styles/createMuiTheme' {
         standardFont: FontStyle
         listHoverColor: PaletteColor,
         foregroundColor: PaletteColor,
-        paper:PaletteColor
+        paper: PaletteColor
+        backgroundSelect: PaletteColor
+        backgroundSelectBorder: PaletteColor,
+        buttonColor:PaletteColor,
+        LinkColor:PaletteColor
     }
     interface ThemeOptions {
         appbackground?: PaletteColor,
@@ -18,7 +22,11 @@ declare module '@material-ui/core/styles/createMuiTheme' {
         standardFont?: FontStyle,
         listHoverColor?: PaletteColor,
         foregroundColor?: PaletteColor,
-        paper?:PaletteColor
+        paper?: PaletteColor,
+        backgroundSelect?: PaletteColor
+        backgroundSelectBorder?: PaletteColor,
+        buttonColor?:PaletteColor,
+        LinkColor?:PaletteColor
     }
 }
 
@@ -63,10 +71,34 @@ const theme = createMuiTheme({
         dark: "white",
         contrastText: "orange"
     },
-    paper:{
+    paper: {
         light: "rgba(230,230,230,0.45)",
         main: "blue",
         dark: "#3A3952",
+        contrastText: "orange"
+    },
+    backgroundSelect: {
+        light: "rgba(230,230,230,0.45)",
+        main: "blue",
+        dark: "white",
+        contrastText: "orange"
+    },
+    backgroundSelectBorder: {
+        light: "black",
+        main: "blue",
+        dark: "white",
+        contrastText: "orange"
+    },
+    buttonColor:{
+        light: "rgb(0,190,200)",
+        main: "blue",
+        dark: "rgb(105,195,200)",
+        contrastText: "orange"
+    },
+    LinkColor:{
+        light: "rgb(80,90,20)",
+        main: "blue",
+        dark: "rgb(200,200,200)",
         contrastText: "orange"
     },
     overrides: {
