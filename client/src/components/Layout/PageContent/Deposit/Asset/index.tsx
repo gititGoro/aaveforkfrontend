@@ -97,7 +97,7 @@ const usePurchaseStyles = makeStyles(theme => createStyles({
     }
     , grid: {
         textAlign: 'center',
-        marginTop:'-16px'
+        marginTop: '-16px'
     },
     narrowColumn: {
         width: '600px'
@@ -308,9 +308,14 @@ function PurchasePanel(props: purchasePanelProps) {
 
 const useStatsPanelStyle = makeStyles(theme => createStyles({
     root: {
+        width: '100%',
         height: "100%",
         minHeight: "900px",
-    }
+        fontSize: theme.standardFont.fontSize + 4,
+        fontWeight: theme.standardFont.fontWeightMedium,
+        fontFamily: theme.standardFont.fontFamily
+    },
+
 }))
 
 /*
@@ -323,35 +328,84 @@ function StatsPanel() {
         container
         direction="column"
         justify="flex-start"
-        alignItems="flex-start"
+        alignItems="center"
         spacing={4}
         className={classes.root}
     >
-        <Grid item>
-            Utilization rate
-      </Grid>
-        <Grid item>
-            Available Liqidity
-      </Grid>
-        <Grid item>
-            Asset Price
-      </Grid>
-        <Grid item>
-            Deposit APY
-      </Grid>
-        <Grid item>
-            Can be used as collateral
-      </Grid>
-        <Grid item>
-            Maximum LTV
-      </Grid>
-        <Grid item>
-            Liquidation threshold
-      </Grid>
-        <Grid item>
-            Liquidation penalty
-      </Grid>
+        <StatRow title="Utilization Rate" suffix=" %">
+            65.39
+            </StatRow>
+        <StatRow title="Available Liquidity" suffix=" DAI">
+            123411345
+            </StatRow>
+        <StatRow title="Asset Price" prefix="$">
+            1.01
+            </StatRow>
+
+        <StatRow title="APY" suffix="%" color='red'>
+            4.2
+            </StatRow>
+        <StatRow title="Can be used as collateral" color='green'>
+            Yes
+            </StatRow>
+        <StatRow title="Maximum LTV" suffix=" %">
+            75
+            </StatRow>
+        <StatRow title="Liquidation threshold" suffix=" %">
+            80
+            </StatRow>
+        <StatRow title="Liquidation penalty" suffix=" %">
+            5
+         </StatRow>
     </Grid>)
+}
+
+
+const useStatRowStyle = makeStyles(theme => createStyles({
+    root: {
+        // border: '2px solid red',
+        marginLeft: '10px'
+    },
+    redCell: {
+        color: 'red'
+    },
+    greenCell: {
+        color: 'green'
+    },
+    encasingCell: {
+        width: '100%'
+    }
+}))
+
+interface statRowProps {
+    title: string
+    children?: any
+    prefix?: string
+    suffix?: string
+    color?: 'green' | 'red'
+}
+
+function StatRow(props: statRowProps) {
+    const classes = useStatRowStyle()
+    const colorClass = props.color ? classes[props.color + 'Cell'] : ''
+
+    return <Grid item className={classes.encasingCell}>
+        <Grid
+            container
+            direction="row"
+            justify="space-between"
+            alignItems="baseline"
+            className={classes.root}
+            spacing={1}
+        >
+            <Grid item>
+                {props.title}
+            </Grid>
+            <Grid item>
+                {props.prefix || ''}{<span className={colorClass}>{props.children}</span>}{props.suffix || ''}
+            </Grid>
+        </Grid>
+    </Grid>
 }
 
 const paperStyles = makeStyles(theme => createStyles({
