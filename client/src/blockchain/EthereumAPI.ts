@@ -20,6 +20,7 @@ declare global {
         fromWAD(): string
         asPercentage(): string
         truncBig(): string
+        dropDecimals(): string
     }
 }
 
@@ -48,12 +49,24 @@ String.prototype.truncBig = function (): string {
     const big = new BigNumber(this.toString())
     return big.isNaN() ? this.toString() : big.decimalPlaces(4).toString()
 }
+String.prototype.dropDecimals = function (): string {
+    if (this.indexOf('.'))
+        return this.substring(0, this.indexOf('.'))
+    return this.toString()
+}
 
 export const hexToNumString = (hex: string) => new BigNumber(hex).toString()
 export const numToHex = (num: string) => ethers.utils.hexValue(num)
 export const isHex = (value: string) => ethers.utils.isHexString(value)
 export const weiToEth = (value: string) => ethers.utils.formatEther(value.toString())
-export const ethToWei = (value: string) => new BigNumber(value).times(WAD).decimalPlaces(0).toString()
+export const ethToWei = (value: string): string => (
+    new BigNumber(value)
+        .times(WAD)
+        .decimalPlaces(0)
+        .toPrecision(value.length, BigNumber.ROUND_DOWN)
+        .toString()
+        .dropDecimals()
+)
 export const weiToEthString = (value: ethersBigNumber | string) => weiToEth(value.toString()).toString()
 export const WadMul = (lhs: ethersBigNumber, rhs: ethersBigNumber) => {
     return lhs.mul(rhs).div(WAD.toString())

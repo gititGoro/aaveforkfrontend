@@ -186,7 +186,6 @@ function BorrowPanel(props: purchasePanelProps) {
                     break;
 
                 case PurchasePanelTransactionStates.borrowClicked:
-                    console.log('borrowing: ' + borrowValue)
                     const borrowTX = blockchain
                         .contracts
                         .LendingPool

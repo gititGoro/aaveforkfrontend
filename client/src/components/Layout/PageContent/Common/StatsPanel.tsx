@@ -111,7 +111,7 @@ export default function StatsPanel(props: statsPanelProps) {
                 {dollarPrice}
             </StatRow>
 
-            <StatRow title="APY" suffix="%" color='red' hide={!props.deposit}>
+            <StatRow title="APY" color='red' hide={!props.deposit}>
                 {APY}
             </StatRow>
             <StatRow title="Can be used as collateral" color='green' hide={!props.deposit}>
