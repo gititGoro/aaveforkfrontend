@@ -114,8 +114,8 @@ export default function StatsPanel(props: statsPanelProps) {
             <StatRow title="APY" color='red' hide={!props.deposit}>
                 {APY}
             </StatRow>
-            <StatRow title="Can be used as collateral" color='green' hide={!props.deposit}>
-                {props.setBorrowingEnabled}
+            <StatRow title="Can be used as collateral" color={props.borrowingEnabled === 'YES' ? 'green' : 'red'} hide={!props.deposit}>
+                {props.borrowingEnabled}
             </StatRow>
             <StatRow title="Maximum LTV" suffix=" %" hide={!props.deposit}>
                 {maxLTV}

@@ -62,7 +62,7 @@ export function Asset(props: assetProps) {
             <Hidden mdDown>
                 <Grid item className={classes.StatsCell}>
                     <StyledPaper>
-                        <StatsPanel assetId={assetId} deposit borrowingEnabled= {borrowingEnabled} setBorrowingEnabled={setBorrowingEnabled}/>
+                        <StatsPanel assetId={assetId} deposit borrowingEnabled={borrowingEnabled} setBorrowingEnabled={setBorrowingEnabled} />
                     </StyledPaper>
                 </Grid>
             </Hidden>
@@ -140,7 +140,6 @@ function PurchasePanel(props: purchasePanelProps) {
     const [percentage, setPercentage] = useState<PercentageRange>(0)
     const imageLoader = ImgSrc(ethereumContext.network)
     const tokenName = imageLoader(props.assetId).name
-
 
     const resetInput = () => {
         setPurchaseValue('')
@@ -235,11 +234,10 @@ function PurchasePanel(props: purchasePanelProps) {
                     break;
 
                 case PurchasePanelTransactionStates.depositClicked:
-                    const etherOverride = props.assetId === blockchain.contracts.EthAddress ? { value: purchaseValue } : undefined
+                    const etherOverride = props.assetId === blockchain.contracts.EthAddress ? { value: purchaseValue, gasLimit: "350000" } : { gasLimit: "350000" }
 
-                    const depositTX = (etherOverride ?
-                        blockchain.contracts.LendingPool.deposit(props.assetId, ethToWei(purchaseValue), 0, etherOverride) :
-                        blockchain.contracts.LendingPool.deposit(props.assetId, ethToWei(purchaseValue), 0))
+                    const depositTX =
+                        blockchain.contracts.LendingPool.deposit(props.assetId, ethToWei(purchaseValue), 0, etherOverride)
 
                     setTransaction(depositTX)
                     setTransactionState(PurchasePanelTransactionStates.depositAwaitingUserWalletConfirmation)

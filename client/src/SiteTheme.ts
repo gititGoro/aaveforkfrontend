@@ -1,6 +1,7 @@
 import { createMuiTheme } from '@material-ui/core/styles'
 import { PaletteColor } from '@material-ui/core/styles/createPalette'
 import { FontStyle } from '@material-ui/core/styles/createTypography'
+
 declare module '@material-ui/core/styles/createMuiTheme' {
     interface Theme {
         appbackground: PaletteColor
@@ -12,8 +13,8 @@ declare module '@material-ui/core/styles/createMuiTheme' {
         paper: PaletteColor
         backgroundSelect: PaletteColor
         backgroundSelectBorder: PaletteColor,
-        buttonColor:PaletteColor,
-        LinkColor:PaletteColor
+        buttonColor: PaletteColor,
+        LinkColor: PaletteColor
     }
     interface ThemeOptions {
         appbackground?: PaletteColor,
@@ -25,8 +26,8 @@ declare module '@material-ui/core/styles/createMuiTheme' {
         paper?: PaletteColor,
         backgroundSelect?: PaletteColor
         backgroundSelectBorder?: PaletteColor,
-        buttonColor?:PaletteColor,
-        LinkColor?:PaletteColor
+        buttonColor?: PaletteColor,
+        LinkColor?: PaletteColor
     }
 }
 
@@ -78,7 +79,7 @@ const theme = createMuiTheme({
         contrastText: "orange"
     },
     backgroundSelect: {
-        light:"linear-gradient(to bottom right, #C00BA0, #00AAAA)",
+        light: "linear-gradient(to bottom right, #C00BA0, #00AAAA)",
         main: "blue",
         dark: "white",
         contrastText: "orange"
@@ -89,20 +90,37 @@ const theme = createMuiTheme({
         dark: "white",
         contrastText: "orange"
     },
-    buttonColor:{
+    buttonColor: {
         light: "rgb(0,190,200)",
         main: "blue",
         dark: "rgb(105,195,200)",
         contrastText: "orange"
     },
-    LinkColor:{
+    LinkColor: {
         light: "rgb(80,90,20)",
         main: "blue",
         dark: "rgb(200,200,200)",
         contrastText: "orange"
     },
     overrides: {
-    }
+        // Applied to the <ul> element
+        MuiMenu: {
+            list: {
+                padding: 0
+            },
+        },
+        // Applied to the <li> elements
+        MuiMenuItem: {
+            root: {
+
+            },
+        },
+        MuiFormLabel: {
+            root: {
+     
+            }
+        }
+    },
 })
 
 export default theme

@@ -25,7 +25,7 @@ import { EthereumContext } from "../../../contexts/EthereumContext"
 import { LoadAToken } from '../../../../blockchain/EthereumAPI'
 
 import { AToken } from 'src/blockchain/typechain-types/ethers/AToken';
-import { ImgSrc } from './TokenImage';
+import { ImgSrc, ImageType } from './TokenImage';
 
 const topLevelStyles = makeStyles(theme => createStyles({
     invisibleContainer: {
@@ -67,7 +67,7 @@ export default function AssetPage(props: AssetPageProps) {
             const rowPromises = fullAddresses.map(async (address): Promise<Row> => { //TODO: graph query
                 const aTokenAddress = await blockchain.contracts.LendingPoolCore.getReserveATokenAddress(address)
                 const aToken = LoadAToken(aTokenAddress, blockchain.metamaskConnections.signer)
-                const icon: AssetIcon = imageLoader(address)
+                const icon: ImageType = imageLoader(address)
 
                 return {
                     icon,
@@ -163,13 +163,9 @@ function TopSelectors(props: topSelectorProps) {
     </Grid>
 }
 
-export interface AssetIcon {
-    BASE64: any,
-    name: string
-}
 
 export interface Row {
-    icon: AssetIcon
+    icon: ImageType
     column1: string
     column2: string
     column3: string

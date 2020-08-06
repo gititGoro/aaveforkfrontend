@@ -3,7 +3,7 @@ import { Paper, Grid, makeStyles, createStyles, Typography, Button, Link, Hidden
 import { useParams } from "react-router-dom";
 import RangedTextField, { range as PercentageRange } from 'src/components/Layout/PageContent/Common/RangedTextField'
 import { EthereumContext } from 'src/components/contexts/EthereumContext';
-import { BlockchainTransaction, BlockchainReceipt, ethToWei, getAvailableBorrows, LoadERC20 } from '../../../../../blockchain/EthereumAPI'
+import { BlockchainTransaction, BlockchainReceipt, ethToWei, getAvailableBorrows } from '../../../../../blockchain/EthereumAPI'
 import { useAlert } from 'react-alert'
 import Loading from '../../Common/Loading'
 import StatsPanel, { jaNee } from '../../Common/StatsPanel'
@@ -132,7 +132,7 @@ enum InterestRateMode { NONE = 0, STABLE, VARIABLE }
 
 function BorrowPanel(props: purchasePanelProps) {
     const classes = useBorrowStyles()
-    const alert = useAlert()
+    const alerter = useAlert()
     const ethereumContext = useContext(EthereumContext)
     const [borrowValue, setBorrowValue] = useState<string>('')
     const [valid, setValid] = useState<boolean>(false)
@@ -141,8 +141,7 @@ function BorrowPanel(props: purchasePanelProps) {
     const [percentage, setPercentage] = useState<PercentageRange>(0)
     const [borrowLimit, setBorrowLimit] = useState<string>('0')
     const [borrowMode, setBorrowMode] = useState<InterestRateMode>(InterestRateMode.VARIABLE)
-    const [hasSameToken, setHasSameToken] = useState<boolean>(false)
-
+    const [interestRateModesEnabled, setInterestRateModesEnabled] = useState<InterestRateMode[]>([])
     const imageLoader = ImgSrc(ethereumContext.network)
     const tokenName = imageLoader(props.assetId).name
 
@@ -152,18 +151,32 @@ function BorrowPanel(props: purchasePanelProps) {
 
     }
 
+    const borrowModeCallback = useCallback(async () => {
+        if (ethereumContext.blockchain) {
+            const blockchain = ethereumContext.blockchain
+            const modes: InterestRateMode[] = [InterestRateMode.VARIABLE]
+            if (await blockchain.contracts.LendingPoolCore.isUserAllowedToBorrowAtStable(props.assetId, blockchain.account, borrowValue))
+                modes.push(InterestRateMode.STABLE)
+            else setBorrowMode(InterestRateMode.VARIABLE)
+            setInterestRateModesEnabled(modes)
+
+        }
+    }, [borrowValue])
+
+    useEffect(() => {
+        borrowModeCallback()
+    }, [borrowValue, ethereumContext.blockchain])
+
     const blockChainInteractionCallBack = useCallback(async () => {
         if (ethereumContext.blockchain) {
             const blockchain = ethereumContext.blockchain
             setBorrowLimit(await getAvailableBorrows(props.assetId, ethereumContext.blockchain.contracts, ethereumContext.blockchain.metamaskConnections))
-            const aTokenAddress = await blockchain.contracts.LendingPoolCore.getReserveATokenAddress(props.assetId)
-            const aToken = await LoadERC20(aTokenAddress, blockchain.metamaskConnections.signer)
-            const aaveBalance = await aToken.balanceOf(blockchain.account)
-            setHasSameToken(!aaveBalance.isZero())
+
+
             props.setLoading(false)
             switch (transactionState) {
                 case PurchasePanelTransactionStates.awaitingborrowBlockConfirmation:
-                    alert.info('awaiting blockchain confirmation')
+                    alerter.info('awaiting blockchain confirmation')
                     const borrowReceipt = await (transaction as Promise<BlockchainReceipt>)
 
                     if (borrowReceipt.status === 0) {
@@ -176,10 +189,10 @@ function BorrowPanel(props: purchasePanelProps) {
                 case PurchasePanelTransactionStates.borrowAwaitingUserWalletConfirmation:
                     if (!transaction) {
                         setTransactionState(PurchasePanelTransactionStates.borrowFailed)
-                        alert.error('user cancelled')
+                        alerter.error('user cancelled')
                         break;
                     }
-                    alert.info('wallet request pending')
+                    alerter.info('wallet request pending')
                     const waiter = (await (transaction as Promise<BlockchainTransaction>)).wait()
                     setTransaction(waiter)
                     setTransactionState(PurchasePanelTransactionStates.awaitingborrowBlockConfirmation)
@@ -189,7 +202,7 @@ function BorrowPanel(props: purchasePanelProps) {
                     const borrowTX = blockchain
                         .contracts
                         .LendingPool
-                        .borrow(props.assetId, ethToWei(borrowValue), borrowMode, 0)
+                        .borrow(props.assetId, ethToWei(borrowValue), borrowMode, 0,{gasLimit:'700000'})
 
                     setTransaction(borrowTX)
                     setTransactionState(PurchasePanelTransactionStates.borrowAwaitingUserWalletConfirmation)
@@ -197,11 +210,11 @@ function BorrowPanel(props: purchasePanelProps) {
                     break;
                 case PurchasePanelTransactionStates.borrowFailed:
                     setTransaction(undefined)
-                    alert.error('Borrow transaction failed')
+                    alerter.error('Borrow transaction failed')
                     break;
 
                 case PurchasePanelTransactionStates.borrowSuccess:
-                    alert.success('Borrow transaction succeeded')
+                    alerter.success('Borrow transaction succeeded')
                     setTransaction(undefined)
                     break;
             }
@@ -255,7 +268,7 @@ function BorrowPanel(props: purchasePanelProps) {
                     Borrow
                 </Button>
             </Grid>
-            <InterestRateModePicker mode={hasSameToken ? InterestRateMode.VARIABLE : borrowMode} setMode={setBorrowMode} disableStable={hasSameToken} />
+            <InterestRateModePicker mode={borrowMode} setMode={setBorrowMode} permittedModes={interestRateModesEnabled} />
             <Grid item>
                 <Link className={classes.link} component="button" onClick={() => props.setRedirect('/borrow')}>Go back</Link>
             </Grid>
@@ -267,7 +280,7 @@ const interestRateModeStrings = ['None', 'Stable', 'Variable']
 interface interestRateModePickerProps {
     mode: InterestRateMode
     setMode: (m: InterestRateMode) => void
-    disableStable: boolean
+    permittedModes: InterestRateMode[]
 }
 
 function InterestRateModePicker(props: interestRateModePickerProps) {
@@ -282,19 +295,19 @@ function InterestRateModePicker(props: interestRateModePickerProps) {
             nextMode = InterestRateMode.STABLE
 
     }
+    const disableStable = props.permittedModes.findIndex(m => m === InterestRateMode.STABLE) === -1
 
-
-    return (<OptionalToolTip show={props.disableStable}>
+    return (<OptionalToolTip show={disableStable}>
         <FormControlLabel
             control={
                 <Switch
-                    checked={props.mode === InterestRateMode.VARIABLE || props.disableStable}
-                    onClick={() => { if (!props.disableStable) props.setMode(nextMode) }}
+                    checked={props.mode === InterestRateMode.VARIABLE || disableStable}
+                    onClick={() => { if (!disableStable) props.setMode(nextMode) }}
                     name="modePicker"
-                    disabled={props.disableStable || undefined}
+                    disabled={disableStable || undefined}
                 />
             }
-            label={interestRateModeStrings[props.disableStable ? InterestRateMode.VARIABLE : props.mode]}
+            label={interestRateModeStrings[disableStable ? InterestRateMode.VARIABLE : props.mode]}
         />
     </OptionalToolTip>)
 }

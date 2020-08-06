@@ -163,7 +163,7 @@ function RangeSelector(props: rangeSelectorProps) {
     alignItems="center"
   >
     {[25, 50, 75, 100].map((num: range) => (
-      <Grid item onClick={() => props.onChange(num)} className={getClass(num)} >{num}%</Grid>
+      <Grid key={num} item onClick={() => props.onChange(num)} className={getClass(num)} >{num}%</Grid>
     ))}
   </Grid>
 }

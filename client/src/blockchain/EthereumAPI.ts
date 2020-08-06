@@ -63,11 +63,13 @@ export const ethToWei = (value: string): string => (
     new BigNumber(value)
         .times(WAD)
         .decimalPlaces(0)
-        .toPrecision(value.length, BigNumber.ROUND_DOWN)
+        .toPrecision(50, BigNumber.ROUND_DOWN)
         .toString()
         .dropDecimals()
 )
+
 export const weiToEthString = (value: ethersBigNumber | string) => weiToEth(value.toString()).toString()
+
 export const WadMul = (lhs: ethersBigNumber, rhs: ethersBigNumber) => {
     return lhs.mul(rhs).div(WAD.toString())
 }
@@ -183,11 +185,10 @@ export async function getAvailableBorrows(reserveAddress: string, contracts: Con
     const reserveData = (await contracts.LendingPoolDataProvider.getReserveData(reserveAddress))
     const availableLiquidity = reserveData.availableLiquidity.toString()
     if (theoreticalTotalAvailable.gt(availableLiquidity)) {
-        return availableLiquidity.fromWAD()
+        return weiToEthString(availableLiquidity)
     }
-    return theoreticalTotalAvailable
-        .toString()
-        .fromWAD()
+    return weiToEthString(theoreticalTotalAvailable)
+
 }
 
 export async function GetContracts(signer: ethers.Signer, network: string): Promise<ContractInstances | undefined> {
