@@ -226,7 +226,7 @@ function AssetGrid(props: AssetGridProps) {
         .filter(searchFilterPredicate)
 
 
-    return filteredRows.length > 0 ? <TableContainer id='hello' component={Paper} className={classes.tableContainer}  >
+    return filteredRows.length > 0 ? <TableContainer component={Paper} className={classes.tableContainer}  >
         <Table className={classes.table} width={1 / 2}>
             <TableHead>
                 <StyledCell>Asset</StyledCell>

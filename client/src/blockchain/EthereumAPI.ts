@@ -8,11 +8,12 @@ import { AToken } from './typechain-types/ethers/AToken'
 import { PriceOracle } from './typechain-types/ethers/PriceOracle'
 import { Ierc20DetailedBytes } from './typechain-types/ethers/Ierc20DetailedBytes'
 
-const RAY = new BigNumber(10).pow(27)
+// const RAY = new BigNumber(10).pow(27)
 const WAD = new BigNumber(10).pow(18)
-const RAYstring = RAY.toString()
+const RAYstring = '1000000000000000000000000000'
+// const RAYWADDIFF = '1000000000'
 const WADstring = WAD.toString()
-const UINTMAX = '115792089237316195423570985008687907853269984665640564039457584007913129639934'
+export const  UINTMAX = '115792089237316195423570985008687907853269984665640564039457584007913129639933'
 
 declare global {
     interface String {
@@ -68,11 +69,33 @@ export const ethToWei = (value: string): string => (
         .dropDecimals()
 )
 
+export const bigNumberize = (num: ethersBigNumber | string) => new BigNumber(num.toString())
+
 export const weiToEthString = (value: ethersBigNumber | string) => weiToEth(value.toString()).toString()
 
 export const WadMul = (lhs: ethersBigNumber, rhs: ethersBigNumber) => {
     return lhs.mul(rhs).div(WAD.toString())
 }
+
+export const ethValueOfReserve = async (asset: string, value: ethersBigNumber, blockchain: { contracts: ContractInstances, wallet: ethersMetamask }): Promise<string> => {
+    const oracle = await GetPriceOracle(blockchain.contracts, blockchain.wallet.signer)
+    const ethPriceOfAsset = await oracle.getAssetPrice(asset)
+    const decimals = bigNumberize((await blockchain.contracts.LendingPoolCore.getReserveConfiguration(asset))[0])
+    const magnitude = new BigNumber(10).pow(decimals).toString()
+    return weiToEthString(value.mul(magnitude).div(ethPriceOfAsset))
+}
+
+export const dollarValueOfReserve = async (asset: string, value: ethersBigNumber, blockchain: { contracts: ContractInstances, wallet: ethersMetamask }): Promise<string> => {
+    const oracle = await GetPriceOracle(blockchain.contracts, blockchain.wallet.signer)
+    const ethPriceOfAsset = await oracle.getAssetPrice(asset)
+    const dollarPriceOfEth = await oracle.getEthUsdPrice()
+    const decimals = bigNumberize((await blockchain.contracts.LendingPoolCore.getReserveConfiguration(asset))[0])
+    const magnitude = new BigNumber(10).pow(decimals).toString()
+    return weiToEthString(value.mul(dollarPriceOfEth).mul(magnitude).div(ethPriceOfAsset))
+}
+
+//TODO: dollar value
+
 export interface ethersMetamask {
     provider: ethers.providers.Web3Provider,
     signer: ethers.Signer
@@ -173,22 +196,28 @@ export async function getAvailableBorrows(reserveAddress: string, contracts: Con
 
     const oracle = await GetPriceOracle(contracts, wallet.signer)
     const account = await wallet.signer.getAddress()
+
+    //Protect again underflow error in getUserAccountData
+    const userGlobalData = await contracts.LendingPoolDataProvider.calculateUserGlobalData(account)
+    const availabelBorrowsEth = userGlobalData.totalCollateralBalanceETH.mul(userGlobalData.currentLtv).div(100)
+    const feeAdjustedBorrows = userGlobalData.totalBorrowBalanceETH.add(userGlobalData.totalFeesETH)
+    if (availabelBorrowsEth.lt(feeAdjustedBorrows))
+        return "0"
+
     const userData = await contracts.LendingPoolDataProvider.getUserAccountData(account)
-    const availableEthBorrows = userData.availableBorrowsETH.mul(WADstring)
-    const ethPriceOfToken = await oracle?.getAssetPrice(reserveAddress)
+
+    const availableEthBorrows = userData.availableBorrowsETH
+    const ethPriceOfToken = (await oracle?.getAssetPrice(reserveAddress))
     if (!ethPriceOfToken)
         return "price not set"
     if (ethPriceOfToken.isZero())
         return "price not set"
 
-    const theoreticalTotalAvailable = availableEthBorrows.div(ethPriceOfToken)
+    const theoreticalTotalAvailable = availableEthBorrows.div(ethPriceOfToken).mul(WADstring)
     const reserveData = (await contracts.LendingPoolDataProvider.getReserveData(reserveAddress))
     const availableLiquidity = reserveData.availableLiquidity.toString()
-    if (theoreticalTotalAvailable.gt(availableLiquidity)) {
-        return weiToEthString(availableLiquidity)
-    }
-    return weiToEthString(theoreticalTotalAvailable)
-
+    const smaller = theoreticalTotalAvailable.gt(availableLiquidity) ? availableLiquidity : theoreticalTotalAvailable
+    return weiToEthString(smaller)
 }
 
 export async function GetContracts(signer: ethers.Signer, network: string): Promise<ContractInstances | undefined> {

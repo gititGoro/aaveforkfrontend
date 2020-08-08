@@ -31,6 +31,7 @@ const useStyles = makeStyles(them => createStyles({
 interface props {
     expanded: boolean
     isAdmin: boolean
+    loading:boolean
 }
 
 export default function PageContent(props: props) {
@@ -71,7 +72,9 @@ export default function PageContent(props: props) {
             <Route path='/borrow/collateral/:assetId'>
                 <BorrowAsset setRedirect={setRedirection} />
             </Route>
-            <Route path='/liquidation' exact component={Liquidation} />
+            <Route path='/liquidation' exact >
+            <Liquidation loading={props.loading} />
+            </Route>
         </Switch>
     </div >
 }

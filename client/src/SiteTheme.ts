@@ -119,6 +119,10 @@ const theme = createMuiTheme({
             root: {
      
             }
+        },MuiDialog:{
+            scrollPaper:{
+                overflow:'hidden'
+            }
         }
     },
 })

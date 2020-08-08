@@ -75,8 +75,8 @@ export default function StatsPanel(props: statsPanelProps) {
         if (ethereumContext.blockchain && !props.deposit) {
             const blockchain = ethereumContext.blockchain
             const reserveData = await blockchain.contracts.LendingPoolDataProvider.getReserveData(props.assetId)
-            setStableBorrowrate(reserveData.stableBorrowRate.toString().fromRAY())
-            setVariableBorrowrate(reserveData.variableBorrowRate.toString().fromRAY())
+            setStableBorrowrate(reserveData.stableBorrowRate.toString().fromRAY().asPercentage())
+            setVariableBorrowrate(reserveData.variableBorrowRate.toString().fromRAY().asPercentage())
             const userData = await blockchain.contracts.LendingPoolDataProvider.calculateUserGlobalData(blockchain.account)
             setHealthFactor(new BigNumber(userData.healthFactor.toString().fromWAD()).decimalPlaces(4).toString())
             const userReserveData = await blockchain.contracts.LendingPool.getUserReserveData(props.assetId, blockchain.account)
@@ -127,10 +127,10 @@ export default function StatsPanel(props: statsPanelProps) {
                 {liquidationPenalty}
             </StatRow>
 
-            <StatRow title="Stable borrow rate" suffix=" %" hide={props.deposit}>
+            <StatRow title="Stable borrow rate" hide={props.deposit}>
                 {stableBorrowRate}
             </StatRow>
-            <StatRow title="Variable borrow rate" suffix=" %" hide={props.deposit}>
+            <StatRow title="Variable borrow rate" hide={props.deposit}>
                 {variableBorrowRate}
             </StatRow>
             <StatRow title="Healthfactor" hide={props.deposit}>

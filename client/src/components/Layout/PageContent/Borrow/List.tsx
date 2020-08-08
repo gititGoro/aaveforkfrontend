@@ -14,7 +14,7 @@ export function List(props: props) {
     if (ethereumContextProps.blockchain) {
         const blockchain = ethereumContextProps.blockchain
 
-        const availableQuery = async (aToken: AToken): Promise<string> => {
+        const availableQuery = async (aToken: AToken): Promise<string> => { //TODO: bug
             const reserveAddress = await aToken.underlyingAssetAddress()
             return await getAvailableBorrows(reserveAddress, blockchain.contracts, blockchain.metamaskConnections)
         }

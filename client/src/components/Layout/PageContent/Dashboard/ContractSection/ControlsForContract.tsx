@@ -36,6 +36,8 @@ export default function ControlsForContracts(props: props) {
         .filter(permittedPredicate)
         .filter(f => f.indexOf('(') !== -1)
 
+    const address = ethereumContextProps.blockchain.contracts[props.contractName].address
+
     return <Paper className={classes.paper}>
         <Grid container
             direction="column"
@@ -44,6 +46,9 @@ export default function ControlsForContracts(props: props) {
             spacing={7}>
             <Grid item key={props.contractName}>
                 <Typography variant="h4">Contract {props.contractName}</Typography>
+            </Grid>
+            <Grid item key="address">
+                {address}
             </Grid>
             {functions.map(f => <Grid item key={props.contractName + f}> <ControlsForFunction contractName={props.contractName} function={f} /></Grid>)}
         </Grid>

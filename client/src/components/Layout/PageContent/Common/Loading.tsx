@@ -13,10 +13,30 @@ const loadingStyles = makeStyles(theme => createStyles({
     }
 }))
 
+const phrases = [
+    'Loading',
+    'Recharging flux capacitor',
+    'Inserting kyber crystals',
+    'Gazing into a Palintir',
+    'Reassembling the blockchain',
+    'Synthesizing quarks',
+    'Fusing atomic nuclei',
+    'Correcting spin gravity',
+    'Constructing alcubier drive',
+    'Contacting Satoshi Nakamoto',
+    'Resolving Fermi Paradox',
+    'Overriding Voi Kernel',
+    'Establishing rift to Kelewan',
+    'Stabilizing tokamak plasma field',
+    'Crossing the Helcaraxë',
+    'Retrieving the Horadric cube'
+]
+
 export default function Loading(props: { invisible?: boolean }) {
     if (props.invisible)
         return <div></div>
     const classes = loadingStyles()
+    const phrase = phrases[Math.trunc(Math.random() * phrases.length)]
     return <Grid
         container
         direction="column"
@@ -30,7 +50,7 @@ export default function Loading(props: { invisible?: boolean }) {
         </Grid>
         <Grid item>
             <Typography variant="h3" className={classes.dogeText}>
-                Loading....
+                {phrase}....
                 </Typography>
         </Grid>
     </Grid>

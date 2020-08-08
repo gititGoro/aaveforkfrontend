@@ -123,10 +123,6 @@ interface purchasePanelProps {
     borrowingEnabled: jaNee
 }
 
-/*
-LendingPoolDataProvider.getUserAccountData
--> avaiable Borrows eth. Use price oracle to conver to local asset
-*/
 
 enum InterestRateMode { NONE = 0, STABLE, VARIABLE }
 
@@ -202,7 +198,7 @@ function BorrowPanel(props: purchasePanelProps) {
                     const borrowTX = blockchain
                         .contracts
                         .LendingPool
-                        .borrow(props.assetId, ethToWei(borrowValue), borrowMode, 0,{gasLimit:'700000'})
+                        .borrow(props.assetId, ethToWei(borrowValue), borrowMode, 0,{gasLimit:'900000'})
 
                     setTransaction(borrowTX)
                     setTransactionState(PurchasePanelTransactionStates.borrowAwaitingUserWalletConfirmation)

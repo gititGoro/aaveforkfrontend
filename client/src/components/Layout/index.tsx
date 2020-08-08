@@ -1,7 +1,7 @@
 import React, { useState, useContext, useCallback, useEffect } from 'react';
 import PageContent from './PageContent/index'
 import LeftPanel from './LeftPanel/index'
-import BottomPanel, {brightMode} from './BottomPanel'
+import BottomPanel, { brightMode } from './BottomPanel'
 import { BrowserRouter } from 'react-router-dom'
 import { GetRole, Role } from '../../blockchain/EthereumAPI'
 import { EthereumContext } from '../contexts/EthereumContext'
@@ -14,7 +14,7 @@ interface props {
 const useStyles = makeStyles((theme: Theme) => createStyles({
     root: {
         overflowX: "hidden",
-        overflowY:"hidden"
+        overflowY: "hidden"
     }
 }))
 
@@ -39,7 +39,7 @@ export default function Layout(props: props) {
         <BrowserRouter>
             <LeftPanel expanded={expandLeftPanel} setExpanded={setExpandLeftPanel} isAdmin={isAdmin} />
             <BottomPanel brightMode={props.brightMode} setBrightMode={props.setBrightMode} />
-            <PageContent expanded={expandLeftPanel} isAdmin={isAdmin} />
+            <PageContent expanded={expandLeftPanel} isAdmin={isAdmin} loading={ethereumContextProps.connectionStatus !== 'Successfully connected to Metmask'} />
         </BrowserRouter>
     </div>
 }
