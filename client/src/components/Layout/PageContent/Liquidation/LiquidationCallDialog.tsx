@@ -22,10 +22,9 @@ import { EthereumContext } from 'src/components/contexts/EthereumContext';
 import { weiToEthString, dollarValueOfReserve, LoadERC20, UINTMAX, LendingPoolCoreApproved, ethToWei } from 'src/blockchain/EthereumAPI';
 import BigNumber from 'bignumber.js';
 
-
 const useStyles = makeStyles(theme => createStyles({
     root: {
-        height: '500px',
+        height: '700px',
         overflow: 'invisible',
         background: theme.appbackground[theme.palette.type],
         font: theme.standardFont.fontFamily,
@@ -64,7 +63,6 @@ export default function LiquidationCallDialog(props: props) {
     const [nativeTotalDebt, setNativeTotalDebt] = useState<string>('')
     const [userBalanceOfDebtToken, setUserBalanceOfDebtToken] = useState<string>('')
 
-
     const nativeDebtCallback = useCallback(async () => {
         if (ethereumContext.blockchain) {
             const blockchain = ethereumContext.blockchain
@@ -78,6 +76,7 @@ export default function LiquidationCallDialog(props: props) {
     useEffect(() => {
         nativeDebtCallback()
     })
+
 
     const isApprovedCallback = useCallback(async () => {
         if (ethereumContext.blockchain && collateral.length > 3) {
@@ -108,7 +107,6 @@ export default function LiquidationCallDialog(props: props) {
     const liquidationClickedCallback = useCallback(async () => {
         if (liquidationClicked) {
             if (ethereumContext.blockchain) {
-
                 const blockchain = ethereumContext.blockchain
                 await blockchain.contracts.LendingPool
                     .liquidationCall(collateral, props.reserveLoan, props.accountToLiquidate, ethToWei(debtToPay), false)
@@ -127,8 +125,8 @@ export default function LiquidationCallDialog(props: props) {
         setShowError(false)
     }
 
-    const debtToPayBig = new BigNumber(debtToPay)
 
+    const debtToPayBig = new BigNumber(debtToPay)
     const invalidDebtToPay = debtToPayBig.isNaN() || debtToPayBig.lt(0) || debtToPayBig.gt(nativeTotalDebt) || debtToPayBig.gt(userBalanceOfDebtToken)
 
     return (
