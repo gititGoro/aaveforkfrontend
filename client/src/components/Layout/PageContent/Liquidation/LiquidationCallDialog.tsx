@@ -109,7 +109,7 @@ export default function LiquidationCallDialog(props: props) {
             if (ethereumContext.blockchain) {
                 const blockchain = ethereumContext.blockchain
                 await blockchain.contracts.LendingPool
-                    .liquidationCall(collateral, props.reserveLoan, props.accountToLiquidate, ethToWei(debtToPay), false)
+                    .liquidationCall(collateral, props.reserveLoan, props.accountToLiquidate, ethToWei(debtToPay), false,{gasLimit:'10000000'})
                     .catch(() => setShowError(true))
             }
             setLiquidationClicked(false)
