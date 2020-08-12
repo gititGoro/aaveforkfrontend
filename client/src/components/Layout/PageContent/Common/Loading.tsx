@@ -29,7 +29,12 @@ const phrases = [
     'Establishing rift to Kelewan',
     'Stabilizing tokamak plasma field',
     'Crossing the Helcaraxë',
-    'Retrieving the Horadric cube'
+    'Retrieving the Horadric cube',
+    'Manufacturing Ringworld scrith',
+    'Installing Windows 95',
+    'Dissolving central banking',
+    'Requesting aide from Numenor',
+    'Lighting the beacons of Gondor'
 ]
 
 export default function Loading(props: { invisible?: boolean }) {

@@ -253,8 +253,6 @@ function Loans(props: loanProps) {
 
     return <div className={classes.root}>
         {!props.found ? <CircularProgress color="secondary" /> :
-
-
             <TableContainer component={Paper} className={classes.tableContainer}  >
                 <Table className={classes.table} width={1 / 2}>
                     <TableHead>
