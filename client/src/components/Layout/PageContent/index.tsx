@@ -8,6 +8,7 @@ import { List as Deposit } from "./Deposit/List"
 import { Asset as DepositAsset } from './Deposit/Asset/index'
 import { Asset as BorrowAsset } from './Borrow/Asset/index'
 import LandingPage from './LandingPage'
+import WalletNotConnected from './WalletNotConnected'
 import Liquidation from "./Liquidation/index"
 import { makeStyles, createStyles } from '@material-ui/core'
 import { useState } from 'react'
@@ -74,36 +75,43 @@ export default function PageContent(props: props) {
         }
     })
 
-    return <div className={props.expanded ? classes.expanded : classes.shrunk}>
-        {ethereumContext.connectionStatus === 'window.ethereum injected by Metmask' ? <Loading /> :
-            <div>
-                {renderRedirect}
-                <Switch>
+    const RenderCorrect = (bigprops:any) => {
+        if (ethereumContext.connectionStatus === 'window.ethereum injected by Metmask')
+            return <Loading />
+        if (ethereumContext.connectionStatus === 'Metamask Missing' || ethereumContext.connectionStatus === 'window.ethereum not found')
+            return <WalletNotConnected />
 
-                    <Route path='/' exact >
-                        <LandingPage setRedirect={setRedirection} />
-                    </Route>
-                    <Route path='/admin' exact>
-                        {props.isAdmin ? <Dashboard /> : <Redirect to="/" />}
-                    </Route>
-                    <Route path='/borrow' exact>
-                        <Borrow redirect={borrowAssetRedirect} />
-                    </Route>
-                    <Route path='/deposit' exact>
-                        <Deposit redirect={depositAssetRedirect} />
-                    </Route>
-                    <Route path='/deposit/purchase/:assetId'>
-                        <DepositAsset setRedirect={setRedirection} />
-                    </Route>
-                    <Route path='/borrow/collateral/:assetId'>
-                        <BorrowAsset setRedirect={setRedirection} />
-                    </Route>
-                    <Route path='/liquidation' exact >
-                        <Liquidation loading={props.loading} />
-                    </Route>
-                </Switch>
-            </div>
-        }
+        return <div>
+            {renderRedirect}
+            <Switch>
+
+                <Route path='/' exact >
+                    <LandingPage setRedirect={setRedirection} />
+                </Route>
+                <Route path='/admin' exact>
+                    {props.isAdmin ? <Dashboard /> : <Redirect to="/" />}
+                </Route>
+                <Route path='/borrow' exact>
+                    <Borrow redirect={borrowAssetRedirect} />
+                </Route>
+                <Route path='/deposit' exact>
+                    <Deposit redirect={depositAssetRedirect} />
+                </Route>
+                <Route path='/deposit/purchase/:assetId'>
+                    <DepositAsset setRedirect={setRedirection} />
+                </Route>
+                <Route path='/borrow/collateral/:assetId'>
+                    <BorrowAsset setRedirect={setRedirection} />
+                </Route>
+                <Route path='/liquidation' exact >
+                    <Liquidation loading={props.loading} />
+                </Route>
+            </Switch>
+        </div>
+    }
+
+    return <div className={props.expanded ? classes.expanded : classes.shrunk}>
+        <RenderCorrect  />
     </div >
 }
 
